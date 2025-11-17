@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pedido — Minha LP</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="blob-left" id="blob-left"></div>
+  <div class="particles"></div>
+
+  <header class="header">
+    <img src="assets/logo-2.png" class="logo" onclick="location.href='index.html'"/>
+    <a href="index.html" class="btn">Voltar</a>
+  </header>
+
+  <main class="pagina-form">
+  <div class="blob-right" id="blob-right"></div>
+
+  <h1>Fazer Pedido</h1>
+  <p>Preencha rápido que eu recebo sua proposta direto no WhatsApp.</p>
+
+  <form id="brief" style="max-width:720px;margin-top:18px;">
+    <label>Nome completo<br/><input name="nome" placeholder="Seu nome" required></label>
+    <label>Email (opcional)<br/><input name="email" type="email" placeholder="exemplo@email.com"></label>
+    <label>Negócio / Nicho<br/><input name="nicho" placeholder="Ex: Loja de roupas" required></label>
+    <label>Qual plano prefere?<br/>
+      <select name="plano">
+        <option value="Basico">Básico - R$150</option>
+        <option value="Profissional">Profissional - R$300</option>
+        <option value="Premium">Premium - R$550</option>
+      </select>
+    </label>
+    <label>Observações (o que precisa)<br/><textarea name="obs" rows="4" placeholder="Ex: Quero cores neon"></textarea></label>
+    <button class="btn-whats" id="sendBtn" type="button">Enviar pedido via WhatsApp</button>
+  </form>
+</main>
+
+  <footer class="footer">
+      © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
+      <div style="margin-top:8px;font-size:0.9rem;">
+        <a href="page4.html" style="color:#0ff;text-decoration:underline;">Políticas e Termos</a>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

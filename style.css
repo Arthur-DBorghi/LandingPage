@@ -1,0 +1,346 @@
+/* ========================= */
+/*       GLOBAL DARK         */
+/* ========================= */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  color: #EAEAEA;
+  background: #0C0C1C;
+  overflow-x: hidden;
+}
+
+/* Glass effect para TODAS as seções */
+.hero,
+.sobre,
+.servicos,
+.cta,
+.footer,
+.pagina {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  border-radius: 25px;
+  margin: 40px;
+  padding: 40px;
+}
+
+/* ========================= */
+/*         HEADER            */
+/* ========================= */
+.header {
+  background: rgba(10, 10, 20, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  
+}
+
+.logo {
+  height: 140px;
+  cursor: pointer;
+}
+
+/* ========================= */
+/*      BOTÕES NEON          */
+/* ========================= */
+.btn,
+.btn-whats {
+  background: linear-gradient(90deg, #8B3FFD, #00D8FF);
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 0 15px rgba(139, 63, 253, 0.7);
+  transition: 0.2s;
+}
+
+.btn:hover,
+.btn-whats:hover {
+  box-shadow: 0 0 30px rgba(0, 216, 255, 1);
+}
+
+/* ========================= */
+/*          HERO             */
+/* ========================= */
+.hero {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  color: #EAEAEA;
+}
+
+/* ========================= */
+/*         CARDS             */
+/* ========================= */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 30px;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(139, 63, 253, 0.2);
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 35px rgba(0, 216, 255, 0.55);
+}
+
+/* ========================= */
+/*         FOOTER            */
+/* ========================= */
+.footer {
+  text-align: center;
+  color: #AFAFAF;
+  margin-bottom: 50px;
+}
+
+/* ========================= */
+/*         BLOBS NEON        */
+/* ========================= */
+
+/* BLOB ESQUERDO — segue a página */
+.blob-left {
+  position: absolute; /* trocado de fixed pra absolute */
+  top: 200px;
+  left: -200px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle at 30% 30%, #8B3FFD, #00D8FF);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  box-shadow:
+    0 0 60px #8B3FFD,
+    0 0 100px #00D8FF;
+  pointer-events: none;
+  z-index: 0;
+  animation: blobL 14s infinite ease-in-out reverse;
+}
+
+/* BLOB DIREITO — segue a página */
+.blob-right {
+  position: absolute; /* trocado de fixed pra absolute */
+  top: 30%; /* IMPORTANTE: escolha onde ele entra na página */
+  right: -200px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle at 70% 70%, rgb(0, 216, 255,0.3), rgb(139, 63, 253, 0.7));
+  border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%;
+  box-shadow:
+    0 0 120px #00D8FF,
+    0 0 200px #8B3FFD;
+  pointer-events: none;
+  z-index: 0;
+  animation: blobR 14s infinite ease-in-out reverse;
+}
+@keyframes blobR {
+  0%   { transform: translate(0,0) scale(1); }
+  50%  { transform: translate(-90px, 120px) scale(1.25); }
+  100% { transform: translate(0,0) scale(1); }
+}
+@keyframes blobL {
+  0%   { transform: translate(0,0) scale(1); }
+  50%  { transform: translate(-90px, 120px) scale(1.25); }
+  100% { transform: translate(0,0) scale(1); }
+}
+
+/* Quando fugindo, sem animação */
+.blob-right.fleeing {
+  animation: none !important;
+  transition: transform 0.15s ease-out;
+}
+.blob-left.fleeing {
+  animation: none !important;
+  transition: transform 0.15s ease-out;
+}
+
+/* ========================= */
+/*      PARTICULAS           */
+/* ========================= */
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 0.85;
+  animation-timing-function: linear, linear;
+  animation-fill-mode: forwards;
+  
+}
+
+/* Queda */
+@keyframes fall {
+  0%   { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(120vh); opacity: 0; }
+}
+
+/* Subida */
+@keyframes rise {
+  0%   { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* Cor quando caindo */
+@keyframes colorFall {
+  0%   { background:#8B3FFD; box-shadow:0 0 12px #8B3FFD; }
+  25%  { background:#00D8FF; box-shadow:0 0 12px #00D8FF; }
+  50%  { background:#2CFF95; box-shadow:0 0 12px #2CFF95; }
+  75%  { background:#FF3FAF; box-shadow:0 0 12px #FF3FAF; }
+  100% { background:#FFDD35; box-shadow:0 0 12px #FFDD35; }
+}
+
+/* Cor subindo */
+@keyframes colorRise {
+  0%   { background:#FFDD35; box-shadow:0 0 12px #FFDD35; }
+  25%  { background:#FF3FAF; box-shadow:0 0 12px #FF3FAF; }
+  50%  { background:#2CFF95; box-shadow:0 0 12px #2CFF95; }
+  75%  { background:#00D8FF; box-shadow:0 0 12px #00D8FF; }
+  100% { background:#8B3FFD; box-shadow:0 0 12px #8B3FFD; }
+}
+
+/* ========================= */
+/*      FORM NEON            */
+/* ========================= */
+.pagina-form {
+  margin: 80px auto;     /* já centraliza horizontal */
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* CENTRALIZA TUDO PRA VALER */
+  text-align: center;    /* deixa os textos alinhados também */
+}
+
+#brief {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;        /* garante que o form fique CENTRADÃO */
+}
+
+form label {
+  display: block;
+  margin-bottom: 18px;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid rgba(139,63,253,0.5);
+  background: rgba(255,255,255,0.03);
+  color: #EAEAEA;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+
+form select option{
+  background: rgb(12, 12, 29);
+  color: #EAEAEA;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: #00D8FF;
+  box-shadow: 0 0 15px rgba(0,216,255,0.7);
+  outline: none;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+  color: rgba(255,255,255,0.6);
+  text-shadow: 0 0 5px rgba(139,63,253,0.4);
+}
+
+/* ========================= */
+/*     BOTÃO NEON            */
+#sendBtn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(90deg, #8B3FFD, #00D8FF);
+  color: #fff;
+  padding: 14px 0;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1rem;
+  box-shadow: 0 0 15px rgba(139,63,253,0.7);
+  transition: 0.2s, transform 0.1s;
+  cursor: pointer;
+  border: none;
+}
+
+#sendBtn:hover{
+  box-shadow: 0 0 35px rgba(0,216,255,0.9);
+}
+
+#sendBtn:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 50px rgba(0,216,255,0.9);
+}
+
+/* ========================= */
+/*     SEÇÃO POLÍTICAS       */
+/* ========================= */
+.politicas {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  color: #EAEAEA;
+  line-height: 1.6;
+}
+
+.politicas h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #00D8FF;
+}
+
+.politicas h3 {
+  font-size: 1.4rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #8B3FFD;
+}
+
+.politicas ul {
+  padding-left: 20px;
+}
+
+.politicas li {
+  margin-bottom: 10px;
+}
