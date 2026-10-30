@@ -1,74 +1,91 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Planos — Minha LP</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planos e preços | Arthur Borghi</title>
+  <meta name="description" content="Criação da landing page com pagamento único e manutenção mensal opcional com hospedagem e domínio." />
+  <meta property="og:title" content="Planos e preços | Arthur Borghi" />
+  <meta property="og:description" content="Criação da landing page com pagamento único e manutenção mensal opcional com hospedagem e domínio." />
+  <meta property="og:image" content="https://arthur-dborghi.netlify.app/assets/og.png" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="blob-left" id="blob-left"></div>
-  <div class="blob-right" id="blob-right"></div>
-  <div class="particles"></div>
+  <div class="bg" aria-hidden="true">
+    <div id="blob-left" class="blob-left"></div>
+    <div id="blob-right" class="blob-right"></div>
+  </div>
+  <div class="particles" aria-hidden="true"></div>
 
   <header class="header">
-    <img src="assets/logo-2.png" class="logo" onclick="location.href='index.html'"/>
-    <a href="index.html" class="btn">Voltar</a>
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-ab.png" alt="Arthur Borghi" class="logo" />
+      <span class="logo-nome">Arthur Borghi</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Início</a>
+      <a href="page1.html">Planos</a>
+      <a href="page2.html">Modelos</a>
+      <a href="page3.html" class="btn">Pedir orçamento</a>
+    </nav>
   </header>
 
   <main class="pagina">
-    <h1>Planos e Preços</h1>
-    <p>Escolha o plano que bate com sua necessidade. Se quiser, eu monto um combo customizado.</p>
+    <h1>Planos e preços</h1>
+    <p class="muted">Você paga a criação uma vez. A manutenção mensal é opcional: se preferir, eu te entrego os arquivos e você hospeda onde quiser.</p>
 
-    <div class="cards" style="margin-top:24px;">
-      <!-- Básico -->
-      <div class="card">
-        <h3>Básico</h3>
-        <p>Landing page simples (1 seção) + formulário</p>
-        <p style="font-weight:700;font-size:1.6rem;margin:16px 0;">R$ 150</p>
+    <div class="cards planos">
+      <!-- CRIAÇÃO -->
+      <div class="card plano destaque">
+        <span class="tipo">Pagamento único</span>
+        <h3>Criação da página</h3>
+        <p class="preco">R$ 500</p>
+        <span class="selo">Lançamento: R$ 300 para os 3 primeiros clientes</span>
         <ul>
-          <li>Entrega em 3 dias úteis</li>
-          <li>1 revisão</li>
-          <li>Responsive</li>
+          <li>Landing page com até 6 seções</li>
+          <li>Visual adaptado à identidade do seu negócio</li>
+          <li>Versão pra celular</li>
+          <li>Botão e formulário que chegam no seu WhatsApp</li>
+          <li>SEO básico (título, descrição, estrutura)</li>
+          <li>2 rodadas de ajustes</li>
+          <li>Entrega em até 7 dias úteis</li>
         </ul>
-        <a class="btn-whats" href="https://wa.me/5511941060165?text=Quero%20o%20Plano%20Básico%20-%20Landing%20Page%20(R$150)">Quero esse</a>
+        <a class="btn-whats" href="page3.html">Quero minha página</a>
       </div>
 
-      <!-- Profissional -->
-      <div class="card">
-        <h3>Profissional</h3>
-        <p>Landing page + 3 seções + CTA e integração WhatsApp</p>
-        <p style="font-weight:700;font-size:1.6rem;margin:16px 0;">R$ 300</p>
+      <!-- MANUTENÇÃO -->
+      <div class="card plano destaque">
+        <span class="tipo">Mensal · opcional</span>
+        <h3>Manutenção</h3>
+        <p class="preco">R$ 40 <small>/mês</small></p>
         <ul>
-          <li>Entrega em 5 dias úteis</li>
-          <li>2 revisões</li>
-          <li>Otimização básica de SEO</li>
+          <li>Hospedagem</li>
+          <li>Domínio .com.br (registro e renovação)</li>
+          <li>Cadeado de segurança (HTTPS)</li>
+          <li>Acompanho se a página sair do ar</li>
+          <li>1 ajuste simples por mês (texto, foto, telefone)</li>
+          <li>Cancelamento com 30 dias de aviso</li>
         </ul>
-        <a class="btn-whats" href="https://wa.me/5511941060165?text=Quero%20o%20Plano%20Profissional%20-%20Landing%20Page%20(R$300)">Quero esse</a>
+        <a class="btn-whats" href="page3.html">Quero com manutenção</a>
       </div>
+    </div>
 
-      <!-- Premium -->
-      <div class="card">
-        <h3>Premium</h3>
-        <p>Tudo do Profissional + animações, SEO ampliado e suporte 7 dias</p>
-        <p style="font-weight:700;font-size:1.6rem;margin:16px 0;">R$ 550</p>
-        <ul>
-          <li>Entrega em 7 dias úteis</li>
-          <li>3 revisões</li>
-          <li>Hospedagem opcional (extra)</li>
-        </ul>
-        <a class="btn-whats" href="https://wa.me/5511941060165?text=Quero%20o%20Plano%20Premium%20-%20Landing%20Page%20(R$550)">Quero esse</a>
-      </div>
+    <div class="extras">
+      <h2>Extras</h2>
+      <ul>
+        <li>Página adicional (ex.: cardápio, galeria, serviços): <strong>R$ 60</strong> cada</li>
+        <li>Mudanças maiores depois da entrega: orçamento à parte</li>
+      </ul>
+      <p class="muted">Formas de pagamento: PIX ou transferência.</p>
     </div>
   </main>
 
   <footer class="footer">
-      © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
-      <div style="margin-top:8px;font-size:0.9rem;">
-        <a href="page4.html" style="color:#0ff;text-decoration:underline;">Políticas e Termos</a>
-      </div>
-    </footer>
-    <div class="particles"></div>
-    <script src="script.js"></script>
+    © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
+    <div style="margin-top: 8px"><a href="page4.html">Políticas e Termos</a></div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

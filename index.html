@@ -3,75 +3,166 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Minha LP - Neon Dark</title>
+    <title>Arthur Borghi | Landing pages para pequenos negócios</title>
+    <meta name="description" content="Página profissional para o seu negócio, pronta em poucos dias: bonita no celular, rápida e com botão direto para o seu WhatsApp." />
+
+    <!-- Preview quando o link é compartilhado (WhatsApp, LinkedIn etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Landing pages para pequenos negócios | Arthur Borghi" />
+    <meta property="og:description" content="Página profissional pro seu negócio, pronta em poucos dias, com botão direto pro seu WhatsApp." />
+    <meta property="og:image" content="https://arthur-dborghi.netlify.app/assets/og.png" />
+    <meta property="og:url" content="https://arthur-dborghi.netlify.app/" />
+
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <!-- BLOBS -->
-    <div id="blob-left" class="blob-left"></div>
+    <!-- FUNDO -->
+    <div class="bg" aria-hidden="true">
+      <div id="blob-left" class="blob-left"></div>
+      <div id="blob-right" class="blob-right"></div>
+    </div>
+    <div class="particles" aria-hidden="true"></div>
 
     <!-- HEADER -->
     <header class="header">
-      <img src="assets/logo-2.png" alt="Logo" class="logo" onclick="location.href='index.html'"/>
-      <a href="#contato" class="btn">Fale Conosco</a>
+      <a href="index.html" class="logo-link">
+        <img src="assets/logo-ab.png" alt="Arthur Borghi" class="logo" />
+        <span class="logo-nome">Arthur Borghi</span>
+      </a>
+      <nav class="nav">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="page1.html">Planos</a>
+        <a href="page2.html">Modelos</a>
+        <a href="page3.html" class="btn">Pedir orçamento</a>
+      </nav>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
-      <h1>Faça seu negócio aparecer online 🚀</h1>
-      <p>Landing Pages modernas, rápidas e com presença impactante.</p>
-      <a href="https://wa.me/5511941060165" class="btn-whats">Chamar no WhatsApp</a>
-    </section>
-
-    <!-- SOBRE -->
-    <section class="sobre">
-      <div class="texto">
-        <h2>Quem Somos</h2>
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <h1>Uma página profissional pro seu negócio, pronta em poucos dias</h1>
         <p>
-          Criamos landing pages profissionais, com identidade forte e modernas,
-          focadas em conversão e experiência estética.
+          Bonita no celular, rápida de abrir e com botão direto pro seu WhatsApp.
+          Você cuida do seu negócio, eu cuido da parte técnica.
         </p>
-      </div>
-    </section>
+        <a href="page3.html" class="btn-whats">Pedir orçamento</a><br />
+        <a class="link-secundario" href="https://wa.me/5511941060165?text=Ol%C3%A1%2C%20Arthur%21%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20as%20landing%20pages.">ou chamar direto no WhatsApp</a>
+      </section>
 
-    <!-- SERVIÇOS -->
-    <section class="servicos">
-      <h2>O que oferecemos</h2>
-      <div class="cards">
-        <div class="card" onclick="location.href='page1.html'">
-          <h3>Landing Page</h3>
-          <p>Seu site pronto em poucos dias.</p>
+      <!-- COMO FUNCIONA -->
+      <section class="passos" id="como-funciona">
+        <h2>Como funciona</h2>
+        <div class="cards">
+          <div class="card">
+            <span class="numero">1</span>
+            <h3>Você me conta sobre o negócio</h3>
+            <p>Pelo formulário ou pelo WhatsApp: o que você faz, pra quem, e como quer que o cliente te chame.</p>
+          </div>
+          <div class="card">
+            <span class="numero">2</span>
+            <h3>Eu monto a página</h3>
+            <p>Texto, design e versão pra celular. Você recebe uma prévia e pede os ajustes que quiser.</p>
+          </div>
+          <div class="card">
+            <span class="numero">3</span>
+            <h3>Sua página vai pro ar</h3>
+            <p>Com domínio próprio (seunegocio.com.br) e, se você quiser, eu cuido da hospedagem todo mês.</p>
+          </div>
         </div>
-        <div class="card" onclick="location.href='page2.html'">
-          <h3>Customização</h3>
-          <p>Identidade visual adaptada ao seu negócio.</p>
-        </div>
-        <div class="card" onclick="location.href='page3.html'">
-          <h3>Suporte</h3>
-          <p>Atendimento simples e direto, sem enrolação.</p>
-        </div>
-      </div>
-                <div id="blob-right" class="blob-right"></div>
+      </section>
 
-    </section>
+      <!-- O QUE VOCÊ RECEBE -->
+      <section class="servicos">
+        <h2>O que vem na sua página</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>📱 Feita pro celular</h3>
+            <p>A maioria dos seus clientes vai abrir pelo celular. Ela é pensada pra isso desde o começo.</p>
+          </div>
+          <div class="card">
+            <h3>💬 Botão de WhatsApp</h3>
+            <p>O cliente lê, se interessa e já te chama, sem precisar procurar seu número.</p>
+          </div>
+          <div class="card">
+            <h3>🔎 Pronta pro Google</h3>
+            <p>Título, descrição e estrutura certos pra sua página poder ser encontrada nas buscas.</p>
+          </div>
+        </div>
+      </section>
 
-    <!-- CTA FINAL -->
-    <section id="contato" class="cta">
-      <h2>Bora tirar sua ideia do papel?</h2>
-      <p>Me chama e eu te entrego uma LP neon absurda.</p>
-      <a href="https://wa.me/5511941060165" class="btn-whats">Falar agora</a>
-    </section>
+      <!-- QUEM SOU -->
+      <section class="sobre">
+        <h2>Quem sou</h2>
+        <p>
+          Sou o Arthur, desenvolvedor. Crio landing pages para pequenos negócios que querem um
+          endereço profissional na internet sem pagar preço de agência. Você fala direto comigo,
+          do orçamento ao suporte.
+        </p>
+        <div class="cards" style="margin-top: 24px">
+          <a class="card card-link" href="page1.html">
+            <h3>Planos e preços</h3>
+            <p>Criação da página + manutenção mensal opcional.</p>
+            <span class="seta">Ver planos →</span>
+          </a>
+          <a class="card card-link" href="page2.html">
+            <h3>Modelos</h3>
+            <p>Pontos de partida por tipo de negócio.</p>
+            <span class="seta">Ver modelos →</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq">
+        <h2>Perguntas frequentes</h2>
+
+        <details>
+          <summary>Quanto tempo leva pra ficar pronta?</summary>
+          <p>Até 7 dias úteis depois que eu recebo seus textos, fotos e logo (ou depois da nossa conversa, se for eu quem monta os textos).</p>
+        </details>
+
+        <details>
+          <summary>Preciso ter logo e textos prontos?</summary>
+          <p>Não. Se você não tiver textos, eu monto a partir de uma conversa rápida sobre o negócio. Sem logo, uso o nome do negócio com uma tipografia caprichada.</p>
+        </details>
+
+        <details>
+          <summary>Posso usar meu próprio domínio?</summary>
+          <p>Pode. Na manutenção mensal o domínio .com.br já está incluso. Se você já tem um, eu conecto.</p>
+        </details>
+
+        <details>
+          <summary>O que inclui a manutenção mensal?</summary>
+          <p>Hospedagem, domínio, cadeado de segurança (HTTPS), acompanhamento se a página sair do ar e 1 ajuste simples por mês, como trocar texto, foto ou telefone.</p>
+        </details>
+
+        <details>
+          <summary>Posso pedir alterações depois?</summary>
+          <p>Pode. A criação já inclui 2 rodadas de ajustes. Depois disso, ajustes simples entram na manutenção mensal e mudanças maiores são orçadas à parte.</p>
+        </details>
+
+        <details>
+          <summary>E se eu cancelar a manutenção?</summary>
+          <p>É só avisar com 30 dias de antecedência. A página é sua: se cancelar, eu te entrego os arquivos pra você hospedar onde quiser.</p>
+        </details>
+      </section>
+
+      <!-- CTA FINAL -->
+      <section id="contato" class="cta">
+        <h2>Vamos colocar seu negócio online?</h2>
+        <p>Me conta rapidinho o que você precisa e eu te respondo com um orçamento.</p>
+        <a href="page3.html" class="btn-whats">Pedir orçamento</a>
+      </section>
+    </main>
 
     <!-- FOOTER -->
     <footer class="footer">
       © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
-      <div style="margin-top:8px;font-size:0.9rem;">
-        <a href="page4.html" style="color:#0ff;text-decoration:underline;">Políticas e Termos</a>
-      </div>
+      <div style="margin-top: 8px"><a href="page4.html">Políticas e Termos</a></div>
     </footer>
-    <div class="particles"></div>
+
     <script src="script.js"></script>
-    
   </body>
 </html>

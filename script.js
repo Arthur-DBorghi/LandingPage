@@ -1,27 +1,33 @@
-document.getElementById("ano").textContent = new Date().getFullYear();
+// Número que recebe os pedidos (só dígitos, com DDI 55)
+const WHATSAPP = "5511941060165";
+
+const anoEl = document.getElementById("ano");
+if (anoEl) anoEl.textContent = new Date().getFullYear();
+
+const reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const temMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 // =========================
 //   PARTICULAS COLORIDAS
 // =========================
 const particlesContainer = document.querySelector(".particles");
+const blobs = [document.getElementById("blob-left"), document.getElementById("blob-right")].filter(Boolean);
 
 function createParticle() {
-  const p = document.createElement("div");
-  p.classList.add("particle");
+  // Aba em segundo plano: não cria nada (economiza bateria)
+  if (document.hidden) return;
 
-  const leftBlob = document.getElementById("blob-left");
-  const rightBlob = document.getElementById("blob-right");
-
-  const isLeft = Math.random() < 0.5;
-  const blob = isLeft ? leftBlob : rightBlob;
-
+  const blob = blobs[Math.floor(Math.random() * blobs.length)];
   const rect = blob.getBoundingClientRect();
 
-  const x = rect.left + Math.random() * rect.width;
-  const y = rect.top + Math.random() * rect.height;
+  // Blob fora da tela: não gera partícula invisível
+  if (rect.bottom < 0 || rect.top > window.innerHeight) return;
 
-  p.style.left = x + "px";
-  p.style.top = y + "px";
+  const p = document.createElement("div");
+  p.className = "particle";
+
+  p.style.left = rect.left + Math.random() * rect.width + "px";
+  p.style.top = rect.top + Math.random() * rect.height + "px";
 
   const size = Math.random() * 4 + 3;
   p.style.width = size + "px";
@@ -29,101 +35,93 @@ function createParticle() {
 
   const duration = Math.random() * 4 + 4;
   p.style.animationDuration = duration + "s, " + (duration + 1) + "s";
-
-  if (isLeft) {
-    p.style.animationName = "fall, colorFall";
-  } else {
-    p.style.animationName = "rise, colorRise";
-  }
+  p.style.animationName = blob.id === "blob-left" ? "fall, colorFall" : "rise, colorRise";
 
   particlesContainer.appendChild(p);
-
   setTimeout(() => p.remove(), duration * 1000);
 }
 
-setInterval(createParticle, 200);
+if (particlesContainer && blobs.length && !reduzirMovimento) {
+  // No celular, metade das partículas (mais leve)
+  setInterval(createParticle, temMouse ? 200 : 400);
+}
 
 // =========================
-//     BLOB DIREITO FUJÃO
+//     BLOBS FUJÕES
 // =========================
-const blobRight = document.getElementById("blob-right");
+// Mesmo comportamento de antes, mas com limite de distância:
+// antes o deslocamento somava sem parar e o blob podia ir parar longe,
+// empurrando o layout (era o bug do formulário fora do centro).
+function fazerFugir(blob, { raio = 260, forca = 0.18, maxDesloc = 180 } = {}) {
+  if (!blob) return;
+  let x = 0;
+  let y = 0;
 
-let fleeX = 0;
-let fleeY = 0;
+  document.addEventListener(
+    "mousemove",
+    (e) => {
+      const r = blob.getBoundingClientRect();
+      const dx = r.left + r.width / 2 - e.clientX;
+      const dy = r.top + r.height / 2 - e.clientY;
+      const dist = Math.hypot(dx, dy) || 1;
 
-document.addEventListener("mousemove", (e) => {
-  const rr = blobRight.getBoundingClientRect();
-  const cx = rr.left + rr.width / 2;
-  const cy = rr.top + rr.height / 2;
+      if (dist < raio) {
+        blob.classList.add("fleeing");
+        const f = (raio - dist) * forca;
+        x += (dx / dist) * f;
+        y += (dy / dist) * f;
 
-  const dx = cx - e.clientX;
-  const dy = cy - e.clientY;
-  const dist = Math.hypot(dx, dy);
+        const mag = Math.hypot(x, y);
+        if (mag > maxDesloc) {
+          x *= maxDesloc / mag;
+          y *= maxDesloc / mag;
+        }
+      } else {
+        x *= 0.9;
+        y *= 0.9;
+        if (Math.abs(x) < 0.5 && Math.abs(y) < 0.5) {
+          x = 0;
+          y = 0;
+          blob.classList.remove("fleeing");
+        }
+      }
 
-  if (dist < 260) {
-    blobRight.classList.add("fleeing");
+      blob.style.transform = `translate(${x}px, ${y}px)`;
+    },
+    { passive: true }
+  );
+}
 
-    const force = (260 - dist) * 0.18;
-    fleeX += (dx / dist) * force;
-    fleeY += (dy / dist) * force;
-  } else {
-    fleeX *= 0.9;
-    fleeY *= 0.9;
-
-    if (Math.abs(fleeX) < 0.5 && Math.abs(fleeY) < 0.5) {
-      blobRight.classList.remove("fleeing");
-    }
-  }
-
-  blobRight.style.transform = `translate(${fleeX}px, ${fleeY}px)`;
-});
-
-// =========================
-//   BLOB ESQUERDO SUAVE
-// =========================
-const blobLeft = document.getElementById("blob-left");
-
-let fleeLeftX = 0;
-let fleeLeftY = 0;
-
-document.addEventListener("mousemove", (e) => {
-  const rr = blobLeft.getBoundingClientRect();
-  const cx = rr.left + rr.width / 2;
-  const cy = rr.top + rr.height / 2;
-
-  const dx = cx - e.clientX;
-  const dy = cy - e.clientY;
-  const dist = Math.hypot(dx, dy);
-
-  if (dist < 260) {
-    blobLeft.classList.add("fleeing");
-
-    const force = (260 - dist) * 0.18;
-    fleeLeftX += (dx / dist) * force;
-    fleeLeftY += (dy / dist) * force;
-  } else {
-    fleeLeftX *= 0.9;
-    fleeLeftY *= 0.9;
-
-    if (Math.abs(fleeLeftX) < 0.5 && Math.abs(fleeLeftY) < 0.5) {
-      blobLeft.classList.remove("fleeing");
-    }
-  }
-
-  blobLeft.style.transform = `translate(${fleeLeftX}px, ${fleeLeftY}px)`;
-});
+if (temMouse && !reduzirMovimento) {
+  fazerFugir(document.getElementById("blob-right"));
+  fazerFugir(document.getElementById("blob-left"));
+}
 
 // =========================
-//       ENVIAR WHATSAPP
+//    PEDIDO VIA WHATSAPP
 // =========================
-document.getElementById('sendBtn').addEventListener('click', () => {
-  const f = document.getElementById('brief');
-  const data = new FormData(f);
-  const nome = encodeURIComponent(data.get('nome')||'');
-  const email = encodeURIComponent(data.get('email')||'');
-  const nicho = encodeURIComponent(data.get('nicho')||'');
-  const plano = encodeURIComponent(data.get('plano')||'');
-  const obs = encodeURIComponent(data.get('obs')||'');
-  const msg = `Pedido%20de%20LP%0ANome:%20${nome}.%0AEmail:%20${email}.%0ANicho:%20${nicho}.%0APlano:%20${plano}.%0AObs:%20${obs}.`;
-  window.open(`https://wa.me/5511941060165?text=${msg}`,'_blank');
-});
+// Só existe na page3. Usando o evento "submit", o navegador valida
+// os campos obrigatórios antes de abrir o WhatsApp.
+const brief = document.getElementById("brief");
+
+if (brief) {
+  brief.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const d = new FormData(brief);
+    const campo = (nome) => (d.get(nome) || "").toString().trim() || "-";
+
+    const linhas = [
+      "Olá, Arthur! Vim pelo site e quero um orçamento de landing page.",
+      "",
+      "Nome: " + campo("nome"),
+      "Negócio: " + campo("nicho"),
+      "Instagram/site atual: " + campo("link"),
+      "Já tenho logo: " + campo("logo"),
+      "Interesse: " + campo("plano"),
+      "O que preciso: " + campo("obs"),
+    ];
+
+    const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(linhas.join("\n"))}`;
+    window.open(url, "_blank", "noopener");
+  });
+}

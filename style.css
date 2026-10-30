@@ -1,67 +1,124 @@
 /* ========================= */
-/*       GLOBAL DARK         */
+/*       BASE                */
 /* ========================= */
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  color: #EAEAEA;
-  background: #0C0C1C;
-  overflow-x: hidden;
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* evita input "estourando" a largura (form fora do centro) */
 }
 
-/* Glass effect para TODAS as seções */
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  color: #EAEAEA;
+  background: #0C0C1C;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+a { color: #00D8FF; }
+
+img { max-width: 100%; }
+
+/* Tudo que é conteúdo fica acima dos blobs e partículas */
+.header,
+main,
+section,
+.footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Glass effect para as seções */
 .hero,
 .sobre,
 .servicos,
+.passos,
+.faq,
 .cta,
 .footer,
 .pagina {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(8px);
+  /* mais escuro que antes: o blob aparece, mas sem atrapalhar a leitura */
+  background: rgba(16, 16, 34, 0.62);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: 25px;
-  margin: 40px;
+  margin: 40px auto;
   padding: 40px;
+  max-width: 1100px;
 }
+
+h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); line-height: 1.2; margin: 0 0 16px; }
+h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); margin: 0 0 20px; }
+h3 { margin: 0 0 8px; }
+
+.muted { color: #AFAFC8; }
 
 /* ========================= */
 /*         HEADER            */
 /* ========================= */
 .header {
-  background: rgba(10, 10, 20, 0.7);
+  background: rgba(10, 10, 20, 0.75);
   backdrop-filter: blur(8px);
-  padding: 20px 40px;
+  -webkit-backdrop-filter: blur(8px);
+  padding: 12px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  gap: 16px;
   z-index: 10;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.logo {
-  height: 140px;
-  cursor: pointer;
-}
+.logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #EAEAEA; }
+.logo { height: 56px; width: auto; display: block; }
+.logo-nome { font-weight: 600; letter-spacing: 0.5px; }
+
+.nav { display: flex; align-items: center; gap: 22px; }
+.nav a:not(.btn) { color: #EAEAEA; text-decoration: none; opacity: 0.85; }
+.nav a:not(.btn):hover { opacity: 1; color: #00D8FF; }
 
 /* ========================= */
 /*      BOTÕES NEON          */
 /* ========================= */
 .btn,
 .btn-whats {
+  display: inline-block;
   background: linear-gradient(90deg, #8B3FFD, #00D8FF);
   color: #fff;
   padding: 12px 22px;
   border-radius: 12px;
   font-weight: 600;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
   box-shadow: 0 0 15px rgba(139, 63, 253, 0.7);
-  transition: 0.2s;
+  transition: box-shadow 0.2s, transform 0.1s;
 }
 
 .btn:hover,
 .btn-whats:hover {
   box-shadow: 0 0 30px rgba(0, 216, 255, 1);
+}
+
+.btn:focus-visible,
+.btn-whats:focus-visible,
+.card-link:focus-visible {
+  outline: 2px solid #00D8FF;
+  outline-offset: 3px;
+}
+
+.link-secundario {
+  display: inline-block;
+  margin-top: 14px;
+  color: #AFAFC8;
 }
 
 /* ========================= */
@@ -70,11 +127,15 @@ body {
 .hero {
   text-align: center;
   margin-top: 80px;
+  padding-top: 56px;
+  padding-bottom: 56px;
 }
 
-.hero h1 {
-  font-size: 2.8rem;
-  color: #EAEAEA;
+.hero p {
+  max-width: 640px;
+  margin: 0 auto 28px;
+  font-size: 1.15rem;
+  color: #CFCFE0;
 }
 
 /* ========================= */
@@ -82,87 +143,176 @@ body {
 /* ========================= */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 25px;
-  
 }
 
 .card {
-  background: rgba(255,255,255,0.05);
-  border-radius: 30px;
-  padding: 30px;
+  background: rgba(255, 255, 255, 0.045);
+  border-radius: 24px;
+  padding: 28px;
   box-shadow: 0 0 15px rgba(139, 63, 253, 0.2);
-  transition: 0.25s;
-  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
-.card:hover {
+.card p { margin: 0; color: #CFCFE0; }
+
+/* Card que é link (acessível por teclado, diferente da div com onclick) */
+a.card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.card-link:hover,
+.card.destaque:hover {
   transform: translateY(-8px);
   box-shadow: 0 0 35px rgba(0, 216, 255, 0.55);
 }
 
+.card .numero {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B3FFD, #00D8FF);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.card .seta { display: inline-block; margin-top: 14px; color: #00D8FF; font-weight: 600; }
+
 /* ========================= */
-/*         FOOTER            */
+/*         PLANOS            */
 /* ========================= */
+.planos { margin-top: 24px; }
+
+.plano { display: flex; flex-direction: column; }
+.plano .tipo { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #00D8FF; }
+.plano .preco { font-size: 2.2rem; font-weight: 700; margin: 10px 0 0; color: #fff; }
+.plano .preco small { font-size: 1rem; font-weight: 400; color: #AFAFC8; }
+.plano ul { padding-left: 20px; margin: 18px 0 24px; flex: 1; }
+.plano li { margin-bottom: 6px; }
+.plano .btn-whats { text-align: center; }
+
+.selo {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(44, 255, 149, 0.12);
+  color: #2CFF95;
+  border: 1px solid rgba(44, 255, 149, 0.4);
+}
+
+.selo.em-breve {
+  background: rgba(255, 221, 53, 0.1);
+  color: #FFDD35;
+  border-color: rgba(255, 221, 53, 0.4);
+}
+
+.extras { margin-top: 32px; }
+.extras ul { padding-left: 20px; }
+
+/* ========================= */
+/*           FAQ             */
+/* ========================= */
+.faq details {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(139, 63, 253, 0.3);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: #00D8FF; font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { margin: 10px 0 0; color: #CFCFE0; }
+
+/* ========================= */
+/*         CTA / FOOTER      */
+/* ========================= */
+.cta { text-align: center; }
+.cta p { color: #CFCFE0; margin: 0 0 24px; }
+
 .footer {
   text-align: center;
   color: #AFAFAF;
   margin-bottom: 50px;
+  font-size: 0.95rem;
 }
+
+.footer a { color: #00D8FF; }
 
 /* ========================= */
 /*         BLOBS NEON        */
 /* ========================= */
 
-/* BLOB ESQUERDO — segue a página */
-.blob-left {
-  position: absolute; /* trocado de fixed pra absolute */
-  top: 200px;
-  left: -200px;
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle at 30% 30%, #8B3FFD, #00D8FF);
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  box-shadow:
-    0 0 60px #8B3FFD,
-    0 0 100px #00D8FF;
+/* Camada de fundo: segura os blobs sem criar rolagem lateral */
+.bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
   pointer-events: none;
   z-index: 0;
+}
+
+.blob-left,
+.blob-right {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.blob-left {
+  top: 160px;
+  left: -200px;
+  background: radial-gradient(circle at 30% 30%, #8B3FFD, #00D8FF);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  box-shadow: 0 0 50px #8B3FFD, 0 0 90px rgba(0, 216, 255, 0.6);
   animation: blobL 14s infinite ease-in-out reverse;
 }
 
-/* BLOB DIREITO — segue a página */
 .blob-right {
-  position: absolute; /* trocado de fixed pra absolute */
-  top: 30%; /* IMPORTANTE: escolha onde ele entra na página */
+  top: 640px;
   right: -200px;
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle at 70% 70%, rgb(0, 216, 255,0.3), rgb(139, 63, 253, 0.7));
+  background: radial-gradient(circle at 70% 70%, rgba(0, 216, 255, 0.3), rgba(139, 63, 253, 0.7));
   border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%;
-  box-shadow:
-    0 0 120px #00D8FF,
-    0 0 200px #8B3FFD;
-  pointer-events: none;
-  z-index: 0;
+  box-shadow: 0 0 70px #00D8FF, 0 0 110px rgba(139, 63, 253, 0.6);
   animation: blobR 14s infinite ease-in-out reverse;
 }
+
 @keyframes blobR {
-  0%   { transform: translate(0,0) scale(1); }
+  0%   { transform: translate(0, 0) scale(1); }
   50%  { transform: translate(-90px, 120px) scale(1.25); }
-  100% { transform: translate(0,0) scale(1); }
+  100% { transform: translate(0, 0) scale(1); }
 }
+
 @keyframes blobL {
-  0%   { transform: translate(0,0) scale(1); }
-  50%  { transform: translate(-90px, 120px) scale(1.25); }
-  100% { transform: translate(0,0) scale(1); }
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(90px, 120px) scale(1.25); }
+  100% { transform: translate(0, 0) scale(1); }
 }
 
 /* Quando fugindo, sem animação */
-.blob-right.fleeing {
-  animation: none !important;
-  transition: transform 0.15s ease-out;
-}
+.blob-right.fleeing,
 .blob-left.fleeing {
   animation: none !important;
   transition: transform 0.15s ease-out;
@@ -171,13 +321,9 @@ body {
 /* ========================= */
 /*      PARTICULAS           */
 /* ========================= */
-
 .particles {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
   overflow: hidden;
   z-index: 1;
@@ -185,162 +331,145 @@ body {
 
 .particle {
   position: absolute;
-  width: 6px;
-  height: 6px;
   border-radius: 50%;
   opacity: 0.85;
   animation-timing-function: linear, linear;
   animation-fill-mode: forwards;
-  
 }
 
-/* Queda */
 @keyframes fall {
   0%   { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(120vh); opacity: 0; }
 }
 
-/* Subida */
 @keyframes rise {
   0%   { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-120vh); opacity: 0; }
 }
 
-/* Cor quando caindo */
 @keyframes colorFall {
-  0%   { background:#8B3FFD; box-shadow:0 0 12px #8B3FFD; }
-  25%  { background:#00D8FF; box-shadow:0 0 12px #00D8FF; }
-  50%  { background:#2CFF95; box-shadow:0 0 12px #2CFF95; }
-  75%  { background:#FF3FAF; box-shadow:0 0 12px #FF3FAF; }
-  100% { background:#FFDD35; box-shadow:0 0 12px #FFDD35; }
+  0%   { background: #8B3FFD; box-shadow: 0 0 12px #8B3FFD; }
+  25%  { background: #00D8FF; box-shadow: 0 0 12px #00D8FF; }
+  50%  { background: #2CFF95; box-shadow: 0 0 12px #2CFF95; }
+  75%  { background: #FF3FAF; box-shadow: 0 0 12px #FF3FAF; }
+  100% { background: #FFDD35; box-shadow: 0 0 12px #FFDD35; }
 }
 
-/* Cor subindo */
 @keyframes colorRise {
-  0%   { background:#FFDD35; box-shadow:0 0 12px #FFDD35; }
-  25%  { background:#FF3FAF; box-shadow:0 0 12px #FF3FAF; }
-  50%  { background:#2CFF95; box-shadow:0 0 12px #2CFF95; }
-  75%  { background:#00D8FF; box-shadow:0 0 12px #00D8FF; }
-  100% { background:#8B3FFD; box-shadow:0 0 12px #8B3FFD; }
+  0%   { background: #FFDD35; box-shadow: 0 0 12px #FFDD35; }
+  25%  { background: #FF3FAF; box-shadow: 0 0 12px #FF3FAF; }
+  50%  { background: #2CFF95; box-shadow: 0 0 12px #2CFF95; }
+  75%  { background: #00D8FF; box-shadow: 0 0 12px #00D8FF; }
+  100% { background: #8B3FFD; box-shadow: 0 0 12px #8B3FFD; }
 }
 
 /* ========================= */
 /*      FORM NEON            */
 /* ========================= */
 .pagina-form {
-  margin: 80px auto;     /* já centraliza horizontal */
-  display: flex;
-  flex-direction: column;
-  align-items: center;   /* CENTRALIZA TUDO PRA VALER */
-  text-align: center;    /* deixa os textos alinhados também */
+  max-width: 720px;
+  text-align: left;
 }
 
-#brief {
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto;        /* garante que o form fique CENTRADÃO */
-}
+.pagina-form > h1,
+.pagina-form > p { text-align: center; }
+
+#brief { width: 100%; margin: 24px auto 0; }
 
 form label {
   display: block;
   margin-bottom: 18px;
   font-weight: 500;
-  font-size: 1rem;
 }
-
 
 form input,
 form select,
 form textarea {
   width: 100%;
+  margin-top: 6px;
   padding: 12px 16px;
   border-radius: 12px;
-  border: 2px solid rgba(139,63,253,0.5);
-  background: rgba(255,255,255,0.03);
+  border: 2px solid rgba(139, 63, 253, 0.5);
+  background: rgba(255, 255, 255, 0.03);
   color: #EAEAEA;
-  font-size: 1rem;
-  transition: 0.3s;
+  font: inherit;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-
-form select option{
-  background: rgb(12, 12, 29);
-  color: #EAEAEA;
-}
+/* Fundo escuro no select (o branco "estourado" que dava pra ler mal) */
+form select { background-color: #14142A; }
+form select option { background: #0C0C1D; color: #EAEAEA; }
 
 form input:focus,
 form select:focus,
 form textarea:focus {
   border-color: #00D8FF;
-  box-shadow: 0 0 15px rgba(0,216,255,0.7);
+  box-shadow: 0 0 15px rgba(0, 216, 255, 0.7);
   outline: none;
 }
 
 form input::placeholder,
-form textarea::placeholder {
-  color: rgba(255,255,255,0.6);
-  text-shadow: 0 0 5px rgba(139,63,253,0.4);
-}
+form textarea::placeholder { color: rgba(255, 255, 255, 0.5); }
 
-/* ========================= */
-/*     BOTÃO NEON            */
+.obrigatorio { color: #FF3FAF; }
+
 #sendBtn {
   display: block;
   width: 100%;
-  text-align: center;
-  background: linear-gradient(90deg, #8B3FFD, #00D8FF);
-  color: #fff;
   padding: 14px 0;
-  border-radius: 12px;
-  font-weight: 600;
-  text-decoration: none;
   font-size: 1.1rem;
-  box-shadow: 0 0 15px rgba(139,63,253,0.7);
-  transition: 0.2s, transform 0.1s;
-  cursor: pointer;
-  border: none;
 }
 
-#sendBtn:hover{
-  box-shadow: 0 0 35px rgba(0,216,255,0.9);
-}
+#sendBtn:active { transform: scale(0.97); }
 
-#sendBtn:active {
-  transform: scale(0.95);
-  box-shadow: 0 0 50px rgba(0,216,255,0.9);
-}
+.aviso-form { font-size: 0.9rem; color: #AFAFC8; text-align: center; margin-top: 14px; }
 
 /* ========================= */
 /*     SEÇÃO POLÍTICAS       */
 /* ========================= */
-.politicas {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 40px;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(10px);
-  border-radius: 25px;
-  color: #EAEAEA;
-  line-height: 1.6;
+.politicas { max-width: 900px; }
+.politicas h2 { color: #00D8FF; }
+.politicas h3 { font-size: 1.3rem; margin-top: 28px; margin-bottom: 10px; color: #B88BFF; }
+.politicas ul { padding-left: 20px; }
+.politicas li { margin-bottom: 10px; }
+
+/* ========================= */
+/*     CELULAR               */
+/* ========================= */
+@media (max-width: 720px) {
+  .header { padding: 10px 16px; }
+  .logo { height: 42px; }
+  .logo-nome { display: none; }
+  .nav { gap: 12px; }
+  .nav a:not(.btn) { display: none; }
+  .nav .btn { padding: 10px 16px; font-size: 0.95rem; }
+
+  .hero,
+  .sobre,
+  .servicos,
+  .passos,
+  .faq,
+  .cta,
+  .footer,
+  .pagina {
+    margin: 20px 14px;
+    padding: 26px 20px;
+    border-radius: 20px;
+  }
+
+  .hero { margin-top: 32px; padding-top: 36px; padding-bottom: 36px; }
+  .hero p { font-size: 1.05rem; }
+
+  .blob-left,
+  .blob-right { width: 260px; height: 260px; }
+  .blob-left { left: -140px; }
+  .blob-right { right: -140px; top: 520px; }
 }
 
-.politicas h2 {
-  font-size: 2rem;
-  margin-bottom: 25px;
-  color: #00D8FF;
-}
-
-.politicas h3 {
-  font-size: 1.4rem;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  color: #8B3FFD;
-}
-
-.politicas ul {
-  padding-left: 20px;
-}
-
-.politicas li {
-  margin-bottom: 10px;
+/* Quem prefere menos movimento (configuração do sistema) */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .blob-left,
+  .blob-right { animation: none; }
+  .particles { display: none; }
 }

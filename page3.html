@@ -1,48 +1,82 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Pedido — Minha LP</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedir orçamento | Arthur Borghi</title>
+  <meta name="description" content="Conte rapidinho sobre o seu negócio e receba um orçamento de landing page pelo WhatsApp." />
+  <meta property="og:title" content="Pedir orçamento | Arthur Borghi" />
+  <meta property="og:description" content="Conte rapidinho sobre o seu negócio e receba um orçamento de landing page pelo WhatsApp." />
+  <meta property="og:image" content="https://arthur-dborghi.netlify.app/assets/og.png" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="blob-left" id="blob-left"></div>
-  <div class="particles"></div>
+  <div class="bg" aria-hidden="true">
+    <div id="blob-left" class="blob-left"></div>
+    <div id="blob-right" class="blob-right"></div>
+  </div>
+  <div class="particles" aria-hidden="true"></div>
 
   <header class="header">
-    <img src="assets/logo-2.png" class="logo" onclick="location.href='index.html'"/>
-    <a href="index.html" class="btn">Voltar</a>
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-ab.png" alt="Arthur Borghi" class="logo" />
+      <span class="logo-nome">Arthur Borghi</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Início</a>
+      <a href="page1.html">Planos</a>
+      <a href="page2.html">Modelos</a>
+      <a href="page3.html" class="btn">Pedir orçamento</a>
+    </nav>
   </header>
 
-  <main class="pagina-form">
-  <div class="blob-right" id="blob-right"></div>
+  <main class="pagina pagina-form">
+    <h1>Pedir orçamento</h1>
+    <p class="muted">Leva 1 minuto. Ao enviar, o WhatsApp abre com a mensagem pronta pra você mandar.</p>
 
-  <h1>Fazer Pedido</h1>
-  <p>Preencha rápido que eu recebo sua proposta direto no WhatsApp.</p>
+    <form id="brief">
+      <label>Seu nome <span class="obrigatorio">*</span>
+        <input name="nome" placeholder="Seu nome" autocomplete="name" required />
+      </label>
 
-  <form id="brief" style="max-width:720px;margin-top:18px;">
-    <label>Nome completo<br/><input name="nome" placeholder="Seu nome" required></label>
-    <label>Email (opcional)<br/><input name="email" type="email" placeholder="exemplo@email.com"></label>
-    <label>Negócio / Nicho<br/><input name="nicho" placeholder="Ex: Loja de roupas" required></label>
-    <label>Qual plano prefere?<br/>
-      <select name="plano">
-        <option value="Basico">Básico - R$150</option>
-        <option value="Profissional">Profissional - R$300</option>
-        <option value="Premium">Premium - R$550</option>
-      </select>
-    </label>
-    <label>Observações (o que precisa)<br/><textarea name="obs" rows="4" placeholder="Ex: Quero cores neon"></textarea></label>
-    <button class="btn-whats" id="sendBtn" type="button">Enviar pedido via WhatsApp</button>
-  </form>
-</main>
+      <label>Qual é o seu negócio? <span class="obrigatorio">*</span>
+        <input name="nicho" placeholder="Ex.: barbearia, clínica de estética, escritório de contabilidade" required />
+      </label>
+
+      <label>Instagram ou site atual (se tiver)
+        <input name="link" placeholder="Ex.: @seunegocio" />
+      </label>
+
+      <label>Já tem logo?
+        <select name="logo">
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </label>
+
+      <label>O que te interessa?
+        <select name="plano">
+          <option value="Criação + manutenção mensal">Criação + manutenção mensal</option>
+          <option value="Só a criação">Só a criação</option>
+          <option value="Ainda não sei">Ainda não sei</option>
+        </select>
+      </label>
+
+      <label>O que você precisa? <span class="obrigatorio">*</span>
+        <textarea name="obs" rows="4" placeholder="Ex.: quero mostrar meus serviços e receber agendamentos pelo WhatsApp" required></textarea>
+      </label>
+
+      <button class="btn-whats" id="sendBtn" type="submit">Enviar pelo WhatsApp</button>
+      <p class="aviso-form">Nada do que você preencher fica salvo neste site. Veja as <a href="page4.html">Políticas e Termos</a>.</p>
+    </form>
+  </main>
 
   <footer class="footer">
-      © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
-      <div style="margin-top:8px;font-size:0.9rem;">
-        <a href="page4.html" style="color:#0ff;text-decoration:underline;">Políticas e Termos</a>
-      </div>
-    </footer>
-    <script src="script.js"></script>
+    © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
+    <div style="margin-top: 8px"><a href="page4.html">Políticas e Termos</a></div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
