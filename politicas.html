@@ -12,30 +12,29 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <div class="bg" aria-hidden="true">
-    <div id="blob-left" class="blob-left"></div>
-    <div id="blob-right" class="blob-right"></div>
-  </div>
-  <div class="particles" aria-hidden="true"></div>
 
-  <header class="header">
-    <a href="index.html" class="logo-link">
-      <img src="assets/img/logo-ab.png" alt="Arthur Borghi" class="logo" width="72" height="56" />
-      <span class="logo-nome">Arthur Borghi</span>
-    </a>
-    <nav class="nav">
-      <a href="index.html#portfolio">Portfólio</a>
-      <a href="index.html#planos">Planos</a>
-      <a href="index.html#duvidas">Dúvidas</a>
-      <a href="orcamento.html" class="btn">Pedir orçamento</a>
-    </nav>
+  <header class="topo">
+    <div class="container topo-inner">
+      <a href="index.html" class="marca">
+        <img src="assets/img/logo-ab.png" alt="" width="49" height="38" />
+        <span>Arthur Borghi</span>
+      </a>
+      <nav class="menu" aria-label="Seções">
+        <a href="index.html#portfolio">Portfólio</a>
+        <a href="index.html#como-funciona">Como funciona</a>
+        <a href="index.html#planos">Planos</a>
+        <a href="index.html#duvidas">Dúvidas</a>
+      </nav>
+      <a href="orcamento.html" class="botao botao-pequeno">Pedir orçamento</a>
+    </div>
   </header>
 
-  <main class="pagina politicas">
-    <h2>Políticas e Termos</h2>
-    <p class="muted">Responsável: Arthur Defendi e Borghi. Contato: <a href="https://wa.me/5511941060165">WhatsApp (11) 94106-0165</a>.</p>
+  <main class="pagina">
+    <div class="container pagina-estreita politicas">
+      <h1>Políticas e Termos</h1>
+    <p class="lead">Responsável: Arthur Defendi e Borghi. Contato: <a href="https://wa.me/5511941060165">WhatsApp (11) 94106-0165</a>.</p>
 
-    <h3>1. Termos de uso</h3>
+    <h2>1. Termos de uso</h2>
     <ul>
       <li>O serviço é a criação de landing pages e, se contratada, a manutenção mensal (hospedagem, domínio e pequenos ajustes), conforme o que foi combinado no orçamento.</li>
       <li>O conteúdo da página (textos, fotos, marca) é do cliente, que garante ter direito de usá-lo. Depois de paga a criação, a página também é do cliente.</li>
@@ -44,21 +43,21 @@
       <li>A hospedagem depende de serviços de terceiros. Faço o possível para manter a página no ar, mas não há garantia de funcionamento 100% do tempo.</li>
     </ul>
 
-    <h3>2. Manutenção mensal</h3>
+    <h2>2. Manutenção mensal</h2>
     <ul>
       <li>A mensalidade é paga adiantada, todo mês.</li>
       <li>O cancelamento é feito com 30 dias de aviso. Ao cancelar, eu entrego os arquivos da página para você hospedar onde quiser.</li>
       <li>Se o domínio estiver registrado por mim, ele é transferido para o seu nome ao fim do contrato.</li>
     </ul>
 
-    <h3>3. Pagamento</h3>
+    <h2>3. Pagamento</h2>
     <ul>
       <li>O valor da criação é combinado antes do início do trabalho.</li>
       <li>Páginas adicionais custam R$ 60 cada. Outros extras são orçados à parte.</li>
       <li>Formas de pagamento: PIX ou transferência.</li>
     </ul>
 
-    <h3>4. Privacidade e LGPD</h3>
+    <h2>4. Privacidade e LGPD</h2>
     <ul>
       <li>Este site não usa cookies, não tem ferramentas de rastreamento e não salva os dados do formulário.</li>
       <li>Ao enviar o formulário, o seu WhatsApp abre com a mensagem pronta. Os dados que você mandar (nome, negócio, contato) são usados apenas para responder ao seu pedido e prestar o serviço, e não são vendidos nem compartilhados.</li>
@@ -67,11 +66,17 @@
       <li>Você pode pedir a qualquer momento a correção ou exclusão dos seus dados pelo WhatsApp acima.</li>
       <li>Nas páginas criadas para clientes, quem decide sobre os dados dos visitantes é o próprio cliente. Eu atuo apenas na parte técnica.</li>
     </ul>
+    </div>
   </main>
 
-  <footer class="footer">
-    © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
-    <div style="margin-top: 8px"><a href="politicas.html">Políticas e Termos</a></div>
+  <footer class="rodape">
+    <div class="container rodape-inner">
+      <span>© <span id="ano"></span> Arthur Defendi e Borghi</span>
+      <nav aria-label="Rodapé">
+        <a href="politicas.html">Políticas e Termos</a>
+        <a href="https://wa.me/5511941060165">WhatsApp</a>
+      </nav>
+    </div>
   </footer>
 
   <script src="assets/js/main.js" defer></script>

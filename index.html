@@ -1,142 +1,205 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arthur Borghi | Landing pages para pequenos negócios</title>
-    <meta name="description" content="Página profissional para o seu negócio, pronta em poucos dias: bonita no celular, rápida e com botão direto para o seu WhatsApp." />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arthur Borghi | Landing pages para pequenos negócios</title>
+  <meta name="description" content="Página profissional para o seu negócio, pronta em poucos dias: bonita no celular, rápida e com botão direto para o seu WhatsApp." />
 
-    <!-- Preview quando o link é compartilhado (WhatsApp, LinkedIn etc.) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Landing pages para pequenos negócios | Arthur Borghi" />
-    <meta property="og:description" content="Página profissional pro seu negócio, pronta em poucos dias, com botão direto pro seu WhatsApp." />
-    <meta property="og:image" content="https://arthur-dborghi.netlify.app/assets/img/og.png" />
-    <meta property="og:url" content="https://arthur-dborghi.netlify.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Landing pages para pequenos negócios | Arthur Borghi" />
+  <meta property="og:description" content="Página profissional pro seu negócio, pronta em poucos dias, com botão direto pro seu WhatsApp." />
+  <meta property="og:image" content="https://arthur-dborghi.netlify.app/assets/img/og.png" />
+  <meta property="og:url" content="https://arthur-dborghi.netlify.app/" />
 
-    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="preload" href="assets/fonts/inter-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
 
-  <body>
-    <!-- FUNDO -->
-    <div class="bg" aria-hidden="true">
-      <div id="blob-left" class="blob-left"></div>
-      <div id="blob-right" class="blob-right"></div>
-    </div>
-    <div class="particles" aria-hidden="true"></div>
-
-    <!-- HEADER -->
-    <header class="header">
-      <a href="index.html" class="logo-link">
-        <img src="assets/img/logo-ab.png" alt="Arthur Borghi" class="logo" width="72" height="56" />
-        <span class="logo-nome">Arthur Borghi</span>
+  <header class="topo">
+    <div class="container topo-inner">
+      <a href="index.html" class="marca">
+        <img src="assets/img/logo-ab.png" alt="" width="49" height="38" />
+        <span>Arthur Borghi</span>
       </a>
-      <nav class="nav">
+      <nav class="menu" aria-label="Seções">
         <a href="#portfolio">Portfólio</a>
+        <a href="#como-funciona">Como funciona</a>
         <a href="#planos">Planos</a>
         <a href="#duvidas">Dúvidas</a>
-        <a href="orcamento.html" class="btn">Pedir orçamento</a>
       </nav>
-    </header>
+      <a href="orcamento.html" class="botao botao-pequeno">Pedir orçamento</a>
+    </div>
+  </header>
 
-    <main>
-      <!-- HERO -->
-      <section class="hero">
-        <h1>Uma página profissional pro seu negócio, pronta em poucos dias</h1>
-        <p>
-          Bonita no celular, rápida de abrir e com botão direto pro seu WhatsApp.
-          Você cuida do seu negócio, eu cuido da parte técnica.
-        </p>
-        <a href="orcamento.html" class="btn-whats">Pedir orçamento</a>
-        <a href="#portfolio" class="btn-secundario">Ver modelos</a><br />
-        <a class="link-secundario" href="https://wa.me/5511941060165?text=Ol%C3%A1%2C%20Arthur%21%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20as%20landing%20pages.">ou chamar direto no WhatsApp</a>
-      </section>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="blob" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div>
+          <p class="sobretitulo">Landing pages para pequenos negócios</p>
+          <h1>Uma página profissional pro seu negócio, <span class="destaque">pronta em poucos dias.</span></h1>
+          <p class="lead">Bonita no celular, rápida de abrir e com botão direto pro seu WhatsApp. Você cuida do negócio, eu cuido da parte técnica.</p>
+          <div class="acoes">
+            <a href="orcamento.html" class="botao">Pedir orçamento</a>
+            <a href="#portfolio" class="botao botao-contorno">Ver modelos</a>
+          </div>
+          <p class="hero-whats">Prefere conversar? <a href="https://wa.me/5511941060165?text=Ol%C3%A1%2C%20Arthur%21%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20as%20landing%20pages.">Me chama no WhatsApp</a></p>
+        </div>
 
-      <!-- PORTFÓLIO -->
-      <section class="portfolio" id="portfolio">
-        <h2>Portfólio</h2>
-        <p class="muted">Modelos prontos pra você ver funcionando. Cada página de cliente é adaptada às cores, fotos e textos do negócio.</p>
-        <div class="cards" style="margin-top: 24px">
-          <a class="card card-link portfolio-card" href="modelos/barbearia/index.html">
+        <div class="hero-telas" aria-hidden="true">
+          <figure class="tela tela-lado"><img src="assets/img/portfolio/tela-barbearia.webp" alt="" width="520" height="1125" /></figure>
+          <figure class="tela tela-centro"><img src="assets/img/portfolio/tela-consultoria.webp" alt="" width="520" height="1125" /></figure>
+          <figure class="tela tela-lado"><img src="assets/img/portfolio/tela-petshop.webp" alt="" width="520" height="1125" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- GARANTIAS -->
+    <div class="faixa">
+      <div class="container faixa-grid">
+        <div class="faixa-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span><strong>Até 7 dias úteis</strong>do briefing ao ar</span>
+        </div>
+        <div class="faixa-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18h2"/></svg>
+          <span><strong>Feita pro celular</strong>onde seu cliente está</span>
+        </div>
+        <div class="faixa-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+          <span><strong>Fala direto comigo</strong>sem intermediário</span>
+        </div>
+        <div class="faixa-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span><strong>Sem fidelidade</strong>na manutenção mensal</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTFÓLIO -->
+    <section class="secao" id="portfolio">
+      <div class="container">
+        <div class="cabecalho">
+          <p class="sobretitulo">Portfólio</p>
+          <h2>Modelos prontos pra você ver funcionando</h2>
+          <p class="lead">Cada página de cliente parte de um modelo e é adaptada às cores, fotos e textos do negócio.</p>
+        </div>
+
+        <div class="projetos">
+          <a class="projeto" href="modelos/barbearia/index.html">
             <img src="assets/img/portfolio/barbearia.webp" alt="Prévia do modelo de barbearia" width="800" height="500" loading="lazy" />
-            <div class="info">
-              <span class="tag">Barbearia e estética</span>
+            <div class="projeto-info">
+              <span class="projeto-tag">Barbearia e estética</span>
               <h3>Navalha Fina</h3>
               <p>Serviços com preço, equipe, horários e agendamento pelo WhatsApp.</p>
-              <span class="seta">Ver modelo →</span>
+              <span class="projeto-link">Ver modelo →</span>
             </div>
           </a>
-          <a class="card card-link portfolio-card" href="modelos/consultoria/index.html">
+          <a class="projeto" href="modelos/consultoria/index.html">
             <img src="assets/img/portfolio/consultoria.webp" alt="Prévia do modelo de consultoria" width="800" height="500" loading="lazy" />
-            <div class="info">
-              <span class="tag">Consultoria e serviços</span>
+            <div class="projeto-info">
+              <span class="projeto-tag">Consultoria e serviços</span>
               <h3>Clara Andrade Contabilidade</h3>
               <p>Planos, como funciona, perguntas frequentes e formulário de contato.</p>
-              <span class="seta">Ver modelo →</span>
+              <span class="projeto-link">Ver modelo →</span>
             </div>
           </a>
-          <a class="card card-link portfolio-card" href="modelos/petshop/index.html">
+          <a class="projeto" href="modelos/petshop/index.html">
             <img src="assets/img/portfolio/petshop.webp" alt="Prévia do modelo de pet shop" width="800" height="500" loading="lazy" />
-            <div class="info">
-              <span class="tag">Pet shop e serviços com agenda</span>
+            <div class="projeto-info">
+              <span class="projeto-tag">Pet shop e serviços com agenda</span>
               <h3>Focinho Feliz</h3>
-              <p>Banho e tosa com preço por porte, pacote mensal, leva e traz e agendamento pelo WhatsApp.</p>
-              <span class="seta">Ver modelo →</span>
+              <p>Banho e tosa com preço por porte, pacote mensal e agendamento pelo WhatsApp.</p>
+              <span class="projeto-link">Ver modelo →</span>
             </div>
           </a>
         </div>
-        <p class="nota-portfolio">Os negócios dos modelos são fictícios, criados para demonstração.</p>
-      </section>
+        <p class="nota">Os negócios dos modelos são fictícios, criados para demonstração.</p>
+      </div>
+    </section>
 
-      <!-- COMO FUNCIONA -->
-      <section class="passos" id="como-funciona">
-        <h2>Como funciona</h2>
-        <div class="cards">
-          <div class="card">
-            <span class="numero">1</span>
+    <!-- COMO FUNCIONA -->
+    <section class="secao secao-alt" id="como-funciona">
+      <div class="container">
+        <div class="cabecalho">
+          <p class="sobretitulo">Como funciona</p>
+          <h2>Do primeiro contato à página no ar</h2>
+        </div>
+        <ol class="passos">
+          <li>
             <h3>Você me conta sobre o negócio</h3>
-            <p>Pelo formulário ou pelo WhatsApp: o que você faz, pra quem, e como quer que o cliente te chame.</p>
-          </div>
-          <div class="card">
-            <span class="numero">2</span>
+            <p>Pelo formulário ou pelo WhatsApp: o que você faz, pra quem e como quer que o cliente te chame.</p>
+          </li>
+          <li>
             <h3>Eu monto a página</h3>
             <p>Texto, design e versão pra celular. Você recebe uma prévia e pede os ajustes que quiser.</p>
-          </div>
-          <div class="card">
-            <span class="numero">3</span>
+          </li>
+          <li>
             <h3>Sua página vai pro ar</h3>
             <p>Com domínio próprio (seunegocio.com.br) e, se você quiser, eu cuido da hospedagem todo mês.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- O QUE VEM -->
+    <section class="secao">
+      <div class="container">
+        <div class="cabecalho">
+          <p class="sobretitulo">O que vem na página</p>
+          <h2>Tudo que um pequeno negócio precisa pra ser encontrado</h2>
+        </div>
+        <div class="recursos">
+          <div class="recurso">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18h2"/></svg>
+            <h3>Feita pro celular</h3>
+            <p>A maioria dos clientes abre pelo celular. A página é pensada pra isso desde o começo.</p>
+          </div>
+          <div class="recurso">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
+            <h3>Botão de WhatsApp</h3>
+            <p>O cliente lê, se interessa e já te chama, com a mensagem pronta.</p>
+          </div>
+          <div class="recurso">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+            <h3>Pronta pro Google</h3>
+            <p>Título, descrição e estrutura certos pra sua página poder aparecer nas buscas.</p>
+          </div>
+          <div class="recurso">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></svg>
+            <h3>Domínio próprio</h3>
+            <p>Um endereço com o nome do seu negócio, como seunegocio.com.br.</p>
+          </div>
+          <div class="recurso">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+            <h3>Cadeado de segurança</h3>
+            <p>HTTPS ativo, pra o navegador mostrar que sua página é segura.</p>
+          </div>
+          <div class="recurso">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>
+            <h3>Ajustes inclusos</h3>
+            <p>Duas rodadas de ajustes antes de publicar, pra ficar do seu jeito.</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- O QUE VEM -->
-      <section class="servicos">
-        <h2>O que vem na sua página</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>📱 Feita pro celular</h3>
-            <p>A maioria dos seus clientes vai abrir pelo celular. Ela é pensada pra isso desde o começo.</p>
-          </div>
-          <div class="card">
-            <h3>💬 Botão de WhatsApp</h3>
-            <p>O cliente lê, se interessa e já te chama, sem precisar procurar seu número.</p>
-          </div>
-          <div class="card">
-            <h3>🔎 Pronta pro Google</h3>
-            <p>Título, descrição e estrutura certos pra sua página poder ser encontrada nas buscas.</p>
-          </div>
+    <!-- PLANOS -->
+    <section class="secao secao-alt" id="planos">
+      <div class="container">
+        <div class="cabecalho">
+          <p class="sobretitulo">Planos e preços</p>
+          <h2>Preço fechado, sem surpresa</h2>
+          <p class="lead">Você paga a criação uma vez. A manutenção mensal é opcional: se preferir, eu te entrego os arquivos e você hospeda onde quiser.</p>
         </div>
-      </section>
 
-      <!-- PLANOS -->
-      <section class="planos-secao" id="planos">
-        <h2>Planos e preços</h2>
-        <p class="muted">Você paga a criação uma vez. A manutenção mensal é opcional: se preferir, eu te entrego os arquivos e você hospeda onde quiser.</p>
-
-        <div class="cards planos">
-          <div class="card plano destaque">
-            <span class="tipo">Pagamento único</span>
+        <div class="planos">
+          <div class="plano plano-destaque">
+            <span class="plano-tipo">Pagamento único</span>
             <h3>Criação da página</h3>
             <p class="preco">R$ 500</p>
             <span class="selo">Lançamento: R$ 300 para os 3 primeiros clientes</span>
@@ -149,11 +212,11 @@
               <li>2 rodadas de ajustes</li>
               <li>Entrega em até 7 dias úteis</li>
             </ul>
-            <a class="btn-whats" href="orcamento.html">Quero minha página</a>
+            <a class="botao botao-largo" href="orcamento.html">Quero minha página</a>
           </div>
 
-          <div class="card plano destaque">
-            <span class="tipo">Mensal · opcional</span>
+          <div class="plano">
+            <span class="plano-tipo">Mensal · opcional</span>
             <h3>Manutenção</h3>
             <p class="preco">R$ 40 <small>/mês</small></p>
             <ul>
@@ -164,78 +227,97 @@
               <li>1 ajuste simples por mês (texto, foto, telefone)</li>
               <li>Cancelamento com 30 dias de aviso</li>
             </ul>
-            <a class="btn-whats" href="orcamento.html">Quero com manutenção</a>
+            <a class="botao botao-contorno botao-largo" href="orcamento.html">Quero com manutenção</a>
           </div>
         </div>
 
         <div class="extras">
           <ul>
-            <li>Página adicional (ex.: cardápio, galeria, serviços): <strong>R$ 60</strong> cada</li>
+            <li>Página adicional (ex.: galeria, serviços, cardápio): <strong>R$ 60</strong> cada</li>
             <li>Mudanças maiores depois da entrega: orçamento à parte</li>
           </ul>
-          <p class="muted">Formas de pagamento: PIX ou transferência.</p>
+          <p>Formas de pagamento: PIX ou transferência.</p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- QUEM SOU -->
-      <section class="sobre">
-        <h2>Quem sou</h2>
-        <p>
-          Sou o Arthur, desenvolvedor. Crio landing pages para pequenos negócios que querem um
-          endereço profissional na internet sem pagar preço de agência. Você fala direto comigo,
-          do orçamento ao suporte.
-        </p>
-      </section>
+    <!-- QUEM SOU -->
+    <section class="secao">
+      <div class="container">
+        <div class="sobre">
+          <!-- Quando tiver a foto: salve como assets/img/arthur.webp (quadrada)
+               e tire os marcadores de comentário da linha abaixo.
+               O layout passa sozinho para foto + texto.
+          <img class="foto" src="assets/img/arthur.webp" alt="Arthur Borghi" width="220" height="220" />
+          -->
+          <div>
+            <p class="sobretitulo">Quem sou</p>
+            <h2>Oi, eu sou o Arthur</h2>
+            <p>Sou desenvolvedor e crio landing pages para pequenos negócios que querem um endereço profissional na internet sem pagar preço de agência.</p>
+            <p>Você fala direto comigo, do orçamento ao suporte, e sabe exatamente o que está pagando.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <!-- FAQ -->
-      <section class="faq" id="duvidas">
-        <h2>Perguntas frequentes</h2>
+    <!-- DÚVIDAS -->
+    <section class="secao secao-alt" id="duvidas">
+      <div class="container">
+        <div class="cabecalho">
+          <p class="sobretitulo">Dúvidas</p>
+          <h2>Perguntas frequentes</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Quanto tempo leva pra ficar pronta?</summary>
+            <p>Até 7 dias úteis depois que eu recebo seus textos, fotos e logo (ou depois da nossa conversa, se for eu quem monta os textos).</p>
+          </details>
+          <details>
+            <summary>Preciso ter logo e textos prontos?</summary>
+            <p>Não. Se você não tiver textos, eu monto a partir de uma conversa rápida sobre o negócio. Sem logo, uso o nome do negócio com uma tipografia caprichada.</p>
+          </details>
+          <details>
+            <summary>A minha página vai ficar igual ao modelo?</summary>
+            <p>Não. O modelo é o ponto de partida: cores, fotos, textos e seções mudam de acordo com o seu negócio.</p>
+          </details>
+          <details>
+            <summary>Posso usar meu próprio domínio?</summary>
+            <p>Pode. Na manutenção mensal o domínio .com.br já está incluso. Se você já tem um, eu conecto.</p>
+          </details>
+          <details>
+            <summary>O que inclui a manutenção mensal?</summary>
+            <p>Hospedagem, domínio, cadeado de segurança (HTTPS), acompanhamento se a página sair do ar e 1 ajuste simples por mês, como trocar texto, foto ou telefone.</p>
+          </details>
+          <details>
+            <summary>E se eu cancelar a manutenção?</summary>
+            <p>É só avisar com 30 dias de antecedência. A página é sua: se cancelar, eu te entrego os arquivos pra você hospedar onde quiser.</p>
+          </details>
+        </div>
+      </div>
+    </section>
 
-        <details>
-          <summary>Quanto tempo leva pra ficar pronta?</summary>
-          <p>Até 7 dias úteis depois que eu recebo seus textos, fotos e logo (ou depois da nossa conversa, se for eu quem monta os textos).</p>
-        </details>
+    <!-- CHAMADA FINAL -->
+    <section class="secao">
+      <div class="container">
+        <div class="chamada">
+          <h2>Vamos colocar seu negócio online?</h2>
+          <p class="lead">Me conta rapidinho o que você precisa e eu te respondo com um orçamento.</p>
+          <a href="orcamento.html" class="botao">Pedir orçamento</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        <details>
-          <summary>Preciso ter logo e textos prontos?</summary>
-          <p>Não. Se você não tiver textos, eu monto a partir de uma conversa rápida sobre o negócio. Sem logo, uso o nome do negócio com uma tipografia caprichada.</p>
-        </details>
+  <footer class="rodape">
+    <div class="container rodape-inner">
+      <span>© <span id="ano"></span> Arthur Defendi e Borghi</span>
+      <nav aria-label="Rodapé">
+        <a href="politicas.html">Políticas e Termos</a>
+        <a href="https://wa.me/5511941060165">WhatsApp</a>
+      </nav>
+    </div>
+  </footer>
 
-        <details>
-          <summary>A minha página vai ficar igual ao modelo?</summary>
-          <p>Não. O modelo é o ponto de partida: cores, fotos, textos e seções mudam de acordo com o seu negócio.</p>
-        </details>
-
-        <details>
-          <summary>Posso usar meu próprio domínio?</summary>
-          <p>Pode. Na manutenção mensal o domínio .com.br já está incluso. Se você já tem um, eu conecto.</p>
-        </details>
-
-        <details>
-          <summary>O que inclui a manutenção mensal?</summary>
-          <p>Hospedagem, domínio, cadeado de segurança (HTTPS), acompanhamento se a página sair do ar e 1 ajuste simples por mês, como trocar texto, foto ou telefone.</p>
-        </details>
-
-        <details>
-          <summary>E se eu cancelar a manutenção?</summary>
-          <p>É só avisar com 30 dias de antecedência. A página é sua: se cancelar, eu te entrego os arquivos pra você hospedar onde quiser.</p>
-        </details>
-      </section>
-
-      <!-- CTA FINAL -->
-      <section id="contato" class="cta">
-        <h2>Vamos colocar seu negócio online?</h2>
-        <p>Me conta rapidinho o que você precisa e eu te respondo com um orçamento.</p>
-        <a href="orcamento.html" class="btn-whats">Pedir orçamento</a>
-      </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
-      <div style="margin-top: 8px"><a href="politicas.html">Políticas e Termos</a></div>
-    </footer>
-
-    <script src="assets/js/main.js" defer></script>
-  </body>
+  <script src="assets/js/main.js" defer></script>
+</body>
 </html>

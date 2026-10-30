@@ -12,78 +12,84 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <div class="bg" aria-hidden="true">
-    <div id="blob-left" class="blob-left"></div>
-    <div id="blob-right" class="blob-right"></div>
-  </div>
-  <div class="particles" aria-hidden="true"></div>
 
-  <header class="header">
-    <a href="index.html" class="logo-link">
-      <img src="assets/img/logo-ab.png" alt="Arthur Borghi" class="logo" width="72" height="56" />
-      <span class="logo-nome">Arthur Borghi</span>
-    </a>
-    <nav class="nav">
-      <a href="index.html#portfolio">Portfólio</a>
-      <a href="index.html#planos">Planos</a>
-      <a href="index.html#duvidas">Dúvidas</a>
-      <a href="orcamento.html" class="btn">Pedir orçamento</a>
-    </nav>
+  <header class="topo">
+    <div class="container topo-inner">
+      <a href="index.html" class="marca">
+        <img src="assets/img/logo-ab.png" alt="" width="49" height="38" />
+        <span>Arthur Borghi</span>
+      </a>
+      <nav class="menu" aria-label="Seções">
+        <a href="index.html#portfolio">Portfólio</a>
+        <a href="index.html#como-funciona">Como funciona</a>
+        <a href="index.html#planos">Planos</a>
+        <a href="index.html#duvidas">Dúvidas</a>
+      </nav>
+      <a href="orcamento.html" class="botao botao-pequeno">Pedir orçamento</a>
+    </div>
   </header>
 
-  <main class="pagina pagina-form">
-    <h1>Pedir orçamento</h1>
-    <p class="muted">Leva 1 minuto. Ao enviar, o WhatsApp abre com a mensagem pronta pra você mandar.</p>
+  <main class="pagina">
+    <div class="container pagina-estreita">
+      <p class="sobretitulo">Orçamento</p>
+      <h1>Me conta sobre o seu negócio</h1>
+      <p class="lead">Leva 1 minuto. Ao enviar, o WhatsApp abre com a mensagem pronta pra você mandar.</p>
 
-    <form id="brief">
-      <label>Seu nome <span class="obrigatorio">*</span>
-        <input name="nome" placeholder="Seu nome" autocomplete="name" required />
-      </label>
+      <form id="brief" class="formulario">
+        <label>Seu nome <span class="obrigatorio">*</span>
+          <input name="nome" placeholder="Seu nome" autocomplete="name" required />
+        </label>
 
-      <label>Qual é o seu negócio? <span class="obrigatorio">*</span>
-        <input name="nicho" placeholder="Ex.: barbearia, clínica de estética, escritório de contabilidade" required />
-      </label>
+        <label>Qual é o seu negócio? <span class="obrigatorio">*</span>
+          <input name="nicho" placeholder="Ex.: barbearia, clínica de estética, escritório de contabilidade" required />
+        </label>
 
-      <label>Instagram ou site atual (se tiver)
-        <input name="link" placeholder="Ex.: @seunegocio" />
-      </label>
+        <label>Instagram ou site atual (se tiver)
+          <input name="link" placeholder="Ex.: @seunegocio" />
+        </label>
 
-      <label>Já tem logo?
-        <select name="logo">
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-      </label>
+        <label>Já tem logo?
+          <select name="logo">
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+        </label>
 
-      <label>Algum modelo te chamou atenção?
-        <select name="modelo" id="campo-modelo">
-          <option value="Nenhum em especial">Nenhum em especial</option>
-          <option value="Barbearia e estética">Barbearia e estética</option>
-          <option value="Consultoria e serviços">Consultoria e serviços</option>
-          <option value="Pet shop e serviços com agenda">Pet shop e serviços com agenda</option>
-        </select>
-      </label>
+        <label>Algum modelo te chamou atenção?
+          <select name="modelo" id="campo-modelo">
+            <option value="Nenhum em especial">Nenhum em especial</option>
+            <option value="Barbearia e estética">Barbearia e estética</option>
+            <option value="Consultoria e serviços">Consultoria e serviços</option>
+            <option value="Pet shop e serviços com agenda">Pet shop e serviços com agenda</option>
+          </select>
+        </label>
 
-      <label>O que te interessa?
-        <select name="plano">
-          <option value="Criação + manutenção mensal">Criação + manutenção mensal</option>
-          <option value="Só a criação">Só a criação</option>
-          <option value="Ainda não sei">Ainda não sei</option>
-        </select>
-      </label>
+        <label>O que te interessa?
+          <select name="plano">
+            <option value="Criação + manutenção mensal">Criação + manutenção mensal</option>
+            <option value="Só a criação">Só a criação</option>
+            <option value="Ainda não sei">Ainda não sei</option>
+          </select>
+        </label>
 
-      <label>O que você precisa? <span class="obrigatorio">*</span>
-        <textarea name="obs" rows="4" placeholder="Ex.: quero mostrar meus serviços e receber agendamentos pelo WhatsApp" required></textarea>
-      </label>
+        <label>O que você precisa? <span class="obrigatorio">*</span>
+          <textarea name="obs" rows="4" placeholder="Ex.: quero mostrar meus serviços e receber agendamentos pelo WhatsApp" required></textarea>
+        </label>
 
-      <button class="btn-whats" id="sendBtn" type="submit">Enviar pelo WhatsApp</button>
-      <p class="aviso-form">Nada do que você preencher fica salvo neste site. Veja as <a href="politicas.html">Políticas e Termos</a>.</p>
-    </form>
+        <button class="botao botao-largo" id="sendBtn" type="submit">Enviar pelo WhatsApp</button>
+        <p class="aviso-form">Nada do que você preencher fica salvo neste site. Veja as <a href="politicas.html">Políticas e Termos</a>.</p>
+      </form>
+    </div>
   </main>
 
-  <footer class="footer">
-    © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
-    <div style="margin-top: 8px"><a href="politicas.html">Políticas e Termos</a></div>
+  <footer class="rodape">
+    <div class="container rodape-inner">
+      <span>© <span id="ano"></span> Arthur Defendi e Borghi</span>
+      <nav aria-label="Rodapé">
+        <a href="politicas.html">Políticas e Termos</a>
+        <a href="https://wa.me/5511941060165">WhatsApp</a>
+      </nav>
+    </div>
   </footer>
 
   <script src="assets/js/main.js" defer></script>

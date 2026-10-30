@@ -13,34 +13,40 @@
   <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body>
-  <div class="bg" aria-hidden="true">
-    <div id="blob-left" class="blob-left"></div>
-    <div id="blob-right" class="blob-right"></div>
-  </div>
-  <div class="particles" aria-hidden="true"></div>
 
-  <header class="header">
-    <a href="/index.html" class="logo-link">
-      <img src="/assets/img/logo-ab.png" alt="Arthur Borghi" class="logo" width="72" height="56" />
-      <span class="logo-nome">Arthur Borghi</span>
-    </a>
-    <nav class="nav">
-      <a href="/index.html#portfolio">Portfólio</a>
-      <a href="/index.html#planos">Planos</a>
-      <a href="/index.html#duvidas">Dúvidas</a>
-      <a href="/orcamento.html" class="btn">Pedir orçamento</a>
-    </nav>
+  <header class="topo">
+    <div class="container topo-inner">
+      <a href="/index.html" class="marca">
+        <img src="/assets/img/logo-ab.png" alt="" width="49" height="38" />
+        <span>Arthur Borghi</span>
+      </a>
+      <nav class="menu" aria-label="Seções">
+        <a href="/index.html#portfolio">Portfólio</a>
+        <a href="/index.html#como-funciona">Como funciona</a>
+        <a href="/index.html#planos">Planos</a>
+        <a href="/index.html#duvidas">Dúvidas</a>
+      </nav>
+      <a href="/orcamento.html" class="botao botao-pequeno">Pedir orçamento</a>
+    </div>
   </header>
 
-  <main class="pagina" style="text-align:center; max-width:720px">
-    <h1>Essa página não existe 😅</h1>
-    <p class="muted">O link pode ter mudado. Bora voltar pro começo?</p>
-    <p style="margin-top:24px"><a href="/index.html" class="btn-whats">Ir para o início</a></p>
+  <main class="pagina">
+    <div class="container pagina-estreita">
+      <p class="sobretitulo">Erro 404</p>
+      <h1>Essa página não existe</h1>
+      <p class="lead">O link pode ter mudado. Bora voltar pro começo?</p>
+      <p style="margin-top: 28px"><a href="/index.html" class="botao">Ir para o início</a></p>
+    </div>
   </main>
 
-  <footer class="footer">
-    © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
-    <div style="margin-top: 8px"><a href="/politicas.html">Políticas e Termos</a></div>
+  <footer class="rodape">
+    <div class="container rodape-inner">
+      <span>© <span id="ano"></span> Arthur Defendi e Borghi</span>
+      <nav aria-label="Rodapé">
+        <a href="/politicas.html">Políticas e Termos</a>
+        <a href="https://wa.me/5511941060165">WhatsApp</a>
+      </nav>
+    </div>
   </footer>
 
   <script src="/assets/js/main.js" defer></script>
