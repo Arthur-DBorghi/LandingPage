@@ -1,0 +1,3 @@
+Fontes usadas nos modelos (todas com licença SIL Open Font License 1.1, uso comercial liberado):
+- Playfair Display, Inter, Fraunces, DM Sans, Bricolage Grotesque
+Arquivos obtidos do projeto Fontsource (subconjunto latin, formato woff2).

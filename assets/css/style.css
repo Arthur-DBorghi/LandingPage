@@ -40,6 +40,8 @@ section,
 .sobre,
 .servicos,
 .passos,
+.portfolio,
+.planos-secao,
 .faq,
 .cta,
 .footer,
@@ -115,6 +117,19 @@ h3 { margin: 0 0 8px; }
   outline-offset: 3px;
 }
 
+.btn-secundario {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 2px solid rgba(0, 216, 255, 0.6);
+  color: #EAEAEA;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-secundario:hover { background: rgba(0, 216, 255, 0.12); }
+
 .link-secundario {
   display: inline-block;
   margin-top: 14px;
@@ -183,6 +198,35 @@ a.card-link:hover,
 }
 
 .card .seta { display: inline-block; margin-top: 14px; color: #00D8FF; font-weight: 600; }
+
+/* ========================= */
+/*        PORTFÓLIO          */
+/* ========================= */
+.portfolio-card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.portfolio-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.portfolio-card .info { padding: 20px 22px 24px; }
+.portfolio-card .tag {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #00D8FF;
+}
+.nota-portfolio { margin: 22px 0 0; color: #AFAFC8; font-size: 0.95rem; }
 
 /* ========================= */
 /*         PLANOS            */
@@ -448,6 +492,8 @@ form textarea::placeholder { color: rgba(255, 255, 255, 0.5); }
   .sobre,
   .servicos,
   .passos,
+  .portfolio,
+  .planos-secao,
   .faq,
   .cta,
   .footer,

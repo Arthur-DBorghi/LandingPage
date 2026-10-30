@@ -1,0 +1,7 @@
+# Endereços antigos -> novos (301 = mudou de vez; o Google atualiza sozinho)
+/page1.html   /#planos           301
+/page2.html   /#portfolio        301
+/page3.html   /orcamento.html    301
+/page4.html   /politicas.html    301
+/style.css    /assets/css/style.css  301
+/script.js    /assets/js/main.js     301

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Focinho Feliz Pet Shop | Modelo de demonstração</title>
+  <meta name="description" content="Modelo de landing page para pet shop: banho e tosa com preço por porte, pacote mensal, leva e traz e agendamento pelo WhatsApp." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+  <link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../comum/demo.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-modelo="petshop">
+
+  <header class="nav">
+    <a href="#topo" class="marca">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#1E5BD8" />
+        <g fill="#FFC93C">
+          <ellipse cx="20" cy="25" rx="7" ry="6" />
+          <circle cx="12" cy="17" r="3" /><circle cx="17" cy="12" r="3" /><circle cx="23" cy="12" r="3" /><circle cx="28" cy="17" r="3" />
+        </g>
+      </svg>
+      <span>Focinho Feliz</span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="#precos">Preços</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <a href="#" class="botao botao-pequeno" data-whats="Olá! Vim pelo site e quero agendar um banho.">Agendar</a>
+  </header>
+
+  <main id="topo">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <p class="sobretitulo">Pet shop · banho, tosa e cuidados</p>
+        <h1>Seu pet cheiroso e feliz, <span>sem você sair de casa.</span></h1>
+        <p class="lead">Banho e tosa com hora marcada, produtos hipoalergênicos e leva e traz no bairro. Agende em um minuto pelo WhatsApp.</p>
+        <div class="hero-acoes">
+          <a href="#" class="botao" data-whats="Olá! Vim pelo site e quero agendar um banho.">Agendar pelo WhatsApp</a>
+          <a href="#precos" class="link-seta">Ver preços →</a>
+        </div>
+        <ul class="chips">
+          <li>Leva e traz grátis até 3 km</li>
+          <li>Cães e gatos</li>
+          <li>Fotos durante o banho</li>
+        </ul>
+      </div>
+
+      <div class="ilustracao" aria-hidden="true">
+        <svg viewBox="0 0 400 400">
+          <circle cx="200" cy="205" r="170" fill="#FFC93C" />
+          <g fill="#FFFFFF" stroke="#9CC2FF" stroke-width="3">
+            <circle cx="70" cy="90" r="22" /><circle cx="330" cy="70" r="16" /><circle cx="350" cy="140" r="10" />
+            <circle cx="48" cy="300" r="14" /><circle cx="345" cy="320" r="20" />
+          </g>
+          <ellipse cx="118" cy="190" rx="44" ry="88" fill="#8B5E3C" transform="rotate(22 118 190)" />
+          <ellipse cx="282" cy="190" rx="44" ry="88" fill="#8B5E3C" transform="rotate(-22 282 190)" />
+          <ellipse cx="200" cy="222" rx="112" ry="110" fill="#D9A066" />
+          <ellipse cx="248" cy="196" rx="34" ry="30" fill="#8B5E3C" />
+          <ellipse cx="200" cy="272" rx="70" ry="52" fill="#F6E3C8" />
+          <circle cx="155" cy="200" r="14" fill="#13213D" /><circle cx="160" cy="195" r="4.5" fill="#FFFFFF" />
+          <circle cx="245" cy="200" r="14" fill="#13213D" /><circle cx="250" cy="195" r="4.5" fill="#FFFFFF" />
+          <ellipse cx="200" cy="304" rx="15" ry="20" fill="#F2788A" />
+          <ellipse cx="200" cy="250" rx="23" ry="16" fill="#13213D" />
+          <path d="M200 264 V282 M200 282 Q185 298 168 286 M200 282 Q215 298 232 286" stroke="#13213D" stroke-width="5" fill="none" stroke-linecap="round" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- PREÇOS -->
+    <section class="secao" id="precos">
+      <div class="titulo-secao">
+        <p class="sobretitulo">Preços</p>
+        <h2>Escolha o porte e veja quanto fica</h2>
+      </div>
+
+      <div class="portes" role="group" aria-label="Porte do pet">
+        <button type="button" class="porte" data-porte="p" aria-pressed="true">Pequeno <small>até 10 kg</small></button>
+        <button type="button" class="porte" data-porte="m" aria-pressed="false">Médio <small>10 a 25 kg</small></button>
+        <button type="button" class="porte" data-porte="g" aria-pressed="false">Grande <small>acima de 25 kg</small></button>
+      </div>
+
+      <div class="precos-grade">
+        <ul class="servicos" id="lista-servicos">
+          <li data-servico="Banho" data-p="45" data-m="60" data-g="80">
+            <div><strong>Banho</strong><small>Shampoo neutro, secagem e perfume</small></div>
+            <span class="preco">R$ 45</span>
+          </li>
+          <li data-servico="Banho e tosa higiênica" data-p="55" data-m="70" data-g="95">
+            <div><strong>Banho + tosa higiênica</strong><small>Patas, barriga e região íntima</small></div>
+            <span class="preco">R$ 55</span>
+          </li>
+          <li data-servico="Tosa completa" data-p="75" data-m="95" data-g="130">
+            <div><strong>Tosa completa</strong><small>Na máquina ou na tesoura, já com banho</small></div>
+            <span class="preco">R$ 75</span>
+          </li>
+          <li data-servico="Hidratação de pelos" data-p="20" data-m="25" data-g="30">
+            <div><strong>Hidratação de pelos</strong><small>Adicional ao banho</small></div>
+            <span class="preco">R$ 20</span>
+          </li>
+          <li data-servico="Corte de unhas" data-p="15" data-m="15" data-g="20">
+            <div><strong>Corte de unhas</strong><small>Avulso ou junto com o banho</small></div>
+            <span class="preco">R$ 15</span>
+          </li>
+        </ul>
+
+        <aside class="pacote">
+          <p class="sobretitulo">Clube do banho</p>
+          <h3>4 banhos por mês com 15% de desconto</h3>
+          <p class="pacote-preco"><span id="preco-clube">R$ 153</span><small>/mês</small></p>
+          <p class="pacote-porte" id="porte-clube">Porte pequeno · leva e traz incluso</p>
+          <a href="#" class="botao botao-claro" id="botao-clube" data-whats="Olá! Quero entrar no Clube do Banho (porte pequeno).">Quero entrar no clube</a>
+        </aside>
+      </div>
+
+      <p class="nota">Gatos têm horário exclusivo, longe dos cães: banho a partir de R$ 60.</p>
+      <a href="#" class="botao" id="botao-agendar" data-whats="Olá! Quero agendar um banho para meu pet de porte pequeno.">Agendar para porte pequeno</a>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="secao secao-azul" id="como-funciona">
+      <div class="titulo-secao">
+        <p class="sobretitulo">Como funciona</p>
+        <h2>Você agenda, a gente cuida do resto</h2>
+      </div>
+      <ol class="passos">
+        <li><strong>Agende pelo WhatsApp</strong><span>Escolha o dia, o horário e o serviço.</span></li>
+        <li><strong>A gente busca seu pet</strong><span>Leva e traz grátis até 3 km. Acima disso, R$ 10.</span></li>
+        <li><strong>Banho com fotos</strong><span>Você recebe fotos no WhatsApp durante o atendimento.</span></li>
+        <li><strong>Volta cheiroso</strong><span>Entregamos em casa no horário combinado.</span></li>
+      </ol>
+    </section>
+
+    <!-- CUIDADOS -->
+    <section class="secao">
+      <div class="titulo-secao">
+        <p class="sobretitulo">Nossos cuidados</p>
+        <h2>Tratado como se fosse da família</h2>
+      </div>
+      <div class="cuidados">
+        <article>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>
+          <h3>Produtos hipoalergênicos</h3>
+          <p>Shampoos neutros e sem cheiro forte, pensados para pele sensível.</p>
+        </article>
+        <article>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+          <h3>Fotos durante o banho</h3>
+          <p>Você acompanha tudo pelo WhatsApp, do começo ao fim.</p>
+        </article>
+        <article>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          <h3>Sem estresse</h3>
+          <p>Secador silencioso e um pet por vez na mesa. Nada de gaiola o dia todo.</p>
+        </article>
+      </div>
+
+      <div class="galeria">
+        <figure class="foto"><figcaption>Foto de pet atendido</figcaption></figure>
+        <figure class="foto"><figcaption>Antes e depois da tosa</figcaption></figure>
+        <figure class="foto"><figcaption>Espaço de banho</figcaption></figure>
+        <figure class="foto"><figcaption>Equipe</figcaption></figure>
+      </div>
+      <p class="nota">Na sua página, aqui entram as fotos reais dos pets (com autorização dos tutores).</p>
+    </section>
+
+    <!-- DÚVIDAS + HORÁRIOS -->
+    <section class="secao secao-azul" id="duvidas">
+      <div class="duvidas-grade">
+        <div>
+          <p class="sobretitulo">Dúvidas</p>
+          <h2>Antes de agendar</h2>
+          <div class="faq">
+            <details>
+              <summary>Precisa estar com as vacinas em dia?</summary>
+              <p>Sim. Pedimos a carteirinha de vacinação na primeira visita, para segurança de todos os pets.</p>
+            </details>
+            <details>
+              <summary>Vocês atendem gatos?</summary>
+              <p>Atendemos, sempre em horário exclusivo, sem cães por perto.</p>
+            </details>
+            <details>
+              <summary>Quanto tempo demora?</summary>
+              <p>De 1h30 a 3h, dependendo do porte e do serviço. Com o leva e traz, você nem precisa esperar.</p>
+            </details>
+            <details>
+              <summary>E se meu pet for bravo ou medroso?</summary>
+              <p>Avise no agendamento. Reservamos um horário mais tranquilo e, se precisar, fazemos o atendimento em etapas.</p>
+            </details>
+          </div>
+        </div>
+
+        <aside class="horarios-card">
+          <h3>Horários</h3>
+          <table class="horarios">
+            <tr><th>Segunda a sexta</th><td>8h às 18h</td></tr>
+            <tr><th>Sábado</th><td>8h às 14h</td></tr>
+            <tr><th>Domingo</th><td>Fechado</td></tr>
+          </table>
+          <h3>Endereço</h3>
+          <p>Rua Exemplo, 456, Vila Nova</p>
+          <a href="#" class="link-seta" data-whats="Olá! Pode me mandar a localização do pet shop?">Pedir a localização →</a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h2>Bora marcar o banho?</h2>
+      <p>Os horários de sábado são os primeiros a acabar.</p>
+      <a href="#" class="botao botao-claro" data-whats="Olá! Vim pelo site e quero agendar um banho.">Agendar pelo WhatsApp</a>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>© Focinho Feliz Pet Shop · negócio fictício para demonstração</p>
+  </footer>
+
+  <a href="#" class="whats-flutuante" aria-label="Agendar pelo WhatsApp" data-whats="Olá! Vim pelo site e quero agendar um banho.">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+  </a>
+
+  <script src="../comum/demo.js" defer></script>
+  <script src="petshop.js" defer></script>
+</body>
+</html>

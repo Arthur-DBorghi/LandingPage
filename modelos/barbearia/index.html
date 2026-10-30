@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Navalha Fina Barbearia | Modelo de demonstração</title>
+  <meta name="description" content="Modelo de landing page para barbearia: serviços com preços, equipe, horários e agendamento pelo WhatsApp." />
+  <!-- Modelo fictício: não deve aparecer no Google -->
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+  <link rel="preload" href="../../assets/fonts/playfair-display-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../comum/demo.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-modelo="barbearia">
+
+  <header class="nav">
+    <a href="#topo" class="marca">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 23 L22 6 a3 3 0 0 1 4 4 L9 27z"/><path d="M9 27 l-3 0 l0 -3"/><path d="M15 13 l4 4"/></svg>
+      <span>Navalha Fina</span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="#servicos">Serviços</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#horarios">Horários</a>
+    </nav>
+    <a href="#" class="botao botao-pequeno" data-whats="Olá! Vim pelo site e quero agendar um horário.">Agendar</a>
+  </header>
+
+  <main id="topo">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-texto">
+        <p class="sobretitulo">Barbearia · Centro</p>
+        <h1>Corte em dia, sem fila e sem complicação.</h1>
+        <p class="lead">Agende pelo WhatsApp em menos de um minuto e chegue no seu horário. Café passado na hora enquanto você espera, se esperar.</p>
+        <div class="hero-acoes">
+          <a href="#" class="botao" data-whats="Olá! Vim pelo site e quero agendar um horário.">Agendar pelo WhatsApp</a>
+          <a href="#servicos" class="link-seta">Ver serviços e preços →</a>
+        </div>
+        <ul class="chips">
+          <li>Ter a Sáb</li>
+          <li>Sem fila com hora marcada</li>
+          <li>PIX e cartão</li>
+        </ul>
+      </div>
+
+      <div class="selo" aria-hidden="true">
+        <svg viewBox="0 0 300 300">
+          <defs>
+            <path id="circulo" d="M150,150 m-112,0 a112,112 0 1,1 224,0 a112,112 0 1,1 -224,0" />
+          </defs>
+          <circle cx="150" cy="150" r="140" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".5" />
+          <circle cx="150" cy="150" r="88" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <text font-size="19" letter-spacing="6" fill="currentColor">
+            <textPath href="#circulo">NAVALHA FINA · BARBEARIA · CORTE &amp; BARBA ·</textPath>
+          </text>
+          <g transform="translate(150 150)" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round">
+            <!-- tesoura -->
+            <circle cx="-22" cy="30" r="11" />
+            <circle cx="22" cy="30" r="11" />
+            <path d="M-14 22 L18 -38 M14 22 L-18 -38" />
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section class="secao" id="servicos">
+      <div class="titulo-secao">
+        <p class="sobretitulo">Serviços</p>
+        <h2>Preço na mesa, sem surpresa no fim</h2>
+      </div>
+
+      <div class="servicos-grade">
+        <ul class="cardapio">
+          <li><span class="nome">Corte masculino <small>40 min</small></span><span class="pontos"></span><span class="preco">R$ 45</span></li>
+          <li><span class="nome">Barba completa <small>toalha quente e navalha</small></span><span class="pontos"></span><span class="preco">R$ 35</span></li>
+          <li><span class="nome">Corte + barba <small>1h10</small></span><span class="pontos"></span><span class="preco">R$ 70</span></li>
+          <li><span class="nome">Pezinho e acabamento</span><span class="pontos"></span><span class="preco">R$ 15</span></li>
+          <li><span class="nome">Sobrancelha</span><span class="pontos"></span><span class="preco">R$ 15</span></li>
+          <li><span class="nome">Pigmentação de barba</span><span class="pontos"></span><span class="preco">R$ 40</span></li>
+          <li><span class="nome">Corte infantil <small>até 10 anos</small></span><span class="pontos"></span><span class="preco">R$ 35</span></li>
+        </ul>
+
+        <aside class="plano">
+          <p class="sobretitulo">Clube do corte</p>
+          <h3>4 cortes por mês</h3>
+          <p class="plano-preco">R$ 150<span>/mês</span></p>
+          <p>Para quem não gosta de ver o cabelo crescer. Agende quando quiser, dentro do mês.</p>
+          <a href="#" class="botao" data-whats="Olá! Quero saber mais sobre o Clube do Corte.">Quero entrar no clube</a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- EQUIPE -->
+    <section class="secao" id="equipe">
+      <div class="titulo-secao">
+        <p class="sobretitulo">Equipe</p>
+        <h2>Escolha quem vai cuidar de você</h2>
+      </div>
+      <div class="equipe">
+        <article class="barbeiro">
+          <div class="avatar" aria-hidden="true">R</div>
+          <h3>Rafa</h3>
+          <p>Degradê e cortes modernos</p>
+          <a href="#" data-whats="Olá! Quero agendar um horário com o Rafa.">Agendar com o Rafa →</a>
+        </article>
+        <article class="barbeiro">
+          <div class="avatar" aria-hidden="true">L</div>
+          <h3>Léo</h3>
+          <p>Barba, navalha e toalha quente</p>
+          <a href="#" data-whats="Olá! Quero agendar um horário com o Léo.">Agendar com o Léo →</a>
+        </article>
+        <article class="barbeiro">
+          <div class="avatar" aria-hidden="true">D</div>
+          <h3>Dudu</h3>
+          <p>Cortes clássicos e social</p>
+          <a href="#" data-whats="Olá! Quero agendar um horário com o Dudu.">Agendar com o Dudu →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section class="secao" id="galeria">
+      <div class="titulo-secao">
+        <p class="sobretitulo">O espaço</p>
+        <h2>Vem conhecer</h2>
+      </div>
+      <div class="galeria">
+        <figure class="foto foto-grande"><figcaption>Foto do ambiente</figcaption></figure>
+        <figure class="foto"><figcaption>Antes e depois</figcaption></figure>
+        <figure class="foto"><figcaption>Detalhe da barba</figcaption></figure>
+        <figure class="foto"><figcaption>Equipe</figcaption></figure>
+        <figure class="foto"><figcaption>Produtos</figcaption></figure>
+      </div>
+      <p class="nota">Na sua página, aqui entram as fotos reais do seu espaço e dos seus cortes.</p>
+    </section>
+
+    <!-- HORÁRIOS -->
+    <section class="secao" id="horarios">
+      <div class="local">
+        <div>
+          <p class="sobretitulo">Horários e endereço</p>
+          <h2>Fácil de chegar</h2>
+          <table class="horarios">
+            <tr><th>Segunda</th><td>Fechado</td></tr>
+            <tr><th>Terça a sexta</th><td>9h às 20h</td></tr>
+            <tr><th>Sábado</th><td>8h às 18h</td></tr>
+            <tr><th>Domingo</th><td>Fechado</td></tr>
+          </table>
+          <p class="endereco">Rua Exemplo, 123, Centro<br /><small>Estacionamento conveniado ao lado</small></p>
+          <a href="#" class="link-seta" data-whats="Olá! Pode me mandar a localização da barbearia?">Pedir a localização →</a>
+        </div>
+        <div class="mapa" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#1f1d1a" />
+            <g stroke="#2e2b27" stroke-width="14">
+              <path d="M0 70 H400 M0 190 H400 M90 0 V300 M250 0 V300 M330 0 V300" />
+            </g>
+            <path d="M0 260 C120 230 220 280 400 240" stroke="#3a352e" stroke-width="22" fill="none" />
+            <g transform="translate(250 190)">
+              <circle r="34" fill="#C9A227" opacity=".18" />
+              <path d="M0 -40 C-16 -40 -24 -28 -24 -18 C-24 -2 0 18 0 18 C0 18 24 -2 24 -18 C24 -28 16 -40 0 -40Z" fill="#C9A227" />
+              <circle cy="-19" r="8" fill="#121110" />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h2>Bora dar um trato?</h2>
+      <p>Horários de sábado acabam rápido. Garanta o seu.</p>
+      <a href="#" class="botao" data-whats="Olá! Vim pelo site e quero agendar um horário.">Agendar pelo WhatsApp</a>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>© Navalha Fina Barbearia · negócio fictício para demonstração</p>
+  </footer>
+
+  <!-- Botão flutuante -->
+  <a href="#" class="whats-flutuante" aria-label="Agendar pelo WhatsApp" data-whats="Olá! Vim pelo site e quero agendar um horário.">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+  </a>
+
+  <script src="../comum/demo.js" defer></script>
+</body>
+</html>

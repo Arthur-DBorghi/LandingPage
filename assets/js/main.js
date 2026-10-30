@@ -117,6 +117,7 @@ if (brief) {
       "Negócio: " + campo("nicho"),
       "Instagram/site atual: " + campo("link"),
       "Já tenho logo: " + campo("logo"),
+      "Modelo de referência: " + campo("modelo"),
       "Interesse: " + campo("plano"),
       "O que preciso: " + campo("obs"),
     ];
@@ -124,4 +125,16 @@ if (brief) {
     const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(linhas.join("\n"))}`;
     window.open(url, "_blank", "noopener");
   });
+}
+
+// Veio de um modelo (?modelo=barbearia)? Já deixa o campo preenchido.
+const campoModelo = document.getElementById("campo-modelo");
+if (campoModelo) {
+  const nomes = {
+    barbearia: "Barbearia e estética",
+    consultoria: "Consultoria e serviços",
+    petshop: "Pet shop e serviços com agenda",
+  };
+  const vindo = new URLSearchParams(location.search).get("modelo");
+  if (nomes[vindo]) campoModelo.value = nomes[vindo];
 }

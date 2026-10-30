@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forno da Vila Pizzaria | Modelo de demonstração</title>
+  <meta name="description" content="Modelo de landing page para delivery: cardápio com carrinho que monta o pedido e envia pelo WhatsApp." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+  <link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../comum/demo.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-modelo="delivery">
+
+  <header class="nav">
+    <a href="#topo" class="marca">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#F2B33D"/><circle cx="20" cy="20" r="14" fill="#D9381E"/><circle cx="15" cy="15" r="3" fill="#FFE8B8"/><circle cx="25" cy="18" r="3" fill="#FFE8B8"/><circle cx="18" cy="26" r="3" fill="#FFE8B8"/></svg>
+      <span>Forno da Vila</span>
+    </a>
+    <span class="status" id="status">Carregando horário…</span>
+    <a href="#cardapio" class="botao botao-pequeno">Ver cardápio</a>
+  </header>
+
+  <main id="topo">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <p class="sobretitulo">Pizzaria · delivery e retirada</p>
+        <h1>Pizza de fermentação natural, <span>quentinha na sua porta.</span></h1>
+        <p class="lead">Monte seu pedido aqui e finalize pelo WhatsApp. Sem aplicativo, sem taxa escondida.</p>
+        <div class="hero-acoes">
+          <a href="#cardapio" class="botao">Montar meu pedido</a>
+          <a href="#entrega" class="link-seta">Onde entregamos →</a>
+        </div>
+      </div>
+
+      <div class="pizza" aria-hidden="true">
+        <svg viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="186" fill="#E9A34A" />
+          <circle cx="200" cy="200" r="186" fill="none" stroke="#C97E2B" stroke-width="6" stroke-dasharray="2 14" />
+          <circle cx="200" cy="200" r="160" fill="#D9381E" />
+          <g fill="#FFD36B">
+            <ellipse cx="150" cy="140" rx="46" ry="34" /><ellipse cx="260" cy="150" rx="40" ry="30" />
+            <ellipse cx="135" cy="245" rx="40" ry="30" /><ellipse cx="250" cy="265" rx="50" ry="34" />
+            <ellipse cx="205" cy="205" rx="34" ry="26" /><ellipse cx="300" cy="215" rx="22" ry="30" />
+            <ellipse cx="190" cy="305" rx="30" ry="18" /><ellipse cx="95" cy="190" rx="20" ry="28" />
+          </g>
+          <g fill="#A8231A">
+            <circle cx="175" cy="105" r="20" /><circle cx="285" cy="110" r="18" /><circle cx="110" cy="210" r="18" />
+            <circle cx="230" cy="225" r="20" /><circle cx="300" cy="275" r="18" /><circle cx="160" cy="290" r="19" />
+            <circle cx="230" cy="160" r="14" />
+          </g>
+          <g fill="#C8443A">
+            <circle cx="170" cy="100" r="4" /><circle cx="281" cy="106" r="4" /><circle cx="226" cy="221" r="4" /><circle cx="156" cy="285" r="4" />
+          </g>
+          <g fill="#2E7D32">
+            <ellipse cx="205" cy="125" rx="14" ry="7" transform="rotate(-30 205 125)" />
+            <ellipse cx="120" cy="160" rx="14" ry="7" transform="rotate(40 120 160)" />
+            <ellipse cx="270" cy="190" rx="14" ry="7" transform="rotate(10 270 190)" />
+            <ellipse cx="200" cy="265" rx="14" ry="7" transform="rotate(-50 200 265)" />
+            <ellipse cx="275" cy="320" rx="13" ry="6" transform="rotate(25 275 320)" />
+          </g>
+          <g stroke="#FFF6EA" stroke-width="3" opacity=".7">
+            <path d="M200 14 V386 M14 200 H386 M68 68 L332 332 M332 68 L68 332" />
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <ul class="faixa-info">
+      <li><strong>40–50 min</strong> tempo médio de entrega</li>
+      <li><strong>Ter a dom</strong> das 18h às 23h30</li>
+      <li><strong>PIX, cartão ou dinheiro</strong> na entrega</li>
+    </ul>
+
+    <!-- CARDÁPIO + CARRINHO -->
+    <section class="loja" id="cardapio">
+      <div class="cardapio">
+        <nav class="abas" aria-label="Categorias do cardápio">
+          <a href="#cat-salgadas">Pizzas salgadas</a>
+          <a href="#cat-doces">Pizzas doces</a>
+          <a href="#cat-bebidas">Bebidas</a>
+        </nav>
+        <!-- Itens gerados pelo cardapio.js a partir da lista de produtos -->
+        <div id="lista-cardapio"></div>
+      </div>
+
+      <aside class="carrinho" id="carrinho" aria-label="Seu pedido">
+        <div class="carrinho-topo">
+          <h2>Seu pedido</h2>
+          <button type="button" class="fechar-carrinho" id="fechar-carrinho" aria-label="Fechar pedido">✕</button>
+        </div>
+
+        <div id="itens-carrinho" class="itens-carrinho">
+          <p class="vazio">Seu carrinho está vazio. Escolha uma pizza ao lado. 🍕</p>
+        </div>
+
+        <form id="form-pedido" class="form-pedido" novalidate>
+          <label>Entrega
+            <select name="entrega" id="tipo-entrega"></select>
+          </label>
+          <label>Seu nome
+            <input name="nome" autocomplete="name" required />
+          </label>
+          <label id="campo-endereco">Endereço com número
+            <input name="endereco" autocomplete="street-address" placeholder="Rua, número, complemento" />
+          </label>
+          <label>Pagamento
+            <select name="pagamento" id="pagamento">
+              <option>PIX</option>
+              <option>Cartão na entrega</option>
+              <option>Dinheiro</option>
+            </select>
+          </label>
+          <label id="campo-troco" hidden>Troco para quanto?
+            <input name="troco" inputmode="numeric" placeholder="Ex.: 100" />
+          </label>
+          <label>Observações
+            <input name="obs" placeholder="Ex.: sem cebola, interfone quebrado" />
+          </label>
+
+          <dl class="totais">
+            <div><dt>Subtotal</dt><dd id="subtotal">R$ 0,00</dd></div>
+            <div><dt>Entrega</dt><dd id="taxa">R$ 0,00</dd></div>
+            <div class="total"><dt>Total</dt><dd id="total">R$ 0,00</dd></div>
+          </dl>
+
+          <p class="erro" id="erro" role="alert"></p>
+          <button type="submit" class="botao botao-cheio">Enviar pedido pelo WhatsApp</button>
+        </form>
+      </aside>
+    </section>
+
+    <!-- ENTREGA -->
+    <section class="secao" id="entrega">
+      <div class="entrega">
+        <div>
+          <p class="sobretitulo">Entrega</p>
+          <h2>Onde a gente entrega</h2>
+          <p class="lead">Não achou seu bairro? Chama no WhatsApp que a gente vê se dá pra chegar.</p>
+          <a href="#" class="link-seta" data-whats="Olá! Vocês entregam no meu bairro?">Perguntar sobre meu bairro →</a>
+        </div>
+        <ul class="bairros" id="lista-bairros"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>© Forno da Vila Pizzaria · negócio fictício para demonstração</p>
+  </footer>
+
+  <!-- Barra do carrinho (celular) -->
+  <button type="button" class="barra-carrinho" id="barra-carrinho" hidden>
+    <span id="barra-qtd">0 itens</span>
+    <strong>Ver pedido · <span id="barra-total">R$ 0,00</span></strong>
+  </button>
+
+  <script src="../comum/demo.js" defer></script>
+  <script src="cardapio.js" defer></script>
+</body>
+</html>

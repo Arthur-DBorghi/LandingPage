@@ -7,9 +7,9 @@
   <meta name="description" content="Conte rapidinho sobre o seu negócio e receba um orçamento de landing page pelo WhatsApp." />
   <meta property="og:title" content="Pedir orçamento | Arthur Borghi" />
   <meta property="og:description" content="Conte rapidinho sobre o seu negócio e receba um orçamento de landing page pelo WhatsApp." />
-  <meta property="og:image" content="https://arthur-dborghi.netlify.app/assets/og.png" />
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <meta property="og:image" content="https://arthur-dborghi.netlify.app/assets/img/og.png" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
   <div class="bg" aria-hidden="true">
@@ -20,14 +20,14 @@
 
   <header class="header">
     <a href="index.html" class="logo-link">
-      <img src="assets/logo-ab.png" alt="Arthur Borghi" class="logo" />
+      <img src="assets/img/logo-ab.png" alt="Arthur Borghi" class="logo" width="72" height="56" />
       <span class="logo-nome">Arthur Borghi</span>
     </a>
     <nav class="nav">
-      <a href="index.html">Início</a>
-      <a href="page1.html">Planos</a>
-      <a href="page2.html">Modelos</a>
-      <a href="page3.html" class="btn">Pedir orçamento</a>
+      <a href="index.html#portfolio">Portfólio</a>
+      <a href="index.html#planos">Planos</a>
+      <a href="index.html#duvidas">Dúvidas</a>
+      <a href="orcamento.html" class="btn">Pedir orçamento</a>
     </nav>
   </header>
 
@@ -55,6 +55,15 @@
         </select>
       </label>
 
+      <label>Algum modelo te chamou atenção?
+        <select name="modelo" id="campo-modelo">
+          <option value="Nenhum em especial">Nenhum em especial</option>
+          <option value="Barbearia e estética">Barbearia e estética</option>
+          <option value="Consultoria e serviços">Consultoria e serviços</option>
+          <option value="Pet shop e serviços com agenda">Pet shop e serviços com agenda</option>
+        </select>
+      </label>
+
       <label>O que te interessa?
         <select name="plano">
           <option value="Criação + manutenção mensal">Criação + manutenção mensal</option>
@@ -68,15 +77,15 @@
       </label>
 
       <button class="btn-whats" id="sendBtn" type="submit">Enviar pelo WhatsApp</button>
-      <p class="aviso-form">Nada do que você preencher fica salvo neste site. Veja as <a href="page4.html">Políticas e Termos</a>.</p>
+      <p class="aviso-form">Nada do que você preencher fica salvo neste site. Veja as <a href="politicas.html">Políticas e Termos</a>.</p>
     </form>
   </main>
 
   <footer class="footer">
     © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
-    <div style="margin-top: 8px"><a href="page4.html">Políticas e Termos</a></div>
+    <div style="margin-top: 8px"><a href="politicas.html">Políticas e Termos</a></div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>

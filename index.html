@@ -10,11 +10,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Landing pages para pequenos negócios | Arthur Borghi" />
     <meta property="og:description" content="Página profissional pro seu negócio, pronta em poucos dias, com botão direto pro seu WhatsApp." />
-    <meta property="og:image" content="https://arthur-dborghi.netlify.app/assets/og.png" />
+    <meta property="og:image" content="https://arthur-dborghi.netlify.app/assets/img/og.png" />
     <meta property="og:url" content="https://arthur-dborghi.netlify.app/" />
 
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
 
   <body>
@@ -28,14 +28,14 @@
     <!-- HEADER -->
     <header class="header">
       <a href="index.html" class="logo-link">
-        <img src="assets/logo-ab.png" alt="Arthur Borghi" class="logo" />
+        <img src="assets/img/logo-ab.png" alt="Arthur Borghi" class="logo" width="72" height="56" />
         <span class="logo-nome">Arthur Borghi</span>
       </a>
       <nav class="nav">
-        <a href="#como-funciona">Como funciona</a>
-        <a href="page1.html">Planos</a>
-        <a href="page2.html">Modelos</a>
-        <a href="page3.html" class="btn">Pedir orçamento</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#planos">Planos</a>
+        <a href="#duvidas">Dúvidas</a>
+        <a href="orcamento.html" class="btn">Pedir orçamento</a>
       </nav>
     </header>
 
@@ -47,8 +47,45 @@
           Bonita no celular, rápida de abrir e com botão direto pro seu WhatsApp.
           Você cuida do seu negócio, eu cuido da parte técnica.
         </p>
-        <a href="page3.html" class="btn-whats">Pedir orçamento</a><br />
+        <a href="orcamento.html" class="btn-whats">Pedir orçamento</a>
+        <a href="#portfolio" class="btn-secundario">Ver modelos</a><br />
         <a class="link-secundario" href="https://wa.me/5511941060165?text=Ol%C3%A1%2C%20Arthur%21%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20as%20landing%20pages.">ou chamar direto no WhatsApp</a>
+      </section>
+
+      <!-- PORTFÓLIO -->
+      <section class="portfolio" id="portfolio">
+        <h2>Portfólio</h2>
+        <p class="muted">Modelos prontos pra você ver funcionando. Cada página de cliente é adaptada às cores, fotos e textos do negócio.</p>
+        <div class="cards" style="margin-top: 24px">
+          <a class="card card-link portfolio-card" href="modelos/barbearia/index.html">
+            <img src="assets/img/portfolio/barbearia.webp" alt="Prévia do modelo de barbearia" width="800" height="500" loading="lazy" />
+            <div class="info">
+              <span class="tag">Barbearia e estética</span>
+              <h3>Navalha Fina</h3>
+              <p>Serviços com preço, equipe, horários e agendamento pelo WhatsApp.</p>
+              <span class="seta">Ver modelo →</span>
+            </div>
+          </a>
+          <a class="card card-link portfolio-card" href="modelos/consultoria/index.html">
+            <img src="assets/img/portfolio/consultoria.webp" alt="Prévia do modelo de consultoria" width="800" height="500" loading="lazy" />
+            <div class="info">
+              <span class="tag">Consultoria e serviços</span>
+              <h3>Clara Andrade Contabilidade</h3>
+              <p>Planos, como funciona, perguntas frequentes e formulário de contato.</p>
+              <span class="seta">Ver modelo →</span>
+            </div>
+          </a>
+          <a class="card card-link portfolio-card" href="modelos/petshop/index.html">
+            <img src="assets/img/portfolio/petshop.webp" alt="Prévia do modelo de pet shop" width="800" height="500" loading="lazy" />
+            <div class="info">
+              <span class="tag">Pet shop e serviços com agenda</span>
+              <h3>Focinho Feliz</h3>
+              <p>Banho e tosa com preço por porte, pacote mensal, leva e traz e agendamento pelo WhatsApp.</p>
+              <span class="seta">Ver modelo →</span>
+            </div>
+          </a>
+        </div>
+        <p class="nota-portfolio">Os negócios dos modelos são fictícios, criados para demonstração.</p>
       </section>
 
       <!-- COMO FUNCIONA -->
@@ -73,7 +110,7 @@
         </div>
       </section>
 
-      <!-- O QUE VOCÊ RECEBE -->
+      <!-- O QUE VEM -->
       <section class="servicos">
         <h2>O que vem na sua página</h2>
         <div class="cards">
@@ -92,6 +129,54 @@
         </div>
       </section>
 
+      <!-- PLANOS -->
+      <section class="planos-secao" id="planos">
+        <h2>Planos e preços</h2>
+        <p class="muted">Você paga a criação uma vez. A manutenção mensal é opcional: se preferir, eu te entrego os arquivos e você hospeda onde quiser.</p>
+
+        <div class="cards planos">
+          <div class="card plano destaque">
+            <span class="tipo">Pagamento único</span>
+            <h3>Criação da página</h3>
+            <p class="preco">R$ 500</p>
+            <span class="selo">Lançamento: R$ 300 para os 3 primeiros clientes</span>
+            <ul>
+              <li>Landing page com até 6 seções</li>
+              <li>Visual adaptado à identidade do seu negócio</li>
+              <li>Versão pra celular</li>
+              <li>Botão e formulário que chegam no seu WhatsApp</li>
+              <li>SEO básico (título, descrição, estrutura)</li>
+              <li>2 rodadas de ajustes</li>
+              <li>Entrega em até 7 dias úteis</li>
+            </ul>
+            <a class="btn-whats" href="orcamento.html">Quero minha página</a>
+          </div>
+
+          <div class="card plano destaque">
+            <span class="tipo">Mensal · opcional</span>
+            <h3>Manutenção</h3>
+            <p class="preco">R$ 40 <small>/mês</small></p>
+            <ul>
+              <li>Hospedagem</li>
+              <li>Domínio .com.br (registro e renovação)</li>
+              <li>Cadeado de segurança (HTTPS)</li>
+              <li>Acompanho se a página sair do ar</li>
+              <li>1 ajuste simples por mês (texto, foto, telefone)</li>
+              <li>Cancelamento com 30 dias de aviso</li>
+            </ul>
+            <a class="btn-whats" href="orcamento.html">Quero com manutenção</a>
+          </div>
+        </div>
+
+        <div class="extras">
+          <ul>
+            <li>Página adicional (ex.: cardápio, galeria, serviços): <strong>R$ 60</strong> cada</li>
+            <li>Mudanças maiores depois da entrega: orçamento à parte</li>
+          </ul>
+          <p class="muted">Formas de pagamento: PIX ou transferência.</p>
+        </div>
+      </section>
+
       <!-- QUEM SOU -->
       <section class="sobre">
         <h2>Quem sou</h2>
@@ -100,22 +185,10 @@
           endereço profissional na internet sem pagar preço de agência. Você fala direto comigo,
           do orçamento ao suporte.
         </p>
-        <div class="cards" style="margin-top: 24px">
-          <a class="card card-link" href="page1.html">
-            <h3>Planos e preços</h3>
-            <p>Criação da página + manutenção mensal opcional.</p>
-            <span class="seta">Ver planos →</span>
-          </a>
-          <a class="card card-link" href="page2.html">
-            <h3>Modelos</h3>
-            <p>Pontos de partida por tipo de negócio.</p>
-            <span class="seta">Ver modelos →</span>
-          </a>
-        </div>
       </section>
 
       <!-- FAQ -->
-      <section class="faq">
+      <section class="faq" id="duvidas">
         <h2>Perguntas frequentes</h2>
 
         <details>
@@ -129,6 +202,11 @@
         </details>
 
         <details>
+          <summary>A minha página vai ficar igual ao modelo?</summary>
+          <p>Não. O modelo é o ponto de partida: cores, fotos, textos e seções mudam de acordo com o seu negócio.</p>
+        </details>
+
+        <details>
           <summary>Posso usar meu próprio domínio?</summary>
           <p>Pode. Na manutenção mensal o domínio .com.br já está incluso. Se você já tem um, eu conecto.</p>
         </details>
@@ -136,11 +214,6 @@
         <details>
           <summary>O que inclui a manutenção mensal?</summary>
           <p>Hospedagem, domínio, cadeado de segurança (HTTPS), acompanhamento se a página sair do ar e 1 ajuste simples por mês, como trocar texto, foto ou telefone.</p>
-        </details>
-
-        <details>
-          <summary>Posso pedir alterações depois?</summary>
-          <p>Pode. A criação já inclui 2 rodadas de ajustes. Depois disso, ajustes simples entram na manutenção mensal e mudanças maiores são orçadas à parte.</p>
         </details>
 
         <details>
@@ -153,16 +226,16 @@
       <section id="contato" class="cta">
         <h2>Vamos colocar seu negócio online?</h2>
         <p>Me conta rapidinho o que você precisa e eu te respondo com um orçamento.</p>
-        <a href="page3.html" class="btn-whats">Pedir orçamento</a>
+        <a href="orcamento.html" class="btn-whats">Pedir orçamento</a>
       </section>
     </main>
 
     <!-- FOOTER -->
     <footer class="footer">
       © <span id="ano"></span> Arthur Defendi e Borghi. Todos os direitos reservados.
-      <div style="margin-top: 8px"><a href="page4.html">Políticas e Termos</a></div>
+      <div style="margin-top: 8px"><a href="politicas.html">Políticas e Termos</a></div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="assets/js/main.js" defer></script>
   </body>
 </html>
