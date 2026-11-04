@@ -401,3 +401,129 @@ p { margin: 0; }
   html { scroll-behavior: auto; }
   .blob { animation: none; }
 }
+
+/* ==========================================================
+   MOVIMENTO E COR
+   ========================================================== */
+
+/* ---------- Aparecer ao rolar ----------
+   A classe .anima só entra no <html> quando o JS roda.
+   Sem JS, nada fica escondido. Usa a propriedade "translate"
+   para não brigar com os "transform" de hover. */
+.anima .revelar {
+  opacity: 0;
+  translate: 0 22px;
+  transition:
+    opacity 0.6s ease var(--atraso, 0s),
+    translate 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) var(--atraso, 0s),
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.anima .revelar.visivel { opacity: 1; translate: 0 0; }
+
+/* ---------- Topo: celulares sobem e o do meio flutua ---------- */
+.anima .tela { opacity: 0; translate: 0 40px; animation: tela-entra 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
+.anima .tela:nth-child(1) { animation-delay: 0.35s; }
+.anima .tela:nth-child(2) { animation-delay: 0.2s; }
+.anima .tela:nth-child(3) { animation-delay: 0.5s; }
+@keyframes tela-entra { to { opacity: 1; translate: 0 0; } }
+
+.anima .tela-centro {
+  animation:
+    tela-entra 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s forwards,
+    tela-flutua 6s ease-in-out 1.2s infinite alternate;
+}
+@keyframes tela-flutua { from { translate: 0 0; } to { translate: 0 -12px; } }
+
+/* Gradiente do título se mexendo devagar */
+.destaque {
+  background-size: 200% 100%;
+  animation: brilho-titulo 8s ease-in-out infinite alternate;
+}
+@keyframes brilho-titulo { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+/* ---------- Brilhos de cor no fundo ---------- */
+.hero { background: radial-gradient(900px 500px at 15% 0%, rgba(139, 63, 253, 0.12), transparent 70%); }
+#portfolio { background: radial-gradient(700px 450px at 0% 10%, rgba(139, 63, 253, 0.10), transparent 70%); }
+#planos {
+  background:
+    radial-gradient(700px 500px at 100% 0%, rgba(0, 216, 255, 0.09), transparent 70%),
+    radial-gradient(600px 400px at 0% 100%, rgba(139, 63, 253, 0.08), transparent 70%),
+    var(--fundo-alt);
+}
+
+/* ---------- Portfólio: cada modelo com a sua cor ---------- */
+.projeto { --cor: var(--ciano); position: relative; }
+.projeto-barbearia { --cor: #E2B93B; }
+.projeto-consultoria { --cor: #3CC4A2; }
+.projeto-petshop { --cor: #FFC93C; }
+.projeto::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--cor);
+  z-index: 1;
+}
+.projeto .projeto-tag { color: var(--cor); }
+.projeto:hover { border-color: var(--cor); box-shadow: 0 20px 50px -25px var(--cor); }
+.projeto img { transition: transform 0.5s ease; }
+.projeto:hover img { transform: scale(1.04); }
+.projeto-link { transition: color 0.2s; }
+.projeto:hover .projeto-link { color: var(--cor); }
+
+/* ---------- Ícones em quadradinhos coloridos ---------- */
+.recurso svg,
+.faixa-item svg {
+  box-sizing: content-box;
+  padding: 10px;
+  border-radius: 12px;
+  color: var(--cor-icone, var(--ciano));
+  background: color-mix(in srgb, var(--cor-icone, var(--ciano)) 14%, transparent);
+}
+.faixa-item svg { padding: 8px; border-radius: 10px; }
+.recurso:nth-child(6n + 1), .faixa-item:nth-child(4n + 1) { --cor-icone: #B88BFF; }
+.recurso:nth-child(6n + 2), .faixa-item:nth-child(4n + 2) { --cor-icone: #00D8FF; }
+.recurso:nth-child(6n + 3), .faixa-item:nth-child(4n + 3) { --cor-icone: #5CFFB0; }
+.recurso:nth-child(6n + 4), .faixa-item:nth-child(4n + 4) { --cor-icone: #FF8FC8; }
+.recurso:nth-child(6n + 5) { --cor-icone: #FFC93C; }
+.recurso:nth-child(6n + 6) { --cor-icone: #7FA8FF; }
+
+/* ---------- Passos: número numa pílula com gradiente ---------- */
+.passos li::before {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--roxo), var(--ciano));
+  color: #fff;
+}
+.passos li { border-top-color: rgba(139, 63, 253, 0.35); }
+
+/* ---------- Plano de criação com borda em gradiente ---------- */
+.plano-destaque {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--superficie), var(--superficie)) padding-box,
+    linear-gradient(135deg, var(--roxo), var(--ciano)) border-box;
+  box-shadow: 0 30px 70px -35px rgba(139, 63, 253, 0.55);
+}
+
+/* ---------- Chamada final mais colorida ---------- */
+.chamada {
+  border-color: rgba(139, 63, 253, 0.35);
+  background:
+    radial-gradient(ellipse at 0% 100%, rgba(0, 216, 255, 0.22), transparent 55%),
+    radial-gradient(ellipse at 100% 0%, rgba(139, 63, 253, 0.38), transparent 60%),
+    var(--superficie);
+}
+
+/* ---------- Quem prefere menos movimento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .anima .revelar,
+  .anima .tela { opacity: 1; translate: 0 0; transition: none; animation: none; }
+  .destaque { animation: none; }
+  .projeto img { transition: none; }
+}
