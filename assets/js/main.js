@@ -45,3 +45,53 @@ if (campoModelo) {
   const vindo = new URLSearchParams(location.search).get("modelo");
   if (nomes[vindo]) campoModelo.value = nomes[vindo];
 }
+
+// =========================
+//   APARECER AO ROLAR
+// =========================
+// Só ativa se o navegador suportar e a pessoa não pediu "reduzir movimento".
+(function () {
+  const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduzir || !("IntersectionObserver" in window)) return;
+
+  document.documentElement.classList.add("anima");
+
+  // Grupos que aparecem em sequência (um item depois do outro)
+  const grupos = [
+    ".hero-grid > div:first-child > *",
+    ".faixa-item",
+    ".cabecalho > *",
+    ".projeto",
+    ".passos li",
+    ".recurso",
+    ".plano",
+    ".extras, .exclusivo",
+    ".sobre > *",
+    ".faq details",
+    ".chamada > *",
+    ".pagina-estreita > *",
+  ];
+
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("visivel");
+        observador.unobserve(e.target);
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  grupos.forEach((seletor) => {
+    // itens do mesmo pai entram com 80 ms de diferença
+    const porPai = new Map();
+    document.querySelectorAll(seletor).forEach((el) => {
+      const i = porPai.get(el.parentElement) || 0;
+      porPai.set(el.parentElement, i + 1);
+      el.classList.add("revelar");
+      el.style.setProperty("--atraso", Math.min(i, 6) * 0.08 + "s");
+      observador.observe(el);
+    });
+  });
+})();
