@@ -4,5 +4,7 @@
   "assets": {
     "directory": "./",
     "not_found_handling": "404-page"
-  }
+  },
+  // Necessário para os builds de branch (npx wrangler preview)
+  "previews": {}
 }
