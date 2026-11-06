@@ -18,6 +18,9 @@
     ".sobre > div > *", ".local > div:first-child > *", ".duvidas-grade > div > *",
     ".faq details", ".horarios-card", ".contato > *", ".nota",
     ".cta > *", ".faixa-info li", ".categoria",
+    // Site completo (várias páginas)
+    ".cabecalho-pagina > *", ".destaques > *", ".duas-colunas > *",
+    ".lista-check li", ".rodape-grade > *",
   ];
 
   // Imagens, ilustrações e espaços de foto

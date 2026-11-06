@@ -27,21 +27,27 @@ function aplicarPorte(porte) {
     if (li.dataset.servico === "Banho") precoBanho = valor;
   });
 
-  // Clube do banho: 4 banhos com desconto
+  // Clube do banho: 4 banhos com desconto (só se a página tiver o card do clube)
   const clube = Math.round(precoBanho * 4 * (1 - DESCONTO_CLUBE));
-  document.getElementById("preco-clube").textContent = real(clube);
-  document.getElementById("porte-clube").textContent = `Porte ${nome} · leva e traz incluso`;
-  document.getElementById("botao-clube").dataset.whats =
-    `Olá! Quero entrar no Clube do Banho (porte ${nome}).`;
+  const precoClube = document.getElementById("preco-clube");
+  const porteClube = document.getElementById("porte-clube");
+  const botaoClube = document.getElementById("botao-clube");
+  if (precoClube) precoClube.textContent = real(clube);
+  if (porteClube) porteClube.textContent = `Porte ${nome} · leva e traz incluso`;
+  if (botaoClube && botaoClube.hasAttribute("data-whats")) {
+    botaoClube.dataset.whats = `Olá! Quero entrar no Clube do Banho (porte ${nome}).`;
+  }
 
   // Botão principal
   const agendar = document.getElementById("botao-agendar");
-  agendar.textContent = `Agendar para porte ${nome}`;
-  agendar.dataset.whats = `Olá! Quero agendar um banho para meu pet de porte ${nome}.`;
+  if (agendar) {
+    agendar.textContent = `Agendar para porte ${nome}`;
+    agendar.dataset.whats = `Olá! Quero agendar um banho para meu pet de porte ${nome}.`;
+  }
 }
 
 document.querySelectorAll(".porte").forEach((botao) => {
   botao.addEventListener("click", () => aplicarPorte(botao.dataset.porte));
 });
 
-aplicarPorte("p");
+if (document.querySelector(".porte")) aplicarPorte("p");

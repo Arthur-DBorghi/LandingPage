@@ -1,0 +1,232 @@
+/* ==========================================================
+   Peças do "Site completo" (várias páginas), comuns aos modelos.
+   Usa as variáveis de cor e fonte do style.css de cada modelo:
+   --azul / --destaque etc. são lidas por meio de --site-cor.
+   ========================================================== */
+
+:root {
+  --site-cor: var(--azul, var(--destaque, #1E5BD8));
+  --site-cor-escura: var(--azul-escuro, var(--destaque-escuro, #1646A8));
+  --site-suave: var(--azul-claro, var(--destaque-claro, #DCE8FF));
+  --site-secao: var(--azul-secao, var(--fundo-alt, #EAF2FF));
+  --site-cartao: var(--cartao, #FFFFFF);
+}
+
+/* ---------- Menu do topo: página atual destacada ---------- */
+.nav nav a[aria-current="page"] {
+  color: var(--tinta);
+  box-shadow: inset 0 -3px 0 var(--site-cor);
+  padding-bottom: 4px;
+}
+
+/* Botão de menu (só aparece em telas menores) */
+.menu-botao {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--linha);
+  border-radius: 12px;
+  background: var(--site-cartao);
+  color: var(--tinta);
+  cursor: pointer;
+}
+.menu-botao:focus-visible { outline: 3px solid var(--site-cor); outline-offset: 2px; }
+
+/* ---------- Gaveta lateral (celular e tablet) ---------- */
+.gaveta-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: rgba(10, 15, 30, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.gaveta {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: min(320px, 86vw);
+  padding: 22px 18px 28px;
+  background: var(--site-cartao);
+  box-shadow: 20px 0 50px rgba(10, 15, 30, 0.2);
+  transform: translateX(-105%);
+  visibility: hidden;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s linear 0.3s;
+  overflow-y: auto;
+}
+.menu-aberto .gaveta { transform: translateX(0); visibility: visible; transition-delay: 0s; }
+.menu-aberto .gaveta-fundo { opacity: 1; pointer-events: auto; }
+.menu-aberto { overflow: hidden; }
+
+.gaveta-topo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.gaveta-fechar {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 10px;
+  background: var(--site-suave);
+  color: var(--tinta);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.gaveta a.gaveta-link {
+  display: block;
+  padding: 13px 14px;
+  border-radius: 12px;
+  color: var(--tinta);
+  font-weight: 700;
+  text-decoration: none;
+}
+.gaveta a.gaveta-link:hover { background: var(--site-secao); }
+.gaveta a.gaveta-link[aria-current="page"] { background: var(--site-suave); color: var(--site-cor-escura); }
+.gaveta .botao { margin-top: auto; text-align: center; }
+
+@media (max-width: 1024px) {
+  .nav nav { display: none; }
+  .menu-botao { display: inline-flex; }
+}
+.nav .marca span { white-space: nowrap; }
+/* Celular estreito: o botão "Agendar" do topo sai (a gaveta e o botão flutuante já levam ao WhatsApp) */
+@media (max-width: 420px) {
+  .nav > div .botao-pequeno { display: none; }
+}
+
+/* ---------- Cabeçalho de cada página interna ---------- */
+.cabecalho-pagina {
+  padding: clamp(48px, 7vw, 88px) clamp(16px, 5vw, 64px) clamp(40px, 5vw, 64px);
+  background:
+    radial-gradient(600px 300px at 90% 0%, rgba(255, 201, 60, 0.25), transparent 70%),
+    var(--site-secao);
+  border-bottom: 1px solid var(--linha);
+}
+.cabecalho-pagina > * { max-width: 1052px; margin-left: auto; margin-right: auto; }
+.cabecalho-pagina h1 { text-wrap: balance; }
+.cabecalho-pagina .lead { margin-bottom: 0; }
+.trilha { margin-bottom: 14px; font-size: 0.9rem; color: var(--tinta-suave); }
+.trilha a { color: var(--tinta-suave); }
+
+/* ---------- Cards que levam a outras páginas ---------- */
+.destaques { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; }
+.destaque {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px;
+  border-radius: 22px;
+  background: var(--site-cartao);
+  border: 1px solid var(--linha);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.destaque:hover { transform: translateY(-4px); border-color: var(--site-cor); box-shadow: 0 20px 40px -25px var(--site-cor); }
+.destaque svg { color: var(--site-cor); margin-bottom: 6px; }
+.destaque p { margin: 0; color: var(--tinta-suave); }
+.destaque .preco-destaque { font-family: var(--titulo); font-weight: 800; font-size: 1.3rem; color: var(--site-cor); }
+.destaque .mais { margin-top: auto; padding-top: 8px; font-weight: 700; color: var(--tinta); }
+
+/* ---------- Lista com check ---------- */
+.lista-check { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.lista-check li { position: relative; padding-left: 30px; }
+.lista-check li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 7px;
+  width: 12px;
+  height: 7px;
+  border-left: 2.5px solid var(--site-cor);
+  border-bottom: 2.5px solid var(--site-cor);
+  transform: rotate(-45deg);
+}
+
+/* ---------- Duas colunas genéricas ---------- */
+.duas-colunas { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.caixa {
+  padding: 28px;
+  border-radius: 22px;
+  background: var(--site-cartao);
+  border: 1px solid var(--linha);
+}
+.caixa h3 { margin-bottom: 12px; }
+.caixa p { color: var(--tinta-suave); }
+
+/* ---------- Formulário de agendamento ---------- */
+.formulario {
+  padding: 28px;
+  border-radius: 22px;
+  background: var(--site-cartao);
+  border: 1px solid var(--linha);
+}
+.formulario label { display: block; margin-bottom: 16px; font-weight: 700; font-size: 0.95rem; }
+.formulario input,
+.formulario select,
+.formulario textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--linha);
+  border-radius: 12px;
+  background: var(--fundo);
+  color: var(--tinta);
+  font: 400 1rem var(--corpo);
+}
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus { outline: none; border-color: var(--site-cor); box-shadow: 0 0 0 3px var(--site-suave); }
+.formulario .botao { width: 100%; }
+.formulario .linha-dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* ---------- Mapa ilustrativo ---------- */
+.mapa { margin-top: 18px; border-radius: 18px; overflow: hidden; border: 1px solid var(--linha); aspect-ratio: 16 / 10; }
+.mapa svg { display: block; width: 100%; height: 100%; }
+
+/* ---------- Rodapé completo ---------- */
+.rodape-completo {
+  padding: 56px clamp(16px, 5vw, 64px) 100px;
+  background: var(--tinta);
+  color: #C9D3E6;
+  font-size: 0.95rem;
+}
+.rodape-grade {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 32px;
+  max-width: 1052px;
+  margin: 0 auto;
+}
+.rodape-completo h3 { margin-bottom: 12px; color: #fff; font-size: 1rem; }
+.rodape-completo a { color: #C9D3E6; text-decoration: none; }
+.rodape-completo a:hover { color: #fff; text-decoration: underline; }
+.rodape-completo ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.rodape-completo .marca { color: #fff; margin-bottom: 10px; }
+.rodape-completo .assinatura {
+  max-width: 1052px;
+  margin: 36px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.85rem;
+  color: #93A0B8;
+}
+
+@media (max-width: 860px) {
+  .duas-colunas { grid-template-columns: 1fr; gap: 28px; }
+  .rodape-grade { grid-template-columns: 1fr 1fr; }
+  .formulario .linha-dupla { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .rodape-grade { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gaveta, .gaveta-fundo, .destaque { transition: none; }
+}

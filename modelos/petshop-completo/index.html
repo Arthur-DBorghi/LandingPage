@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Focinho Feliz Pet Shop | Banho e tosa na Vila Nova</title>
+  <meta name="description" content="Pet shop na Vila Nova com banho e tosa por porte, clube do banho e leva e traz grátis até 3 km. Agende pelo WhatsApp." />
+  <!-- Modelo fictício: não deve aparecer no Google -->
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+  <link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../comum/demo.css" />
+  <link rel="stylesheet" href="../comum/animacoes.css" />
+  <link rel="stylesheet" href="../petshop/style.css" />
+  <link rel="stylesheet" href="../comum/site.css" />
+  <link rel="stylesheet" href="site-petshop.css" />
+</head>
+<body data-modelo="petshop">
+
+  <header class="nav">
+    <a href="index.html" class="marca">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#1E5BD8" />
+        <g fill="#FFC93C">
+          <ellipse cx="20" cy="25" rx="7" ry="6" />
+          <circle cx="12" cy="17" r="3" /><circle cx="17" cy="12" r="3" /><circle cx="23" cy="12" r="3" /><circle cx="28" cy="17" r="3" />
+        </g>
+      </svg>
+      <span>Focinho Feliz</span>
+    </a>
+    <nav aria-label="Páginas">
+      <a href="index.html" aria-current="page">Início</a>
+      <a href="banho-e-tosa.html">Banho e tosa</a>
+      <a href="clube-do-banho.html">Clube do banho</a>
+      <a href="cuidados.html">Cuidados</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    <div style="display:flex; gap:10px; align-items:center">
+      <a href="#" class="botao botao-pequeno" data-whats="Olá! Vim pelo site e quero agendar um banho.">Agendar</a>
+      <button type="button" class="menu-botao" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="gaveta-fundo" aria-hidden="true"></div>
+  <nav class="gaveta" id="gaveta" aria-label="Menu" aria-hidden="true" inert>
+    <div class="gaveta-topo">
+      <a href="index.html" class="marca"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#1E5BD8" />
+        <g fill="#FFC93C">
+          <ellipse cx="20" cy="25" rx="7" ry="6" />
+          <circle cx="12" cy="17" r="3" /><circle cx="17" cy="12" r="3" /><circle cx="23" cy="12" r="3" /><circle cx="28" cy="17" r="3" />
+        </g>
+      </svg><span>Focinho Feliz</span></a>
+      <button type="button" class="gaveta-fechar" aria-label="Fechar menu">✕</button>
+    </div>
+    <a href="index.html" class="gaveta-link" aria-current="page">Início</a>
+    <a href="banho-e-tosa.html" class="gaveta-link">Banho e tosa</a>
+    <a href="clube-do-banho.html" class="gaveta-link">Clube do banho</a>
+    <a href="cuidados.html" class="gaveta-link">Cuidados</a>
+    <a href="contato.html" class="gaveta-link">Contato</a>
+    <a href="#" class="botao" data-whats="Olá! Vim pelo site e quero agendar um banho.">Agendar pelo WhatsApp</a>
+  </nav>
+
+  <main id="topo">
+    <section class="hero">
+      <div>
+        <p class="sobretitulo">Pet shop na Vila Nova · banho, tosa e cuidados</p>
+        <h1>Seu pet cheiroso e feliz, <span>sem você sair de casa.</span></h1>
+        <p class="lead">Banho e tosa com hora marcada, produtos hipoalergênicos e leva e traz no bairro. Agende em um minuto pelo WhatsApp.</p>
+        <div class="hero-acoes">
+          <a href="#" class="botao" data-whats="Olá! Vim pelo site e quero agendar um banho.">Agendar pelo WhatsApp</a>
+          <a href="banho-e-tosa.html" class="link-seta">Ver preços →</a>
+        </div>
+        <ul class="chips">
+          <li>Leva e traz grátis até 3 km</li>
+          <li>Cães e gatos</li>
+          <li>Fotos durante o banho</li>
+        </ul>
+      </div>
+
+      <div class="ilustracao" aria-hidden="true">
+        <svg viewBox="0 0 400 400">
+          <circle cx="200" cy="205" r="170" fill="#FFC93C" />
+          <g fill="#FFFFFF" stroke="#9CC2FF" stroke-width="3">
+            <circle cx="70" cy="90" r="22" /><circle cx="330" cy="70" r="16" /><circle cx="350" cy="140" r="10" />
+            <circle cx="48" cy="300" r="14" /><circle cx="345" cy="320" r="20" />
+          </g>
+          <ellipse cx="118" cy="190" rx="44" ry="88" fill="#8B5E3C" transform="rotate(22 118 190)" />
+          <ellipse cx="282" cy="190" rx="44" ry="88" fill="#8B5E3C" transform="rotate(-22 282 190)" />
+          <ellipse cx="200" cy="222" rx="112" ry="110" fill="#D9A066" />
+          <ellipse cx="248" cy="196" rx="34" ry="30" fill="#8B5E3C" />
+          <ellipse cx="200" cy="272" rx="70" ry="52" fill="#F6E3C8" />
+          <circle cx="155" cy="200" r="14" fill="#13213D" /><circle cx="160" cy="195" r="4.5" fill="#FFFFFF" />
+          <circle cx="245" cy="200" r="14" fill="#13213D" /><circle cx="250" cy="195" r="4.5" fill="#FFFFFF" />
+          <ellipse cx="200" cy="304" rx="15" ry="20" fill="#F2788A" />
+          <ellipse cx="200" cy="250" rx="23" ry="16" fill="#13213D" />
+          <path d="M200 264 V282 M200 282 Q185 298 168 286 M200 282 Q215 298 232 286" stroke="#13213D" stroke-width="5" fill="none" stroke-linecap="round" />
+        </svg>
+      </div>
+    </section>
+
+    <section class="secao">
+      <div class="titulo-secao">
+        <p class="sobretitulo">O que a gente faz</p>
+        <h2>Tudo pro seu pet num lugar só</h2>
+      </div>
+      <div class="destaques">
+        <a class="destaque" href="banho-e-tosa.html">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"/></svg>
+          <h3>Banho e tosa</h3>
+          <p>Banho, tosa higiênica, tosa completa, hidratação e unhas, com preço por porte.</p>
+          <span class="preco-destaque">a partir de R$ 45</span>
+          <span class="mais">Ver preços →</span>
+        </a>
+        <a class="destaque" href="clube-do-banho.html">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M9 15l2 2 4-4"/></svg>
+          <h3>Clube do banho</h3>
+          <p>4 banhos por mês com 15% de desconto e horário fixo garantido.</p>
+          <span class="preco-destaque">a partir de R$ 153/mês</span>
+          <span class="mais">Conhecer o clube →</span>
+        </a>
+        <a class="destaque" href="clube-do-banho.html#leva-e-traz">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l2-5a2 2 0 0 1 1.9-1.3h10.2A2 2 0 0 1 19 8l2 5v4a1 1 0 0 1-1 1h-1M3 13v4a1 1 0 0 0 1 1h1M3 13h18"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg>
+          <h3>Leva e traz</h3>
+          <p>A gente busca e devolve seu pet em casa, no horário combinado.</p>
+          <span class="preco-destaque">grátis até 3 km</span>
+          <span class="mais">Como funciona →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="secao secao-azul" id="como-funciona">
+      <div class="titulo-secao">
+        <p class="sobretitulo">Como funciona</p>
+        <h2>Você agenda, a gente cuida do resto</h2>
+      </div>
+      <ol class="passos">
+        <li><strong>Agende pelo WhatsApp</strong><span>Escolha o dia, o horário e o serviço.</span></li>
+        <li><strong>A gente busca seu pet</strong><span>Leva e traz grátis até 3 km. Acima disso, R$ 10.</span></li>
+        <li><strong>Banho com fotos</strong><span>Você recebe fotos no WhatsApp durante o atendimento.</span></li>
+        <li><strong>Volta cheiroso</strong><span>Entregamos em casa no horário combinado.</span></li>
+      </ol>
+    </section>
+
+    <section class="secao">
+      <div class="duas-colunas">
+        <div>
+          <p class="sobretitulo">Por que a Focinho Feliz</p>
+          <h2>Tratado como se fosse da família</h2>
+          <p class="lead">Produtos hipoalergênicos, um pet por vez na mesa, secador silencioso e fotos de tudo pelo WhatsApp.</p>
+          <a href="cuidados.html" class="link-seta">Ver todos os cuidados →</a>
+        </div>
+        <ul class="lista-check caixa">
+          <li>Carteirinha de vacinação conferida em todo atendimento</li>
+          <li>Gatos em horário exclusivo, sem cães por perto</li>
+          <li>Nada de gaiola o dia todo</li>
+          <li>Equipe treinada em manejo de pets medrosos</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Bora marcar o banho?</h2>
+      <p>Os horários de sábado são os primeiros a acabar.</p>
+      <a href="#" class="botao botao-claro" data-whats="Olá! Vim pelo site e quero agendar um banho.">Agendar pelo WhatsApp</a>
+    </section>
+
+  </main>
+
+  <footer class="rodape-completo">
+    <div class="rodape-grade">
+      <div>
+        <a href="index.html" class="marca"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#1E5BD8" />
+        <g fill="#FFC93C">
+          <ellipse cx="20" cy="25" rx="7" ry="6" />
+          <circle cx="12" cy="17" r="3" /><circle cx="17" cy="12" r="3" /><circle cx="23" cy="12" r="3" /><circle cx="28" cy="17" r="3" />
+        </g>
+      </svg><span>Focinho Feliz</span></a>
+        <p>Banho, tosa e cuidados para cães e gatos na Vila Nova, com leva e traz no bairro.</p>
+      </div>
+      <div>
+        <h3>Páginas</h3>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="banho-e-tosa.html">Banho e tosa</a></li>
+            <li><a href="clube-do-banho.html">Clube do banho</a></li>
+            <li><a href="cuidados.html">Cuidados</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Horários</h3>
+        <ul>
+          <li>Seg a sex: 8h às 18h</li>
+          <li>Sábado: 8h às 14h</li>
+          <li>Domingo: fechado</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <ul>
+          <li>Rua Exemplo, 456, Vila Nova</li>
+          <li><a href="#" data-whats="Olá! Vim pelo site e quero agendar um banho.">WhatsApp</a></li>
+          <li><a href="#" data-whats="Olá! Vim pelo site e tenho uma dúvida.">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="assinatura">© Focinho Feliz Pet Shop · negócio fictício para demonstração</p>
+  </footer>
+
+  <a href="#" class="whats-flutuante" aria-label="Agendar pelo WhatsApp" data-whats="Olá! Vim pelo site e quero agendar um banho.">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+  </a>
+
+  <script src="../comum/demo.js" defer></script>
+  <script src="../comum/animacoes.js" defer></script>
+  <script src="../comum/site.js" defer></script>
+</body>
+</html>
