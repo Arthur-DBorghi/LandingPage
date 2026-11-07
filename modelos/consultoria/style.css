@@ -158,6 +158,9 @@ h3 { font-size: 1.3rem; margin-bottom: 8px; }
 /* ---------- Seções ---------- */
 .secao { max-width: 1180px; margin: 0 auto; padding: clamp(56px, 8vw, 96px) clamp(16px, 5vw, 64px); }
 
+/* Sobre o fundo alternado o verde da marca fica abaixo de 4,5:1: usa o verde escuro */
+.secao-clara .sobretitulo { color: var(--destaque-escuro); }
+
 .secao-clara {
   max-width: none;
   background: var(--fundo-alt);

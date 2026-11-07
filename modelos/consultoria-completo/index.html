@@ -9,6 +9,7 @@
   <meta name="robots" content="noindex" />
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
   <link rel="preload" href="../../assets/fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../../assets/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="../comum/demo.css" />
   <link rel="stylesheet" href="../comum/animacoes.css" />
   <link rel="stylesheet" href="../consultoria/style.css" />
@@ -16,6 +17,9 @@
   <link rel="stylesheet" href="site-consultoria.css" />
 </head>
 <body data-modelo="consultoria" data-plano="site">
+
+  <!-- Faixa de demonstração: carregada logo no início (sem defer) para não empurrar a página depois de aparecer -->
+  <script src="../comum/demo.js"></script>
 
   <header class="nav">
     <a href="index.html" class="marca">
@@ -204,7 +208,6 @@
     <p class="assinatura">© Clara Andrade Contabilidade · negócio fictício para demonstração</p>
   </footer>
 
-  <script src="../comum/demo.js" defer></script>
   <script src="../comum/animacoes.js" defer></script>
   <script src="../comum/site.js" defer></script>
 </body>

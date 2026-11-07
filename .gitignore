@@ -1,0 +1,7 @@
+# Testes: dependências e relatórios gerados
+testes/node_modules/
+testes/playwright-report/
+testes/test-results/
+testes/.lighthouseci/
+testes/relatorios-lighthouse/
+.wrangler/

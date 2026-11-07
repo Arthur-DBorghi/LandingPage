@@ -9,7 +9,7 @@
 .plano-clube { position: relative; display: flex; flex-direction: column; }
 .plano-clube .porte-kg { margin: -4px 0 0; color: var(--tinta-suave); }
 .plano-clube .pacote-preco { margin: 14px 0 2px; font-family: var(--titulo); font-weight: 800; font-size: 2.4rem; color: var(--tinta); }
-.plano-clube .pacote-preco small { font-family: var(--corpo); font-weight: 400; font-size: 1rem; color: var(--tinta-suave); }
+.plano-clube .pacote-preco small { font-family: var(--corpo); font-weight: 400; font-size: 1rem; color: var(--tinta-suave); opacity: 1; }
 .plano-clube .por-banho { margin: 0 0 22px; color: var(--tinta-suave); }
 .plano-clube .botao { margin-top: auto; text-align: center; }
 .destaque-clube { border: 2px solid var(--azul); box-shadow: 0 24px 50px -28px rgba(30, 91, 216, 0.6); }

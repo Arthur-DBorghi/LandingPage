@@ -1,0 +1,66 @@
+# Roda os testes do site a cada push e a cada pull request.
+# Junto com as prévias de branch da Cloudflare: abre o PR, a Cloudflare
+# publica a prévia e aqui aparece se os testes passaram.
+name: Qualidade
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: qualidade-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: testes
+
+jobs:
+  testes:
+    name: Testes (Playwright + axe)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: testes/package-lock.json
+      - run: npm ci
+      - run: npm run tipos
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+      - name: Guardar o relatório dos testes
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: relatorio-playwright
+          path: testes/playwright-report/
+          retention-days: 14
+
+  lighthouse:
+    name: Lighthouse (desempenho, acessibilidade, SEO)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: testes/package-lock.json
+      - run: npm ci
+      - run: npx lhci autorun
+      - name: Guardar os relatórios do Lighthouse
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: relatorios-lighthouse
+          path: testes/relatorios-lighthouse/
+          retention-days: 14
