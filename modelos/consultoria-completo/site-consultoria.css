@@ -8,6 +8,9 @@
   --site-brilho: rgba(47, 125, 109, 0.16);
 }
 
+/* Contraste: o cabeçalho das páginas usa o mesmo fundo alternado da .secao-clara */
+.cabecalho-pagina .sobretitulo { color: var(--destaque-escuro); }
+
 /* A landing page não tem rodapé escuro: ajustes da marca nele */
 .rodape-completo .marca-icone { background: var(--destaque); }
 .rodape-completo .marca small { color: var(--site-rodape-suave); }

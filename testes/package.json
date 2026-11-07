@@ -1,0 +1,24 @@
+{
+  "name": "landingpage-testes",
+  "private": true,
+  "description": "Testes automáticos do site: Playwright, axe (acessibilidade) e Lighthouse CI. Ficam fora do site publicado.",
+  "type": "module",
+  "scripts": {
+    "servidor": "node servidor.mjs",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "relatorio": "playwright show-report",
+    "lighthouse": "lhci autorun",
+    "tipos": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@lhci/cli": "^0.16.0",
+    "@playwright/test": "1.63.0",
+    "@types/node": "^22.20.0",
+    "typescript": "^5.9.0"
+  },
+  "overrides": {
+    "playwright-core": "$@playwright/test"
+  }
+}
