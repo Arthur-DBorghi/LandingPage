@@ -1,8 +1,12 @@
 /* ==========================================================
-   Menu em gaveta do "Site completo" (celular e tablet).
-   Abre pelo botão ☰, fecha no X, no fundo escuro, na tecla Esc
-   ou ao escolher uma página.
+   Comportamento do "Site completo" (várias páginas).
+   1. Menu em gaveta (celular e tablet): abre pelo botão ☰,
+      fecha no X, no fundo escuro, na tecla Esc ou ao escolher
+      uma página.
+   2. Formulário que monta a mensagem do WhatsApp.
    ========================================================== */
+
+// ---------- 1. Gaveta ----------
 (function () {
   const botao = document.querySelector(".menu-botao");
   const gaveta = document.getElementById("gaveta");
@@ -36,24 +40,25 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && document.body.classList.contains("menu-aberto")) fecharMenu();
   });
+})();
 
-  // Formulário de agendamento (página de contato)
-  const form = document.getElementById("form-agendar");
-  if (form) {
+// ---------- 2. Formulário → mensagem pronta no WhatsApp ----------
+// Vale para qualquer <form class="form-whats">.
+// data-intro no form = primeira linha da mensagem.
+// data-rotulo em cada campo = como ele aparece na mensagem.
+(function () {
+  document.querySelectorAll("form.form-whats").forEach((form) => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const d = new FormData(form);
-      const v = (n) => (d.get(n) || "").toString().trim() || "-";
-      const msg =
-        "Olá! Quero agendar pelo site.\n\n" +
-        "Meu nome: " + v("nome") + "\n" +
-        "Nome do pet: " + v("pet") + "\n" +
-        "Porte: " + v("porte") + "\n" +
-        "Serviço: " + v("servico") + "\n" +
-        "Melhor dia/turno: " + v("quando") + "\n" +
-        "Leva e traz: " + v("leva");
-      // Na página real: window.open("https://wa.me/55DDDNUMERO?text=" + encodeURIComponent(msg))
+      const linhas = [];
+      for (const campo of form.elements) {
+        if (!campo.name) continue;
+        const valor = (campo.value || "").trim() || "-";
+        linhas.push((campo.dataset.rotulo || campo.name) + ": " + valor);
+      }
+      const msg = (form.dataset.intro || "Olá! Vim pelo site.") + "\n\n" + linhas.join("\n");
+      // Na página real: window.open("https://wa.me/55DDDNUMERO?text=" + encodeURIComponent(msg), "_blank")
       if (window.demoWhats) window.demoWhats(msg);
     });
-  }
+  });
 })();

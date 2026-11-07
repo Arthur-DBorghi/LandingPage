@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fale com a contadora | Clara Andrade Contabilidade</title>
+  <meta name="description" content="Conte sobre a sua empresa e agende uma conversa gratuita de 20 minutos. Atendimento online para todo o Brasil." />
+  <!-- Modelo fictício: não deve aparecer no Google -->
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+  <link rel="preload" href="../../assets/fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../comum/demo.css" />
+  <link rel="stylesheet" href="../comum/animacoes.css" />
+  <link rel="stylesheet" href="../consultoria/style.css" />
+  <link rel="stylesheet" href="../comum/site.css" />
+  <link rel="stylesheet" href="site-consultoria.css" />
+</head>
+<body data-modelo="consultoria" data-plano="site">
+
+  <header class="nav">
+    <a href="index.html" class="marca">
+      <span class="marca-icone" aria-hidden="true">CA</span>
+      <span>Clara Andrade <small>Contabilidade</small></span>
+    </a>
+    <nav aria-label="Páginas">
+      <a href="index.html">Início</a>
+      <a href="servicos.html">Planos e serviços</a>
+      <a href="como-funciona.html">Como funciona</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html" aria-current="page">Contato</a>
+    </nav>
+    <div style="display:flex; gap:10px; align-items:center">
+      <a href="#" class="botao botao-pequeno" data-whats="Olá, Clara! Vim pelo site e quero agendar uma conversa gratuita.">Falar com a Clara</a>
+      <button type="button" class="menu-botao" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="gaveta-fundo" aria-hidden="true"></div>
+  <nav class="gaveta" id="gaveta" aria-label="Menu" aria-hidden="true" inert>
+    <div class="gaveta-topo">
+      <a href="index.html" class="marca"><span class="marca-icone" aria-hidden="true">CA</span>
+      <span>Clara Andrade <small>Contabilidade</small></span></a>
+      <button type="button" class="gaveta-fechar" aria-label="Fechar menu">✕</button>
+    </div>
+    <a href="index.html" class="gaveta-link">Início</a>
+    <a href="servicos.html" class="gaveta-link">Planos e serviços</a>
+    <a href="como-funciona.html" class="gaveta-link">Como funciona</a>
+    <a href="sobre.html" class="gaveta-link">Sobre</a>
+    <a href="contato.html" class="gaveta-link" aria-current="page">Contato</a>
+    <a href="#" class="botao" data-whats="Olá, Clara! Vim pelo site e quero agendar uma conversa gratuita.">Falar com a Clara pelo WhatsApp</a>
+  </nav>
+
+  <main id="topo">
+    <section class="cabecalho-pagina">
+      <p class="trilha"><a href="index.html">Início</a> / Contato</p>
+      <p class="sobretitulo">Contato</p>
+      <h1>Vamos conversar?</h1>
+      <p class="lead">Conta rapidinho sobre a sua empresa. Eu respondo pelo WhatsApp em até 1 dia útil.</p>
+    </section>
+
+    <section class="secao">
+      <div class="duas-colunas">
+        <form class="formulario form-whats" data-intro="Olá, Clara! Vim pelo site.">
+          <div class="linha-dupla">
+            <label>Seu nome
+              <input name="nome" data-rotulo="Nome" autocomplete="name" required />
+            </label>
+            <label>Cidade
+              <input name="cidade" data-rotulo="Cidade" autocomplete="address-level2" />
+            </label>
+          </div>
+          <label>Situação da empresa
+            <select name="tipo" data-rotulo="Situação">
+              <option>Sou MEI</option>
+              <option>Tenho ME ou EPP</option>
+              <option>Ainda não tenho empresa</option>
+            </select>
+          </label>
+          <label>Como posso ajudar?
+            <textarea name="mensagem" data-rotulo="Preciso de" rows="4" required placeholder="Ex.: quero sair do MEI e virar ME"></textarea>
+          </label>
+          <button class="botao" type="submit">Enviar pelo WhatsApp</button>
+        </form>
+
+        <aside class="caixa">
+          <h3>Atendimento</h3>
+          <ul class="lista-check">
+            <li>Segunda a sexta, das 9h às 18h</li>
+            <li>Resposta em até 1 dia útil</li>
+            <li>100% online, para todo o Brasil</li>
+          </ul>
+          <h3>Outros canais</h3>
+          <p>E-mail: clara@exemplo.com.br</p>
+          <a href="#" class="botao botao-contorno" data-whats="Olá, Clara! Vim pelo site e quero agendar uma conversa gratuita.">Agendar conversa gratuita</a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="secao secao-clara">
+      <p class="sobretitulo">Antes de enviar</p>
+      <h2>Dúvidas rápidas</h2>
+      <div class="faq">
+        <details>
+          <summary>A primeira conversa é mesmo gratuita?</summary>
+          <p>Sim. São 20 minutos por vídeo ou WhatsApp, sem compromisso de contratar.</p>
+        </details>
+        <details>
+          <summary>Preciso mandar documentos agora?</summary>
+          <p>Não. Os documentos só entram depois que você aprovar a proposta.</p>
+        </details>
+        <details>
+          <summary>Em quanto tempo recebo a proposta?</summary>
+          <p>No mesmo dia da conversa, com o valor fechado e tudo o que está incluso.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape-completo">
+    <div class="rodape-grade">
+      <div>
+        <a href="index.html" class="marca"><span class="marca-icone" aria-hidden="true">CA</span>
+      <span>Clara Andrade <small>Contabilidade</small></span></a>
+        <p>Contabilidade online para MEI e pequenas empresas de todo o Brasil.</p>
+      </div>
+      <div>
+        <h3>Páginas</h3>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="servicos.html">Planos e serviços</a></li>
+            <li><a href="como-funciona.html">Como funciona</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Atendimento</h3>
+        <ul>
+          <li>Seg a sex: 9h às 18h</li>
+          <li>100% online</li>
+          <li>Resposta em até 1 dia útil</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <ul>
+          <li><a href="#" data-whats="Olá, Clara! Vim pelo site e quero agendar uma conversa gratuita.">WhatsApp</a></li>
+          <li>clara@exemplo.com.br</li>
+          <li>Atende todo o Brasil</li>
+        </ul>
+      </div>
+    </div>
+    <p class="assinatura">© Clara Andrade Contabilidade · negócio fictício para demonstração</p>
+  </footer>
+
+  <script src="../comum/demo.js" defer></script>
+  <script src="../comum/animacoes.js" defer></script>
+  <script src="../comum/site.js" defer></script>
+</body>
+</html>

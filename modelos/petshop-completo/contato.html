@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../comum/site.css" />
   <link rel="stylesheet" href="site-petshop.css" />
 </head>
-<body data-modelo="petshop">
+<body data-modelo="petshop" data-plano="site">
 
   <header class="nav">
     <a href="index.html" class="marca">
@@ -73,18 +73,18 @@
 
     <section class="secao">
       <div class="duas-colunas">
-        <form id="form-agendar" class="formulario">
+        <form id="form-agendar" class="formulario form-whats" data-intro="Olá! Quero agendar pelo site.">
           <div class="linha-dupla">
             <label>Seu nome
-              <input name="nome" autocomplete="name" required />
+              <input name="nome" data-rotulo="Meu nome" autocomplete="name" required />
             </label>
             <label>Nome do pet
-              <input name="pet" required />
+              <input name="pet" data-rotulo="Nome do pet" required />
             </label>
           </div>
           <div class="linha-dupla">
             <label>Porte
-              <select name="porte">
+              <select name="porte" data-rotulo="Porte">
                 <option>Pequeno (até 10 kg)</option>
                 <option>Médio (10 a 25 kg)</option>
                 <option>Grande (acima de 25 kg)</option>
@@ -92,7 +92,7 @@
               </select>
             </label>
             <label>Serviço
-              <select name="servico">
+              <select name="servico" data-rotulo="Serviço">
                 <option>Banho</option>
                 <option>Banho + tosa higiênica</option>
                 <option>Tosa completa</option>
@@ -102,10 +102,10 @@
           </div>
           <div class="linha-dupla">
             <label>Melhor dia e turno
-              <input name="quando" placeholder="Ex.: sábado de manhã" />
+              <input name="quando" data-rotulo="Melhor dia/turno" placeholder="Ex.: sábado de manhã" />
             </label>
             <label>Leva e traz?
-              <select name="leva">
+              <select name="leva" data-rotulo="Leva e traz">
                 <option>Sim, quero que busquem</option>
                 <option>Não, eu levo</option>
               </select>

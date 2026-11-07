@@ -20,7 +20,7 @@
     ".cta > *", ".faixa-info li", ".categoria",
     // Site completo (várias páginas)
     ".cabecalho-pagina > *", ".destaques > *", ".duas-colunas > *",
-    ".lista-check li", ".rodape-grade > *",
+    ".lista-check li", ".rodape-grade > *", ".grade-caixas > *", ".avulsos li",
   ];
 
   // Imagens, ilustrações e espaços de foto

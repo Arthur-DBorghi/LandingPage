@@ -10,6 +10,10 @@
   --site-suave: var(--azul-claro, var(--destaque-claro, #DCE8FF));
   --site-secao: var(--azul-secao, var(--fundo-alt, #EAF2FF));
   --site-cartao: var(--cartao, #FFFFFF);
+  --site-brilho: rgba(255, 201, 60, 0.25);   /* luz no canto do cabeçalho das páginas */
+  --site-rodape: var(--tinta);
+  --site-rodape-texto: #C9D3E6;
+  --site-rodape-suave: #93A0B8;
 }
 
 /* ---------- Menu do topo: página atual destacada ---------- */
@@ -103,7 +107,7 @@
 .cabecalho-pagina {
   padding: clamp(48px, 7vw, 88px) clamp(16px, 5vw, 64px) clamp(40px, 5vw, 64px);
   background:
-    radial-gradient(600px 300px at 90% 0%, rgba(255, 201, 60, 0.25), transparent 70%),
+    radial-gradient(600px 300px at 90% 0%, var(--site-brilho), transparent 70%),
     var(--site-secao);
   border-bottom: 1px solid var(--linha);
 }
@@ -135,6 +139,7 @@
 
 /* ---------- Lista com check ---------- */
 .lista-check { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+h2 + .lista-check { margin-top: 22px; }
 .lista-check li { position: relative; padding-left: 30px; }
 .lista-check li::before {
   content: "";
@@ -158,6 +163,10 @@
 }
 .caixa h3 { margin-bottom: 12px; }
 .caixa p { color: var(--tinta-suave); }
+
+/* Grade de caixas (3 por linha no computador) */
+.grade-caixas { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; }
+.grade-caixas .caixa p { margin: 0; }
 
 /* ---------- Formulário de agendamento ---------- */
 .formulario {
@@ -193,8 +202,8 @@
 /* ---------- Rodapé completo ---------- */
 .rodape-completo {
   padding: 56px clamp(16px, 5vw, 64px) 100px;
-  background: var(--tinta);
-  color: #C9D3E6;
+  background: var(--site-rodape);
+  color: var(--site-rodape-texto);
   font-size: 0.95rem;
 }
 .rodape-grade {
@@ -205,7 +214,7 @@
   margin: 0 auto;
 }
 .rodape-completo h3 { margin-bottom: 12px; color: #fff; font-size: 1rem; }
-.rodape-completo a { color: #C9D3E6; text-decoration: none; }
+.rodape-completo a { color: var(--site-rodape-texto); text-decoration: none; }
 .rodape-completo a:hover { color: #fff; text-decoration: underline; }
 .rodape-completo ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
 .rodape-completo .marca { color: #fff; margin-bottom: 10px; }
@@ -215,7 +224,7 @@
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   font-size: 0.85rem;
-  color: #93A0B8;
+  color: var(--site-rodape-suave);
 }
 
 @media (max-width: 860px) {

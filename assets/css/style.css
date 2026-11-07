@@ -104,7 +104,7 @@ p { margin: 0; }
 .botao:hover { background: var(--roxo-escuro); border-color: var(--roxo-escuro); transform: translateY(-1px); }
 .botao:focus-visible,
 .menu a:focus-visible,
-.projeto:focus-visible { outline: 2px solid var(--ciano); outline-offset: 3px; }
+.projeto a:focus-visible, .versoes button:focus-visible { outline: 2px solid var(--ciano); outline-offset: 3px; }
 
 .botao-contorno { background: transparent; border-color: rgba(255, 255, 255, 0.22); color: var(--texto); }
 .botao-contorno:hover { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.4); }
@@ -210,7 +210,41 @@ p { margin: 0; }
 .projeto-info { display: flex; flex-direction: column; gap: 8px; padding: 22px 24px 26px; flex: 1; }
 .projeto-tag { color: var(--ciano); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
 .projeto p { color: var(--texto-suave); font-size: 0.95rem; }
-.projeto-link { margin-top: auto; padding-top: 10px; color: var(--texto); font-weight: 600; font-size: 0.95rem; }
+.projeto-link { margin-top: auto; padding-top: 10px; color: var(--texto); font-weight: 600; font-size: 0.95rem; text-decoration: none; }
+.projeto-link::after { content: ""; position: absolute; inset: 0; z-index: 0; } /* o card inteiro abre o modelo */
+.projeto-capa { display: block; overflow: hidden; }
+.versoes {
+  position: relative;
+  z-index: 1; /* fica acima do link que cobre o card */
+  display: inline-flex;
+  align-self: flex-start;
+  gap: 4px;
+  margin: 4px 0 2px;
+  padding: 4px;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.versoes button {
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--texto-suave);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.versoes button:hover { color: var(--texto); }
+.versoes button[aria-pressed="true"] { background: var(--cor, var(--ciano)); color: #0B0B14; }
+.capa-site, .texto-site { display: none; }
+.projeto[data-versao="site"] .capa-lp,
+.projeto[data-versao="site"] .texto-lp { display: none; }
+.projeto[data-versao="site"] .capa-site { display: block; }
+.projeto[data-versao="site"] .texto-site { display: block; }
 
 /* Como funciona */
 .passos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; margin: 0; padding: 0; list-style: none; counter-reset: passo; }
@@ -232,7 +266,7 @@ p { margin: 0; }
 .recurso p { margin-top: 8px; color: var(--texto-suave); }
 
 /* Planos */
-.planos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 920px; }
+.planos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .plano { display: flex; flex-direction: column; padding: 32px; border: 1px solid var(--linha); border-radius: var(--raio); background: var(--superficie); }
 .plano-destaque { border-color: rgba(139, 63, 253, 0.6); box-shadow: 0 0 0 1px rgba(139, 63, 253, 0.25) inset; }
 .plano-tipo { color: var(--texto-suave); font-size: 0.85rem; }
@@ -262,28 +296,71 @@ p { margin: 0; }
   border-bottom: 2px solid var(--ciano);
   transform: rotate(-45deg);
 }
-.extras { margin-top: 32px; color: var(--texto-suave); max-width: 920px; }
+.extras { margin-top: 32px; color: var(--texto-suave); }
 .extras ul { margin: 0 0 10px; padding-left: 20px; }
 .extras li { margin-bottom: 4px; }
 .extras strong { color: var(--texto); }
 
-/* Projeto exclusivo (abaixo dos planos) */
-.exclusivo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  max-width: 920px;
-  margin-top: 32px;
-  padding: 24px 28px;
-  border: 1px dashed rgba(255, 255, 255, 0.18);
+/* Variações dos planos */
+.selo-ciano { background: rgba(0, 216, 255, 0.1); color: #6FE6FF; }
+.preco-texto { font-size: 2rem; }
+.plano-exclusivo { border-style: dashed; border-color: rgba(255, 255, 255, 0.2); background: transparent; }
+
+/* Manutenção mensal (abaixo dos planos) */
+.manutencao {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px 40px;
+  margin-top: 24px;
+  padding: 32px;
+  border: 1px solid var(--linha);
   border-radius: var(--raio);
+  background: var(--superficie);
 }
-.exclusivo p { margin-top: 6px; color: var(--texto-suave); max-width: 520px; }
-.exclusivo .botao { flex-shrink: 0; }
-@media (max-width: 720px) {
-  .exclusivo { flex-direction: column; align-items: flex-start; }
-  .exclusivo .botao { width: 100%; text-align: center; }
+.manutencao h3 { margin-top: 6px; font-size: 1.35rem; }
+.manutencao-texto p { margin-top: 8px; color: var(--texto-suave); }
+.manutencao-precos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.manutencao-precos p {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 18px;
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.manutencao-precos span { color: var(--texto-suave); font-size: 0.9rem; }
+.manutencao-precos strong { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.02em; }
+.manutencao-precos small { font-size: 0.95rem; font-weight: 400; color: var(--texto-suave); letter-spacing: 0; }
+.manutencao-precos em { font-style: normal; color: #5CFFB0; font-size: 0.88rem; }
+.manutencao-lista {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px 24px;
+  margin: 0;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--linha);
+  list-style: none;
+}
+.manutencao-lista li { position: relative; padding: 4px 0 4px 26px; color: #D2D2E0; font-size: 0.95rem; }
+.manutencao-lista li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 11px;
+  width: 11px;
+  height: 6px;
+  border-left: 2px solid var(--ciano);
+  border-bottom: 2px solid var(--ciano);
+  transform: rotate(-45deg);
+}
+@media (max-width: 900px) {
+  .manutencao { grid-template-columns: 1fr; padding: 26px 22px; }
+  .manutencao-lista { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .manutencao-precos, .manutencao-lista { grid-template-columns: 1fr; }
 }
 
 /* Quem sou: só texto; com foto, vira foto + texto */
