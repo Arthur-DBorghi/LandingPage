@@ -26,6 +26,7 @@ npm test                          # todos os testes do Playwright
 npm run relatorio                 # abre o relatório no navegador
 npm run lighthouse                # Lighthouse CI (precisa do Chrome instalado)
 npm run tipos                     # confere os tipos do TypeScript
+npm run imagens                   # regrava os GIFs do README em docs/img (precisa do ffmpeg)
 ```
 
 Para ver o site como os testes veem: `npm run servidor` e abrir http://localhost:4173.

@@ -9,7 +9,8 @@
     "test:ui": "playwright test --ui",
     "relatorio": "playwright show-report",
     "lighthouse": "lhci autorun",
-    "tipos": "tsc --noEmit"
+    "tipos": "tsc --noEmit",
+    "imagens": "node gravar-imagens.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
