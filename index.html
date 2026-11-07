@@ -90,35 +90,59 @@
         </div>
 
         <div class="projetos">
-          <a class="projeto projeto-barbearia" href="modelos/barbearia/index.html">
-            <img src="assets/img/portfolio/barbearia.webp" alt="Prévia do modelo de barbearia" width="800" height="500" loading="lazy" />
+          <article class="projeto projeto-barbearia" data-versao="lp">
+            <a class="projeto-capa" target="_blank" rel="noopener" href="modelos/barbearia/index.html" tabindex="-1" aria-hidden="true">
+              <img class="capa-lp" src="assets/img/portfolio/barbearia.webp" alt="" width="800" height="500" loading="lazy" />
+              <img class="capa-site" src="assets/img/portfolio/barbearia-site.webp" alt="" width="800" height="500" loading="lazy" />
+            </a>
             <div class="projeto-info">
               <span class="projeto-tag">Barbearia e estética</span>
               <h3>Navalha Fina</h3>
-              <p>Serviços com preço, equipe, horários e agendamento pelo WhatsApp.</p>
-              <span class="projeto-link">Ver modelo →</span>
+              <div class="versoes" role="group" aria-label="Versão do modelo Navalha Fina">
+                <button type="button" data-versao="lp" aria-pressed="true">Landing page</button>
+                <button type="button" data-versao="site" aria-pressed="false">Site completo</button>
+              </div>
+              <p class="texto-lp">Uma página com serviços e preços, equipe, horários e agendamento pelo WhatsApp.</p>
+              <p class="texto-site">5 páginas: início, serviços e preços, equipe, galeria e contato com formulário de agendamento.</p>
+              <a class="projeto-link" target="_blank" rel="noopener" href="modelos/barbearia/index.html" data-lp="modelos/barbearia/index.html" data-site="modelos/barbearia-completo/index.html">Ver como landing page →</a>
             </div>
-          </a>
-          <a class="projeto projeto-consultoria" href="modelos/consultoria/index.html">
-            <img src="assets/img/portfolio/consultoria.webp" alt="Prévia do modelo de consultoria" width="800" height="500" loading="lazy" />
+          </article>
+          <article class="projeto projeto-consultoria" data-versao="lp">
+            <a class="projeto-capa" target="_blank" rel="noopener" href="modelos/consultoria/index.html" tabindex="-1" aria-hidden="true">
+              <img class="capa-lp" src="assets/img/portfolio/consultoria.webp" alt="" width="800" height="500" loading="lazy" />
+              <img class="capa-site" src="assets/img/portfolio/consultoria-site.webp" alt="" width="800" height="500" loading="lazy" />
+            </a>
             <div class="projeto-info">
               <span class="projeto-tag">Consultoria e serviços</span>
               <h3>Clara Andrade Contabilidade</h3>
-              <p>Planos, como funciona, perguntas frequentes e formulário de contato.</p>
-              <span class="projeto-link">Ver modelo →</span>
+              <div class="versoes" role="group" aria-label="Versão do modelo Clara Andrade Contabilidade">
+                <button type="button" data-versao="lp" aria-pressed="true">Landing page</button>
+                <button type="button" data-versao="site" aria-pressed="false">Site completo</button>
+              </div>
+              <p class="texto-lp">Uma página com planos, como funciona, perguntas frequentes e formulário de contato.</p>
+              <p class="texto-site">5 páginas: início, planos e serviços, como funciona com dúvidas, sobre e contato.</p>
+              <a class="projeto-link" target="_blank" rel="noopener" href="modelos/consultoria/index.html" data-lp="modelos/consultoria/index.html" data-site="modelos/consultoria-completo/index.html">Ver como landing page →</a>
             </div>
-          </a>
-          <a class="projeto projeto-petshop" href="modelos/petshop/index.html">
-            <img src="assets/img/portfolio/petshop.webp" alt="Prévia do modelo de pet shop" width="800" height="500" loading="lazy" />
+          </article>
+          <article class="projeto projeto-petshop" data-versao="lp">
+            <a class="projeto-capa" target="_blank" rel="noopener" href="modelos/petshop/index.html" tabindex="-1" aria-hidden="true">
+              <img class="capa-lp" src="assets/img/portfolio/petshop.webp" alt="" width="800" height="500" loading="lazy" />
+              <img class="capa-site" src="assets/img/portfolio/petshop-site.webp" alt="" width="800" height="500" loading="lazy" />
+            </a>
             <div class="projeto-info">
               <span class="projeto-tag">Pet shop e serviços com agenda</span>
               <h3>Focinho Feliz</h3>
-              <p>Banho e tosa com preço por porte, pacote mensal e agendamento pelo WhatsApp.</p>
-              <span class="projeto-link">Ver modelo →</span>
+              <div class="versoes" role="group" aria-label="Versão do modelo Focinho Feliz">
+                <button type="button" data-versao="lp" aria-pressed="true">Landing page</button>
+                <button type="button" data-versao="site" aria-pressed="false">Site completo</button>
+              </div>
+              <p class="texto-lp">Uma página com banho e tosa por porte, pacote mensal e agendamento pelo WhatsApp.</p>
+              <p class="texto-site">5 páginas: início, banho e tosa, clube do banho com leva e traz, cuidados e contato.</p>
+              <a class="projeto-link" target="_blank" rel="noopener" href="modelos/petshop/index.html" data-lp="modelos/petshop/index.html" data-site="modelos/petshop-completo/index.html">Ver como landing page →</a>
             </div>
-          </a>
+          </article>
         </div>
-        <p class="nota">Os negócios dos modelos são fictícios, criados para demonstração.</p>
+        <p class="nota">Os negócios dos modelos são fictícios, criados para demonstração. Cada um existe em duas versões: landing page (uma página) e site completo (5 páginas).</p>
       </div>
     </section>
 
@@ -200,11 +224,11 @@
         <div class="planos">
           <div class="plano plano-destaque">
             <span class="plano-tipo">Pagamento único</span>
-            <h3>Criação da página</h3>
+            <h3>Landing page</h3>
             <p class="preco">R$ 500</p>
             <span class="selo">Lançamento: R$ 300 para os 3 primeiros clientes</span>
             <ul>
-              <li>Landing page com até 6 seções</li>
+              <li>Uma página com até 6 seções</li>
               <li>Visual adaptado à identidade do seu negócio</li>
               <li>Versão pra celular</li>
               <li>Botão e formulário que chegam no seu WhatsApp</li>
@@ -212,40 +236,66 @@
               <li>2 rodadas de ajustes</li>
               <li>Entrega em até 7 dias úteis</li>
             </ul>
-            <a class="botao botao-largo" href="orcamento.html">Quero minha página</a>
+            <a class="botao botao-largo" href="orcamento.html?plano=lp">Quero uma landing page</a>
           </div>
 
           <div class="plano">
+            <span class="plano-tipo">Pagamento único</span>
+            <h3>Site completo</h3>
+            <p class="preco">R$ 850</p>
+            <span class="selo selo-ciano">5 páginas: sai a R$ 170 por página</span>
+            <ul>
+              <li>5 páginas, como início, serviços, equipe, galeria e contato</li>
+              <li>Menu no topo no computador e em gaveta no celular</li>
+              <li>Título e descrição próprios em cada página, pra aparecer em mais buscas</li>
+              <li>Tudo da landing page: visual adaptado, celular, WhatsApp e Pronta pro Google</li>
+              <li>2 rodadas de ajustes</li>
+              <li>Entrega em até 10 dias úteis</li>
+            </ul>
+            <a class="botao botao-contorno botao-largo" href="orcamento.html?plano=site">Quero um site completo</a>
+          </div>
+
+          <div class="plano plano-exclusivo">
+            <span class="plano-tipo">Sob consulta</span>
+            <h3>Exclusivo</h3>
+            <p class="preco preco-texto">Sob medida</p>
+            <ul>
+              <li>Design feito do zero, sem partir de um modelo</li>
+              <li>Quantas páginas o negócio precisar</li>
+              <li>Alguma função específica pro seu negócio</li>
+              <li>Preço e prazo combinados no orçamento</li>
+            </ul>
+            <a class="botao botao-contorno botao-largo" href="https://wa.me/5511941060165?text=Ol%C3%A1%2C%20Arthur%21%20Quero%20um%20or%C3%A7amento%20de%20um%20projeto%20exclusivo.">Pedir orçamento sob medida</a>
+          </div>
+        </div>
+
+        <div class="manutencao">
+          <div class="manutencao-texto">
             <span class="plano-tipo">Mensal · opcional</span>
             <h3>Manutenção</h3>
-            <p class="preco">R$ 40 <small>/mês</small></p>
-            <ul>
-              <li>Hospedagem</li>
-              <li>Domínio .com.br (registro e renovação)</li>
-              <li>Cadeado de segurança (HTTPS)</li>
-              <li>Acompanho se a página sair do ar</li>
-              <li>1 ajuste simples por mês (texto, foto, telefone)</li>
-              <li>Cancelamento com 30 dias de aviso</li>
-            </ul>
-            <a class="botao botao-contorno botao-largo" href="orcamento.html">Quero com manutenção</a>
+            <p>Eu cuido da sua página no ar todo mês. Se preferir, te entrego os arquivos e você hospeda onde quiser.</p>
           </div>
+          <div class="manutencao-precos">
+            <p><span>Landing page</span><strong>R$ 40 <small>/mês</small></strong><em>1 ajuste simples por mês</em></p>
+            <p><span>Site completo</span><strong>R$ 60 <small>/mês</small></strong><em>2 ajustes simples por mês</em></p>
+          </div>
+          <ul class="manutencao-lista">
+            <li>Hospedagem</li>
+            <li>Domínio .com.br (registro e renovação)</li>
+            <li>Cadeado de segurança (HTTPS)</li>
+            <li>Acompanho se a página sair do ar</li>
+            <li>Ajustes simples: texto, foto, telefone</li>
+            <li>Cancelamento com 30 dias de aviso</li>
+          </ul>
         </div>
 
         <div class="extras">
           <ul>
-            <li>Página adicional (ex.: galeria, serviços, cardápio): <strong>R$ 60</strong> cada</li>
+            <li>Página adicional (ex.: galeria, serviços, cardápio): <strong>R$ 90</strong> cada</li>
             <li>Configuração do Perfil da Empresa no Google: orçamento à parte</li>
             <li>Mudanças maiores depois da entrega: orçamento à parte</li>
           </ul>
           <p>Formas de pagamento: PIX ou transferência.</p>
-        </div>
-
-        <div class="exclusivo">
-          <div>
-            <h3>Precisa de algo exclusivo?</h3>
-            <p>Design feito do zero, mais páginas ou alguma função específica pro seu negócio. Me conta o que você precisa e eu monto um orçamento sob medida.</p>
-          </div>
-          <a class="botao botao-contorno" href="https://wa.me/5511941060165?text=Ol%C3%A1%2C%20Arthur%21%20Quero%20um%20or%C3%A7amento%20de%20um%20projeto%20exclusivo.">Pedir orçamento sob medida</a>
         </div>
       </div>
     </section>
@@ -262,7 +312,7 @@
           <div>
             <p class="sobretitulo">Quem sou</p>
             <h2>Oi, eu sou o Arthur</h2>
-            <p>Sou desenvolvedor e crio landing pages para pequenos negócios que querem um endereço profissional na internet sem pagar preço de agência.</p>
+            <p>Sou desenvolvedor e crio landing pages e sites para pequenos negócios que querem um endereço profissional na internet sem pagar preço de agência.</p>
             <p>Você fala direto comigo, do orçamento ao suporte, e sabe exatamente o que está pagando.</p>
           </div>
         </div>
@@ -279,7 +329,11 @@
         <div class="faq">
           <details>
             <summary>Quanto tempo leva pra ficar pronta?</summary>
-            <p>Até 7 dias úteis depois que eu recebo seus textos, fotos e logo (ou depois da nossa conversa, se for eu quem monta os textos).</p>
+            <p>Até 7 dias úteis para a landing page e 10 para o site completo, contando de quando eu recebo seus textos, fotos e logo (ou da nossa conversa, se for eu quem monta os textos).</p>
+          </details>
+          <details>
+            <summary>Landing page ou site completo: qual escolher?</summary>
+            <p>A landing page é uma página só, com tudo em sequência, e resolve bem quando o objetivo é ser encontrado e receber mensagens no WhatsApp. O site completo tem 5 páginas, cada uma com o seu título no Google, e cabe melhor quando você tem muitos serviços, equipe ou fotos pra mostrar. No portfólio dá pra ver o mesmo negócio nas duas versões.</p>
           </details>
           <details>
             <summary>Preciso ter logo e textos prontos?</summary>
@@ -299,7 +353,7 @@
           </details>
           <details>
             <summary>O que inclui a manutenção mensal?</summary>
-            <p>Hospedagem, domínio, cadeado de segurança (HTTPS), acompanhamento se a página sair do ar e 1 ajuste simples por mês, como trocar texto, foto ou telefone.</p>
+            <p>Hospedagem, domínio, cadeado de segurança (HTTPS), acompanhamento se a página sair do ar e ajustes simples, como trocar texto, foto ou telefone: 1 por mês na landing page (R$ 40/mês) e 2 por mês no site completo (R$ 60/mês).</p>
           </details>
           <details>
             <summary>E se eu cancelar a manutenção?</summary>

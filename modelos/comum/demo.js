@@ -9,7 +9,9 @@
 
 (function () {
   const modelo = document.body.dataset.modelo || "";
-  const linkOrcamento = "../../orcamento.html?modelo=" + encodeURIComponent(modelo);
+  const plano = document.body.dataset.plano || ""; // "site" nas versões de 5 páginas
+  const linkOrcamento = "../../orcamento.html?modelo=" + encodeURIComponent(modelo) +
+    (plano ? "&plano=" + encodeURIComponent(plano) : "");
 
   // ---------- Faixa no topo ----------
   const faixa = document.createElement("div");

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clara Andrade Contabilidade | Contabilidade online para MEI e pequenas empresas</title>
+  <meta name="description" content="Contabilidade online para MEI, prestadores de serviço e pequenas empresas de todo o Brasil. Preço fechado e atendimento direto no WhatsApp." />
+  <!-- Modelo fictício: não deve aparecer no Google -->
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+  <link rel="preload" href="../../assets/fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../comum/demo.css" />
+  <link rel="stylesheet" href="../comum/animacoes.css" />
+  <link rel="stylesheet" href="../consultoria/style.css" />
+  <link rel="stylesheet" href="../comum/site.css" />
+  <link rel="stylesheet" href="site-consultoria.css" />
+</head>
+<body data-modelo="consultoria" data-plano="site">
+
+  <header class="nav">
+    <a href="index.html" class="marca">
+      <span class="marca-icone" aria-hidden="true">CA</span>
+      <span>Clara Andrade <small>Contabilidade</small></span>
+    </a>
+    <nav aria-label="Páginas">
+      <a href="index.html" aria-current="page">Início</a>
+      <a href="servicos.html">Planos e serviços</a>
+      <a href="como-funciona.html">Como funciona</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    <div style="display:flex; gap:10px; align-items:center">
+      <a href="#" class="botao botao-pequeno" data-whats="Olá, Clara! Vim pelo site e quero agendar uma conversa gratuita.">Falar com a Clara</a>
+      <button type="button" class="menu-botao" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="gaveta-fundo" aria-hidden="true"></div>
+  <nav class="gaveta" id="gaveta" aria-label="Menu" aria-hidden="true" inert>
+    <div class="gaveta-topo">
+      <a href="index.html" class="marca"><span class="marca-icone" aria-hidden="true">CA</span>
+      <span>Clara Andrade <small>Contabilidade</small></span></a>
+      <button type="button" class="gaveta-fechar" aria-label="Fechar menu">✕</button>
+    </div>
+    <a href="index.html" class="gaveta-link" aria-current="page">Início</a>
+    <a href="servicos.html" class="gaveta-link">Planos e serviços</a>
+    <a href="como-funciona.html" class="gaveta-link">Como funciona</a>
+    <a href="sobre.html" class="gaveta-link">Sobre</a>
+    <a href="contato.html" class="gaveta-link">Contato</a>
+    <a href="#" class="botao" data-whats="Olá, Clara! Vim pelo site e quero agendar uma conversa gratuita.">Falar com a Clara pelo WhatsApp</a>
+  </nav>
+
+  <main id="topo">
+    <section class="hero">
+      <div>
+        <p class="sobretitulo">Contabilidade online para MEI e pequenas empresas</p>
+        <h1>Sua empresa em dia com o Leão, <em>sem você perder o sono.</em></h1>
+        <p class="lead">Abertura, impostos, folha e declarações cuidados por uma contadora que responde no WhatsApp e explica tudo sem contabilês.</p>
+        <div class="hero-acoes">
+          <a href="#" class="botao" data-whats="Olá, Clara! Vim pelo site e quero agendar uma conversa gratuita.">Agendar conversa gratuita</a>
+          <a href="servicos.html" class="link-seta">Ver planos →</a>
+        </div>
+        <ul class="garantias">
+          <li>Atendimento 100% online</li>
+          <li>Resposta em até 1 dia útil</li>
+          <li>Sem fidelidade</li>
+        </ul>
+      </div>
+
+      <!-- Ilustração em HTML/CSS: painel de resumo do mês -->
+      <div class="painel" aria-hidden="true">
+        <div class="painel-topo">
+          <span>Resumo de novembro</span>
+          <span class="tag-ok">Tudo em dia</span>
+        </div>
+        <div class="painel-linha">
+          <span class="check">✓</span>
+          <div><strong>DAS pago</strong><small>Simples Nacional</small></div>
+        </div>
+        <div class="painel-linha">
+          <span class="check">✓</span>
+          <div><strong>12 notas fiscais emitidas</strong><small>Serviços</small></div>
+        </div>
+        <div class="painel-linha">
+          <span class="check pendente">!</span>
+          <div><strong>Próximo vencimento</strong><small>Pró-labore · dia 20</small></div>
+        </div>
+        <div class="painel-grafico">
+          <span style="height:38%"></span><span style="height:52%"></span><span style="height:46%"></span>
+          <span style="height:64%"></span><span style="height:72%"></span><span style="height:88%"></span>
+        </div>
+        <p class="painel-legenda">Faturamento dos últimos 6 meses</p>
+      </div>
+    </section>
+
+    <section class="secao">
+      <p class="sobretitulo">Para quem é</p>
+      <h2>Feito pra quem quer crescer sem dor de cabeça</h2>
+      <div class="cards tres">
+        <article class="card">
+          <h3>MEI que está crescendo</h3>
+          <p>Faturamento chegando perto do limite e a dúvida: e agora, viro ME?</p>
+        </article>
+        <article class="card">
+          <h3>Prestador de serviço</h3>
+          <p>Precisa emitir nota, pagar menos imposto dentro da lei e ter tudo organizado.</p>
+        </article>
+        <article class="card">
+          <h3>Pequena empresa</h3>
+          <p>Cansou do contador que só aparece pra cobrar e quer alguém que explique.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="secao secao-clara">
+      <p class="sobretitulo">Conheça</p>
+      <h2>Tudo que você precisa saber antes de conversar</h2>
+      <div class="destaques">
+        <a class="destaque" href="servicos.html">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+          <h3>Planos e serviços</h3>
+          <p>Planos mensais com preço fechado e serviços avulsos, como imposto de renda.</p>
+          <span class="preco-destaque">a partir de R$ 89/mês</span>
+          <span class="mais">Ver planos →</span>
+        </a>
+        <a class="destaque" href="como-funciona.html">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          <h3>Como funciona</h3>
+          <p>Trocar de contador em 4 passos, sem você precisar ligar pra ninguém.</p>
+          <span class="preco-destaque">migração sem trabalho</span>
+          <span class="mais">Ver o passo a passo →</span>
+        </a>
+        <a class="destaque" href="sobre.html">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+          <h3>Sobre a Clara</h3>
+          <p>Contadora que explica sem contabilês e responde direto no WhatsApp.</p>
+          <span class="preco-destaque">atendimento direto</span>
+          <span class="mais">Conhecer a Clara →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="secao">
+      <div class="duas-colunas">
+        <div>
+          <p class="sobretitulo">Tudo online</p>
+          <h2>Sem escritório e sem papelada</h2>
+          <p class="lead">Você manda os documentos pelo celular e acompanha tudo por um relatório simples, todo mês.</p>
+        </div>
+        <ul class="lista-check caixa">
+          <li>Documentos pelo WhatsApp ou e-mail</li>
+          <li>Reunião por vídeo quando precisar</li>
+          <li>Relatório simples todo mês</li>
+          <li>Alerta antes de cada prazo</li>
+          <li>Sem fidelidade</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Vamos ver o melhor caminho pra sua empresa?</h2>
+      <p>A primeira conversa é gratuita e leva 20 minutos.</p>
+      <a href="#" class="botao botao-claro" data-whats="Olá, Clara! Vim pelo site e quero agendar uma conversa gratuita.">Agendar conversa gratuita</a>
+    </section>
+
+  </main>
+
+  <footer class="rodape-completo">
+    <div class="rodape-grade">
+      <div>
+        <a href="index.html" class="marca"><span class="marca-icone" aria-hidden="true">CA</span>
+      <span>Clara Andrade <small>Contabilidade</small></span></a>
+        <p>Contabilidade online para MEI e pequenas empresas de todo o Brasil.</p>
+      </div>
+      <div>
+        <h3>Páginas</h3>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="servicos.html">Planos e serviços</a></li>
+            <li><a href="como-funciona.html">Como funciona</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Atendimento</h3>
+        <ul>
+          <li>Seg a sex: 9h às 18h</li>
+          <li>100% online</li>
+          <li>Resposta em até 1 dia útil</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <ul>
+          <li><a href="#" data-whats="Olá, Clara! Vim pelo site e quero agendar uma conversa gratuita.">WhatsApp</a></li>
+          <li>clara@exemplo.com.br</li>
+          <li>Atende todo o Brasil</li>
+        </ul>
+      </div>
+    </div>
+    <p class="assinatura">© Clara Andrade Contabilidade · negócio fictício para demonstração</p>
+  </footer>
+
+  <script src="../comum/demo.js" defer></script>
+  <script src="../comum/animacoes.js" defer></script>
+  <script src="../comum/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contato e agendamento | Focinho Feliz Pet Shop na Vila Nova</title>
+  <meta name="description" content="Agende banho e tosa pelo WhatsApp. Rua Exemplo, 456, Vila Nova. Seg a sex 8h às 18h, sábado 8h às 14h." />
+  <!-- Modelo fictício: não deve aparecer no Google -->
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+  <link rel="preload" href="../../assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../comum/demo.css" />
+  <link rel="stylesheet" href="../comum/animacoes.css" />
+  <link rel="stylesheet" href="../petshop/style.css" />
+  <link rel="stylesheet" href="../comum/site.css" />
+  <link rel="stylesheet" href="site-petshop.css" />
+</head>
+<body data-modelo="petshop" data-plano="site">
+
+  <header class="nav">
+    <a href="index.html" class="marca">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#1E5BD8" />
+        <g fill="#FFC93C">
+          <ellipse cx="20" cy="25" rx="7" ry="6" />
+          <circle cx="12" cy="17" r="3" /><circle cx="17" cy="12" r="3" /><circle cx="23" cy="12" r="3" /><circle cx="28" cy="17" r="3" />
+        </g>
+      </svg>
+      <span>Focinho Feliz</span>
+    </a>
+    <nav aria-label="Páginas">
+      <a href="index.html">Início</a>
+      <a href="banho-e-tosa.html">Banho e tosa</a>
+      <a href="clube-do-banho.html">Clube do banho</a>
+      <a href="cuidados.html">Cuidados</a>
+      <a href="contato.html" aria-current="page">Contato</a>
+    </nav>
+    <div style="display:flex; gap:10px; align-items:center">
+      <a href="#" class="botao botao-pequeno" data-whats="Olá! Vim pelo site e quero agendar um banho.">Agendar</a>
+      <button type="button" class="menu-botao" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="gaveta-fundo" aria-hidden="true"></div>
+  <nav class="gaveta" id="gaveta" aria-label="Menu" aria-hidden="true" inert>
+    <div class="gaveta-topo">
+      <a href="index.html" class="marca"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#1E5BD8" />
+        <g fill="#FFC93C">
+          <ellipse cx="20" cy="25" rx="7" ry="6" />
+          <circle cx="12" cy="17" r="3" /><circle cx="17" cy="12" r="3" /><circle cx="23" cy="12" r="3" /><circle cx="28" cy="17" r="3" />
+        </g>
+      </svg><span>Focinho Feliz</span></a>
+      <button type="button" class="gaveta-fechar" aria-label="Fechar menu">✕</button>
+    </div>
+    <a href="index.html" class="gaveta-link">Início</a>
+    <a href="banho-e-tosa.html" class="gaveta-link">Banho e tosa</a>
+    <a href="clube-do-banho.html" class="gaveta-link">Clube do banho</a>
+    <a href="cuidados.html" class="gaveta-link">Cuidados</a>
+    <a href="contato.html" class="gaveta-link" aria-current="page">Contato</a>
+    <a href="#" class="botao" data-whats="Olá! Vim pelo site e quero agendar um banho.">Agendar pelo WhatsApp</a>
+  </nav>
+
+  <main id="topo">
+    <section class="cabecalho-pagina">
+      <p class="trilha"><a href="index.html">Início</a> / Contato</p>
+      <p class="sobretitulo">Contato</p>
+      <h1>Agende o banho do seu pet</h1>
+      <p class="lead">Preencha rapidinho e a mensagem chega pronta no nosso WhatsApp. A gente responde em minutos no horário de atendimento.</p>
+    </section>
+
+    <section class="secao">
+      <div class="duas-colunas">
+        <form id="form-agendar" class="formulario form-whats" data-intro="Olá! Quero agendar pelo site.">
+          <div class="linha-dupla">
+            <label>Seu nome
+              <input name="nome" data-rotulo="Meu nome" autocomplete="name" required />
+            </label>
+            <label>Nome do pet
+              <input name="pet" data-rotulo="Nome do pet" required />
+            </label>
+          </div>
+          <div class="linha-dupla">
+            <label>Porte
+              <select name="porte" data-rotulo="Porte">
+                <option>Pequeno (até 10 kg)</option>
+                <option>Médio (10 a 25 kg)</option>
+                <option>Grande (acima de 25 kg)</option>
+                <option>Gato</option>
+              </select>
+            </label>
+            <label>Serviço
+              <select name="servico" data-rotulo="Serviço">
+                <option>Banho</option>
+                <option>Banho + tosa higiênica</option>
+                <option>Tosa completa</option>
+                <option>Clube do banho</option>
+              </select>
+            </label>
+          </div>
+          <div class="linha-dupla">
+            <label>Melhor dia e turno
+              <input name="quando" data-rotulo="Melhor dia/turno" placeholder="Ex.: sábado de manhã" />
+            </label>
+            <label>Leva e traz?
+              <select name="leva" data-rotulo="Leva e traz">
+                <option>Sim, quero que busquem</option>
+                <option>Não, eu levo</option>
+              </select>
+            </label>
+          </div>
+          <button class="botao" type="submit">Enviar pelo WhatsApp</button>
+        </form>
+
+        <aside class="horarios-card">
+          <h3>Horários</h3>
+          <table class="horarios">
+            <tr><th>Segunda a sexta</th><td>8h às 18h</td></tr>
+            <tr><th>Sábado</th><td>8h às 14h</td></tr>
+            <tr><th>Domingo</th><td>Fechado</td></tr>
+          </table>
+          <h3>Endereço</h3>
+          <p>Rua Exemplo, 456, Vila Nova</p>
+          <a href="#" class="link-seta" data-whats="Olá! Pode me mandar a localização do pet shop?">Pedir a localização →</a>
+          <div class="mapa" aria-hidden="true">
+            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="250" fill="#EAF2FF" />
+              <g stroke="#FFFFFF" stroke-width="16"><path d="M0 70 H400 M0 170 H400 M110 0 V250 M280 0 V250" /></g>
+              <path d="M0 230 C120 200 220 250 400 215" stroke="#CFE0FF" stroke-width="22" fill="none" />
+              <g transform="translate(280 170)">
+                <circle r="30" fill="#1E5BD8" opacity=".15" />
+                <path d="M0 -38 C-15 -38 -23 -27 -23 -17 C-23 -2 0 17 0 17 C0 17 23 -2 23 -17 C23 -27 15 -38 0 -38Z" fill="#1E5BD8" />
+                <circle cy="-18" r="7.5" fill="#FFC93C" />
+              </g>
+            </svg>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="secao secao-azul" id="duvidas">
+      <div class="titulo-secao">
+        <p class="sobretitulo">Dúvidas</p>
+        <h2>Antes de agendar</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Precisa estar com as vacinas em dia?</summary>
+          <p>Sim. Pedimos a carteirinha de vacinação na primeira visita, para segurança de todos os pets.</p>
+        </details>
+        <details>
+          <summary>Vocês atendem gatos?</summary>
+          <p>Atendemos, sempre em horário exclusivo, sem cães por perto.</p>
+        </details>
+        <details>
+          <summary>Quanto tempo demora?</summary>
+          <p>De 1h30 a 3h, dependendo do porte e do serviço. Com o leva e traz, você nem precisa esperar.</p>
+        </details>
+        <details>
+          <summary>E se meu pet for bravo ou medroso?</summary>
+          <p>Avise no agendamento. Reservamos um horário mais tranquilo e, se precisar, fazemos o atendimento em etapas.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape-completo">
+    <div class="rodape-grade">
+      <div>
+        <a href="index.html" class="marca"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#1E5BD8" />
+        <g fill="#FFC93C">
+          <ellipse cx="20" cy="25" rx="7" ry="6" />
+          <circle cx="12" cy="17" r="3" /><circle cx="17" cy="12" r="3" /><circle cx="23" cy="12" r="3" /><circle cx="28" cy="17" r="3" />
+        </g>
+      </svg><span>Focinho Feliz</span></a>
+        <p>Banho, tosa e cuidados para cães e gatos na Vila Nova, com leva e traz no bairro.</p>
+      </div>
+      <div>
+        <h3>Páginas</h3>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="banho-e-tosa.html">Banho e tosa</a></li>
+            <li><a href="clube-do-banho.html">Clube do banho</a></li>
+            <li><a href="cuidados.html">Cuidados</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Horários</h3>
+        <ul>
+          <li>Seg a sex: 8h às 18h</li>
+          <li>Sábado: 8h às 14h</li>
+          <li>Domingo: fechado</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <ul>
+          <li>Rua Exemplo, 456, Vila Nova</li>
+          <li><a href="#" data-whats="Olá! Vim pelo site e quero agendar um banho.">WhatsApp</a></li>
+          <li><a href="#" data-whats="Olá! Vim pelo site e tenho uma dúvida.">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="assinatura">© Focinho Feliz Pet Shop · negócio fictício para demonstração</p>
+  </footer>
+
+  <a href="#" class="whats-flutuante" aria-label="Agendar pelo WhatsApp" data-whats="Olá! Vim pelo site e quero agendar um banho.">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+  </a>
+
+  <script src="../comum/demo.js" defer></script>
+  <script src="../comum/animacoes.js" defer></script>
+  <script src="../comum/site.js" defer></script>
+</body>
+</html>

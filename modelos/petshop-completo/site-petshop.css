@@ -1,0 +1,54 @@
+/* ==========================================================
+   Pet shop · Site completo: peças só desta versão.
+   O visual base vem de ../petshop/style.css (o mesmo da landing
+   page), e o menu, cabeçalhos e rodapé de ../comum/site.css.
+   ========================================================== */
+
+/* Planos do clube (um por porte) */
+.planos-clube { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; align-items: stretch; }
+.plano-clube { position: relative; display: flex; flex-direction: column; }
+.plano-clube .porte-kg { margin: -4px 0 0; color: var(--tinta-suave); }
+.plano-clube .pacote-preco { margin: 14px 0 2px; font-family: var(--titulo); font-weight: 800; font-size: 2.4rem; color: var(--tinta); }
+.plano-clube .pacote-preco small { font-family: var(--corpo); font-weight: 400; font-size: 1rem; color: var(--tinta-suave); }
+.plano-clube .por-banho { margin: 0 0 22px; color: var(--tinta-suave); }
+.plano-clube .botao { margin-top: auto; text-align: center; }
+.destaque-clube { border: 2px solid var(--azul); box-shadow: 0 24px 50px -28px rgba(30, 91, 216, 0.6); }
+.selo-clube {
+  position: absolute;
+  top: -13px;
+  left: 24px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--sol);
+  color: var(--tinta);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Passos em coluna (leva e traz) */
+.passos-coluna { grid-template-columns: 1fr; }
+
+/* Equipe */
+.equipe-site { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.membro .avatar-membro {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  background: var(--sol);
+  color: var(--tinta);
+  font-family: var(--titulo);
+  font-weight: 800;
+  font-size: 1.6rem;
+}
+.membro h3 { margin-bottom: 2px; }
+.membro .papel { margin: 0 0 8px; color: var(--azul); font-weight: 700; }
+
+/* Cuidados: 6 itens em 3 colunas */
+.cuidados { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+@media (max-width: 860px) {
+  .planos-clube, .equipe-site { grid-template-columns: 1fr; }
+}

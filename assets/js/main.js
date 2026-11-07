@@ -18,14 +18,15 @@ if (brief) {
     const campo = (nome) => (d.get(nome) || "").toString().trim() || "-";
 
     const linhas = [
-      "Olá, Arthur! Vim pelo site e quero um orçamento de landing page.",
+      "Olá, Arthur! Vim pelo site e quero um orçamento.",
       "",
       "Nome: " + campo("nome"),
       "Negócio: " + campo("nicho"),
       "Instagram/site atual: " + campo("link"),
       "Já tenho logo: " + campo("logo"),
       "Modelo de referência: " + campo("modelo"),
-      "Interesse: " + campo("plano"),
+      "Formato: " + campo("formato"),
+      "Manutenção: " + campo("plano"),
       "O que preciso: " + campo("obs"),
     ];
 
@@ -46,6 +47,37 @@ if (campoModelo) {
   if (nomes[vindo]) campoModelo.value = nomes[vindo];
 }
 
+// Veio de um plano ou de um site completo (?plano=lp|site|exclusivo)? Já marca o formato.
+const campoFormato = document.getElementById("campo-formato");
+if (campoFormato) {
+  const formatos = {
+    lp: "Landing page (R$ 500)",
+    site: "Site completo (5 páginas, R$ 850)",
+    exclusivo: "Exclusivo (sob medida)",
+  };
+  const plano = new URLSearchParams(location.search).get("plano");
+  if (formatos[plano]) campoFormato.value = formatos[plano];
+}
+
+// =========================
+//   PORTFÓLIO: LANDING PAGE OU SITE COMPLETO
+// =========================
+// Cada card alterna entre as duas versões do mesmo negócio fictício:
+// troca a imagem, o texto e o link "Ver como ...".
+document.querySelectorAll(".projeto[data-versao]").forEach((card) => {
+  const link = card.querySelector(".projeto-link");
+  const capa = card.querySelector(".projeto-capa");
+  card.querySelectorAll(".versoes button").forEach((botao) => {
+    botao.addEventListener("click", () => {
+      const versao = botao.dataset.versao; // "lp" ou "site"
+      card.dataset.versao = versao;
+      card.querySelectorAll(".versoes button").forEach((b) => b.setAttribute("aria-pressed", String(b === botao)));
+      link.href = capa.href = link.dataset[versao];
+      link.textContent = versao === "site" ? "Ver como site completo →" : "Ver como landing page →";
+    });
+  });
+});
+
 // =========================
 //   APARECER AO ROLAR
 // =========================
@@ -65,7 +97,7 @@ if (campoModelo) {
     ".passos li",
     ".recurso",
     ".plano",
-    ".extras, .exclusivo",
+    ".manutencao, .extras",
     ".sobre > *",
     ".faq details",
     ".chamada > *",
