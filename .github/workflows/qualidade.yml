@@ -38,7 +38,7 @@ jobs:
       - run: npx playwright test
       - name: Guardar o relatório dos testes
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: relatorio-playwright
           path: testes/playwright-report/
@@ -59,7 +59,7 @@ jobs:
       - run: npx lhci autorun
       - name: Guardar os relatórios do Lighthouse
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: relatorios-lighthouse
           path: testes/relatorios-lighthouse/
