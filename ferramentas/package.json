@@ -9,7 +9,8 @@
   "scripts": {
     "novo-cliente": "node novo-cliente/cli.mjs",
     "test": "node --test \"testes/*.test.mjs\"",
-    "tipos": "tsc -p ."
+    "tipos": "tsc -p .",
+    "vendor": "node copiar-vendor.mjs"
   },
   "dependencies": {
     "parse5": "^8.1.1"

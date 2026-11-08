@@ -30,7 +30,7 @@ const TIPOS = {
 };
 
 // Arquivos que existem no repositório mas não são publicados (ver .assetsignore)
-const ESCONDIDOS = ["/testes", "/ferramentas", "/.github", "/.git", "/.gitignore", "/wrangler.jsonc", "/.assetsignore", "/README.md", "/README.pt-BR.md", "/docs", "/_redirects", "/_headers"];
+const ESCONDIDOS = ["/testes", "/ferramentas/node_modules", "/ferramentas/testes", "/ferramentas/package.json", "/ferramentas/novo-cliente/cli.mjs", "/ferramentas/novo-cliente/gerar.mjs", "/.github", "/.git", "/.gitignore", "/wrangler.jsonc", "/.assetsignore", "/README.md", "/README.pt-BR.md", "/docs", "/_redirects", "/_headers"];
 
 async function lerRedirecionamentos() {
   try {

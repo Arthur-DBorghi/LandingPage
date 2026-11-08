@@ -8,4 +8,13 @@ README.md
 testes
 docs
 README.pt-BR.md
-ferramentas
+# Ferramentas: só o núcleo em ferramentas/novo-cliente é publicado (o painel usa no navegador)
+ferramentas/node_modules
+ferramentas/testes
+ferramentas/package.json
+ferramentas/package-lock.json
+ferramentas/tsconfig.json
+ferramentas/README.md
+ferramentas/copiar-vendor.mjs
+ferramentas/novo-cliente/cli.mjs
+ferramentas/novo-cliente/gerar.mjs

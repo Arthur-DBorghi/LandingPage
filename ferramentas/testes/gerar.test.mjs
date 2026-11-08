@@ -5,7 +5,8 @@ import assert from "node:assert/strict";
 import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { gerarSite } from "../novo-cliente/gerar.mjs";
+import { gerarSite, RAIZ_REPO } from "../novo-cliente/gerar.mjs";
+import { MODELOS } from "../novo-cliente/modelos.mjs";
 import { atributo, lerHtml, percorrer } from "../novo-cliente/html.mjs";
 
 const NUMERO = "5511987654321";
@@ -118,6 +119,16 @@ test("pendências apontam o que continua fictício", () => {
   assert.match(consultoria, /conferir profissão e gênero \("contadora"\)/);
   const pet = readFileSync(path.join(pasta, "petshop-lp/LEIA-ME.md"), "utf8");
   assert.match(pet, /endereço de exemplo/); // não informou endereço
+});
+
+test("a lista de páginas de cada modelo bate com as pastas das vitrines", () => {
+  for (const [modelo, m] of Object.entries(MODELOS)) {
+    for (const versao of /** @type {const} */ (["lp", "completo"])) {
+      const pastaVitrine = path.join(RAIZ_REPO, "modelos", modelo + (versao === "completo" ? "-completo" : ""));
+      const reais = readdirSync(pastaVitrine).filter((f) => f.endsWith(".html")).sort();
+      assert.deepEqual([...m.paginas[versao]].sort(), reais, `${modelo} ${versao}`);
+    }
+  }
 });
 
 test("não sobrescreve uma pasta que já tem arquivos", async () => {
