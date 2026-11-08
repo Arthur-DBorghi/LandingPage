@@ -61,6 +61,17 @@ Um servidor Node sem dependências (`testes/servidor.mjs`) imita a Cloudflare no
 
 ![Site de 5 páginas da barbearia no celular: menu em gaveta e troca de página](docs/img/gaveta-celular.gif)
 
+## Um cliente novo com um comando
+
+Transformar uma vitrine em site de cliente era um passo a passo manual de seis etapas, e esquecer uma custa caro: se o `noindex` fica, o cliente nunca aparece no Google. A [`ferramentas/novo-cliente`](ferramentas/README.md) é uma ferramenta de linha de comando em Node.js que faz a parte mecânica em segundos:
+
+- **Copia só o que as páginas usam** para uma estrutura `assets/` limpa, reescrevendo os caminhos no HTML e no CSS.
+- **Tira a camada de demonstração** e liga todos os botões e formulários ao WhatsApp de verdade do cliente.
+- **Troca o negócio fictício pelo do cliente.** Os artigos mudam conforme o gênero do nome novo ("da Navalha Fina" → "do Studio Corte"), então o texto continua natural.
+- **Lista tudo o que ainda é fictício,** com arquivo e linha, no roteiro do site novo.
+
+As edições no HTML são cirúrgicas: o parse5 informa a posição exata de cada tag e atributo, e as mudanças entram nessas posições. Assim o cliente recebe o mesmo HTML formatado à mão, e não a saída de um serializador. Os tipos são conferidos com JSDoc e `tsc`, ainda sem etapa de build. A cada push, o CI converte as seis vitrines e confere três coisas: nenhum resto de demonstração ficou para trás, todo arquivo citado existe e todo botão abre a conversa certa no WhatsApp, com a mesma mensagem.
+
 ## Resultados
 
 | | |
@@ -69,14 +80,14 @@ Um servidor Node sem dependências (`testes/servidor.mjs`) imita a Cloudflare no
 | Deslocamento de layout (CLS) | 0 em todas as páginas auditadas |
 | Maior elemento visível (LCP, celular simulado) | 0,9–1,7 s |
 | Peso das páginas | 81–327 KB (a maior é a inicial, com as telas de celular) |
-| Verificações automáticas | 156 a cada push, cerca de 3 minutos no CI, mais 24 execuções do Lighthouse |
+| Verificações automáticas | 156 verificações no navegador a cada push (cerca de 3 minutos no CI), 24 execuções do Lighthouse e 28 testes da ferramenta de clientes |
 | Custo de hospedagem | Zero |
 
 Em novembro de 2026 o negócio ainda não tem clientes pagantes. Este site e as vitrines são a primeira coisa que um possível cliente vê.
 
 ## Próximos passos
 
-- **Um comando "novo cliente" em Node.js:** copia uma vitrine, tira a camada de demonstração, coloca o WhatsApp do cliente, gera `sitemap.xml`, `robots.txt` e os dados estruturados de negócio local, e roda os mesmos testes no resultado.
+- **Versão 2 da ferramenta de clientes:** gerar `sitemap.xml`, `robots.txt`, endereço oficial (canonical) e dados estruturados de negócio local, e rodar os testes do Playwright e do axe em cada site gerado.
 - **Um backend pequeno na Cloudflare:** pedidos de orçamento guardados no D1, bloqueio de spam com o Turnstile e um painel privado atrás do Cloudflare Access. Só no meu site, para os sites de clientes continuarem sem peças móveis.
 - **Domínio próprio** e SEO do próprio site de vendas.
 
@@ -105,5 +116,6 @@ modelos/<negócio>/                                     vitrine em landing page
 modelos/<negócio>-completo/                            vitrine em site de 5 páginas
 modelos/comum/                                         peças comuns: demonstração, animações e várias páginas
 testes/                                                testes automáticos (não são publicados)
+ferramentas/                                           ferramenta "novo cliente" (não é publicada)
 docs/img/                                              imagens deste README (não são publicadas)
 ```

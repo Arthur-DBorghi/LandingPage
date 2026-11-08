@@ -44,6 +44,24 @@ jobs:
           path: testes/playwright-report/
           retention-days: 14
 
+  ferramenta:
+    name: Ferramenta novo-cliente (6 vitrines convertidas)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ferramentas
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: ferramentas/package-lock.json
+      - run: npm ci
+      - run: npm run tipos
+      - run: npm test
+
   lighthouse:
     name: Lighthouse (desempenho, acessibilidade, SEO)
     runs-on: ubuntu-latest

@@ -1,0 +1,21 @@
+{
+  "name": "landingpage-ferramentas",
+  "private": true,
+  "description": "Ferramentas de apoio às vendas. novo-cliente: transforma uma vitrine em site de cliente. Ficam fora do site publicado.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "novo-cliente": "node novo-cliente/cli.mjs",
+    "test": "node --test \"testes/*.test.mjs\"",
+    "tipos": "tsc -p ."
+  },
+  "dependencies": {
+    "parse5": "^8.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.0",
+    "typescript": "^5.9.0"
+  }
+}

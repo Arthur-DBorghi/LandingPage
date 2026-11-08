@@ -3,8 +3,11 @@
    - Coloca a faixa "modelo de demonstração" no topo.
    - Todo elemento com data-whats="mensagem" abre uma janela
      mostrando a mensagem que iria para o WhatsApp do negócio.
-   Numa página de cliente de verdade, troque por links
-   https://wa.me/55DDDNUMERO?text=... e remova este arquivo.
+   - Implementa window.enviarWhats(msg), a função única que as
+     vitrines chamam para mandar uma mensagem (formulários etc.).
+   Na página de um cliente este arquivo sai e entra o whats.js,
+   que implementa a mesma função abrindo o WhatsApp de verdade
+   (a ferramenta ferramentas/novo-cliente faz essa troca).
    ========================================================== */
 
 (function () {
@@ -58,6 +61,6 @@
     mostrarWhats(el.dataset.whats || "Olá! Vim pelo site.");
   });
 
-  // Usado pelos formulários dos modelos
-  window.demoWhats = mostrarWhats;
+  // Função única de envio, usada pelos formulários dos modelos
+  window.enviarWhats = mostrarWhats;
 })();
