@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel · Novo cliente | Arthur Borghi</title>
+  <title>Painel de vendas · Novo cliente | Arthur Borghi</title>
   <meta name="description" content="Painel privado: transforma uma vitrine em site de cliente." />
   <!-- Página de uso interno: fora do Google -->
   <meta name="robots" content="noindex, nofollow" />
@@ -29,7 +29,7 @@
       <img src="../assets/img/logo-ab.png" alt="" width="49" height="38" />
       <span>Painel</span>
     </a>
-    <p class="painel-titulo">Novo cliente: transforma uma vitrine em site de cliente</p>
+    <p class="painel-titulo">Monte o site do cliente na frente dele: dados, textos e cores</p>
   </header>
 
   <main class="painel-grade">
@@ -122,9 +122,13 @@
       <div id="resultado" class="resultado" hidden>
         <p id="resumo" class="resumo"></p>
         <button type="button" class="botao botao-largo" id="botao-baixar">Baixar site (.zip)</button>
+        <h2>Cores da marca</h2>
+        <div id="cores" class="cores"></div>
+        <p id="contraste" class="dica contraste" aria-live="polite"></p>
+        <button type="button" class="botao botao-contorno botao-pequeno" id="botao-restaurar-cores">Voltar às cores do modelo</button>
         <h2>Ainda fictício ou de exemplo</h2>
         <ul id="pendencias" class="pendencias"></ul>
-        <p class="dica">A mesma lista, com o roteiro do que revisar e como publicar, vai no <code>LEIA-ME.md</code> dentro do .zip.</p>
+        <p class="dica">A mesma lista, com o roteiro do que revisar e como publicar, vai no <code>LEIA-ME.md</code> dentro do .zip. Os textos e as cores alterados na prévia também vão no .zip.</p>
       </div>
       <p id="status" class="status" role="status" aria-live="polite"></p>
     </section>
@@ -133,9 +137,11 @@
       <div class="previa-barra">
         <h2 id="titulo-previa">Prévia</h2>
         <div class="previa-paginas" id="previa-paginas" role="tablist" aria-label="Páginas do site"></div>
-        <div class="previa-tamanho" role="group" aria-label="Tamanho da tela">
+        <div class="previa-tamanho" role="group" aria-label="Ferramentas da prévia">
+          <button type="button" id="botao-editar" aria-pressed="false">Editar textos</button>
           <button type="button" data-tamanho="celular" aria-pressed="true">Celular</button>
           <button type="button" data-tamanho="computador" aria-pressed="false">Computador</button>
+          <button type="button" id="botao-apresentar">Apresentar</button>
         </div>
       </div>
       <div class="previa-moldura" id="previa-moldura" data-tamanho="celular">

@@ -62,11 +62,29 @@
 
 .resultado { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--linha); }
 .resumo { margin: 0 0 14px; color: var(--texto); }
-.pendencias { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; max-height: 320px; overflow-y: auto; }
+.pendencias { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
 .pendencias li { padding: 8px 10px; border-radius: 10px; background: var(--superficie); font-size: 0.88rem; color: var(--texto-suave); }
 .pendencias li strong { color: var(--texto); font-weight: 600; }
 .pendencias code, .dica code { color: var(--ciano); }
 .status { margin: 14px 0 0; color: var(--texto-suave); font-size: 0.9rem; }
+
+/* Cores da marca */
+.cores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+.formulario .cor, .cor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.cor input[type="color"] { width: 34px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: none; cursor: pointer; }
+.contraste.ruim { color: #FF8FC8; font-weight: 600; }
 
 /* ---------- Prévia ---------- */
 .painel-previa { display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden; background: #06060C; }
@@ -95,7 +113,9 @@
 .previa-tamanho button[aria-pressed="true"] { border-color: var(--ciano); color: var(--texto); background: rgba(0, 216, 255, 0.08); }
 .previa-paginas button:focus-visible,
 .previa-tamanho button:focus-visible { outline: 2px solid var(--ciano); outline-offset: 2px; }
-.previa-tamanho { display: flex; gap: 6px; }
+.previa-tamanho { display: flex; flex-wrap: wrap; gap: 6px; }
+#botao-editar[aria-pressed="true"] { border-color: #FFC93C; color: #FFE08A; background: rgba(255, 201, 60, 0.10); }
+.previa-moldura:fullscreen { padding: 0; align-items: center; background: #000; }
 
 .previa-moldura { flex: 1; display: flex; justify-content: center; align-items: flex-start; padding: 18px; min-height: 0; }
 .previa-escala { position: relative; overflow: hidden; border: 1px solid var(--linha); border-radius: 12px; background: #fff; }

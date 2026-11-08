@@ -11,6 +11,6 @@
     "types": ["node"],
     "lib": ["ES2022", "DOM", "DOM.Iterable"]
   },
-  "include": ["novo-cliente/**/*.mjs", "testes/**/*.mjs", "../painel/painel.js", "../painel/zip.mjs"],
+  "include": ["novo-cliente/**/*.mjs", "testes/**/*.mjs", "../painel/painel.js", "../painel/zip.mjs", "../painel/edicao.mjs"],
   "exclude": []
 }

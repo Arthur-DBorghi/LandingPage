@@ -2,11 +2,12 @@
 // Painel "novo cliente": a mesma ferramenta do terminal, com formulário e prévia.
 // Lê as vitrines do próprio site, monta o site do cliente no navegador e entrega um .zip.
 
-import { montarSite } from "../ferramentas/novo-cliente/montar.mjs";
+import { montarLeiaMe, montarSite, procurarPendencias } from "../ferramentas/novo-cliente/montar.mjs";
 import { MODELOS } from "../ferramentas/novo-cliente/modelos.mjs";
 import { formatarTelefone, normalizarDominio, normalizarEmail, normalizarWhatsapp } from "../ferramentas/novo-cliente/entrada.mjs";
 import { dirname, join } from "../ferramentas/novo-cliente/caminhos.mjs";
 import { criarZip } from "./zip.mjs";
+import { aplicarCores, aplicarTextos, contraste, lerCores, limparConteudo, marcarEditaveis } from "./edicao.mjs";
 
 /** @typedef {import("../ferramentas/novo-cliente/montar.mjs").DadosCliente} DadosCliente */
 /** @typedef {import("../ferramentas/novo-cliente/montar.mjs").SiteMontado} SiteMontado */
@@ -26,6 +27,11 @@ const vazia = /** @type {HTMLElement} */ (document.getElementById("previa-vazia"
 const moldura = /** @type {HTMLElement} */ (document.getElementById("previa-moldura"));
 const abas = /** @type {HTMLElement} */ (document.getElementById("previa-paginas"));
 const escala = /** @type {HTMLElement} */ (document.getElementById("previa-escala"));
+const botaoEditar = /** @type {HTMLButtonElement} */ (document.getElementById("botao-editar"));
+const botaoApresentar = /** @type {HTMLButtonElement} */ (document.getElementById("botao-apresentar"));
+const listaCores = /** @type {HTMLElement} */ (document.getElementById("cores"));
+const avisoContraste = /** @type {HTMLElement} */ (document.getElementById("contraste"));
+const botaoRestaurarCores = /** @type {HTMLButtonElement} */ (document.getElementById("botao-restaurar-cores"));
 
 /** Largura do "computador" simulado: acima de 1024px aparece o menu no topo dos sites completos. */
 const LARGURA_COMPUTADOR = 1280;
@@ -165,34 +171,47 @@ function restaurar() {
   } catch { /* nada salvo */ }
 }
 
-// ---------- Prévia ----------
+// ---------- Estado da prévia ----------
 
-/** @type {string[]} */
-let urlsDaPrevia = [];
-/** @type {Record<string, string>} */
-let paginasDaPrevia = {};
-/** @type {SiteMontado | null} */
-let ultimoSite = null;
+/**
+ * @typedef {{
+ *   site: SiteMontado,
+ *   dados: DadosCliente,
+ *   fontes: Record<string, string>,
+ *   coresOriginais: { nome: string, valor: string }[],
+ *   cores: Map<string, string>,
+ *   editado: boolean,
+ *   pagina: string,
+ * }} Estado
+ */
+/** @type {Estado | null} */
+let estado = null;
+let modoEdicao = false;
+/** @type {Map<string, string>} caminho do arquivo no site do cliente → endereço blob: da prévia */
+let urlsDosArquivos = new Map();
 
 const TIPOS = /** @type {Record<string, string>} */ ({
   css: "text/css", js: "text/javascript", woff2: "font/woff2", woff: "font/woff", ttf: "font/ttf",
   png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", webp: "image/webp", svg: "image/svg+xml", gif: "image/gif", txt: "text/plain",
 });
 
+/** Estilo que só existe na prévia: destaque dos textos editáveis. */
+const ESTILO_DA_PREVIA = `<style id="pv-estilo">
+  body.pv-editando [data-pv] { cursor: text; }
+  body.pv-editando [data-pv]:hover { outline: 2px dashed #00B8D9; outline-offset: 3px; }
+  [data-pv][contenteditable="true"] { outline: 2px solid #00B8D9; outline-offset: 3px; background: rgba(0, 216, 255, 0.10); }
+</style>`;
+
 /**
- * Transforma os arquivos gerados em endereços blob: para a prévia funcionar sem servidor.
+ * Cria endereços blob: para CSS, JS, fontes e imagens, para a prévia funcionar sem servidor.
  * @param {Map<string, string | Uint8Array>} arquivos
  */
-function prepararPrevia(arquivos) {
-  for (const u of urlsDaPrevia) URL.revokeObjectURL(u);
-  urlsDaPrevia = [];
-  /** @type {Map<string, string>} */
-  const urls = new Map();
+function prepararArquivos(arquivos) {
+  for (const u of urlsDosArquivos.values()) URL.revokeObjectURL(u);
+  urlsDosArquivos = new Map();
   const criar = (/** @type {string} */ caminho, /** @type {BlobPart} */ conteudo) => {
     const ext = caminho.split(".").pop() ?? "";
-    const url = URL.createObjectURL(new Blob([conteudo], { type: TIPOS[ext] ?? "application/octet-stream" }));
-    urlsDaPrevia.push(url);
-    urls.set(caminho, url);
+    urlsDosArquivos.set(caminho, URL.createObjectURL(new Blob([conteudo], { type: TIPOS[ext] ?? "application/octet-stream" })));
   };
   // Primeiro fontes, imagens e scripts; depois o CSS, que aponta para as fontes
   for (const [caminho, conteudo] of arquivos) {
@@ -200,54 +219,162 @@ function prepararPrevia(arquivos) {
   }
   for (const [caminho, conteudo] of arquivos) {
     if (!caminho.startsWith("assets/") || !caminho.endsWith(".css")) continue;
-    const css = String(conteudo).replace(/url\((["']?)([^"')]+)\1\)/g, (inteiro, aspas, ref) => {
-      const url = urls.get(join(dirname(caminho), ref));
+    criar(caminho, String(conteudo).replace(/url\((["']?)([^"')]+)\1\)/g, (inteiro, aspas, ref) => {
+      const url = urlsDosArquivos.get(join(dirname(caminho), ref));
       return url ? `url(${aspas}${url}${aspas})` : inteiro;
-    });
-    criar(caminho, css);
+    }));
   }
-  paginasDaPrevia = {};
-  for (const [caminho, conteudo] of arquivos) {
-    if (!caminho.endsWith(".html")) continue;
-    paginasDaPrevia[caminho] = String(conteudo).replace(/(href|src)="(assets\/[^"#?]+)"/g, (inteiro, attr, ref) => {
-      const url = urls.get(ref);
+}
+
+/** HTML de uma página para a prévia: textos marcados para edição e arquivos via blob:. @param {string} pagina */
+function htmlDaPrevia(pagina) {
+  if (!estado) return "";
+  return marcarEditaveis(estado.fontes[pagina]).html
+    .replace(/(href|src)="(assets\/[^"#?]+)"/g, (inteiro, attr, ref) => {
+      const url = urlsDosArquivos.get(ref);
       return url ? `${attr}="${url}"` : inteiro;
-    });
-  }
+    })
+    .replace("</head>", `${ESTILO_DA_PREVIA}\n</head>`);
 }
 
 /** @param {string} pagina @param {string} [ancora] */
 function mostrarPagina(pagina, ancora) {
-  const html = paginasDaPrevia[pagina];
-  if (!html) return;
+  if (!estado || !(pagina in estado.fontes)) return;
+  estado.pagina = pagina;
   iframe.hidden = false;
   vazia.hidden = true;
   ajustarEscala();
   iframe.onload = () => {
     const doc = iframe.contentDocument;
     if (!doc) return;
-    // Links entre páginas do site do cliente trocam a página da prévia
+    doc.body.classList.toggle("pv-editando", modoEdicao);
+    pintarCores(doc);
     doc.addEventListener("click", (e) => {
-      const a = /** @type {HTMLElement} */ (e.target).closest?.("a[href]");
+      const alvo = /** @type {HTMLElement} */ (e.target);
+      const editavel = /** @type {HTMLElement | null} */ (alvo.closest?.("[data-pv]"));
+      if (modoEdicao && editavel) {
+        e.preventDefault();
+        e.stopPropagation();
+        editar(editavel, pagina);
+        return;
+      }
+      const a = alvo.closest?.("a[href]");
       if (!a) return;
       const [destino, hash] = (a.getAttribute("href") ?? "").split("#");
-      if (destino && paginasDaPrevia[destino]) {
+      if (destino && estado && destino in estado.fontes) {
+        // Links entre páginas do site do cliente trocam a página da prévia
         e.preventDefault();
         mostrarPagina(destino, hash);
+      } else if (modoEdicao && destino) {
+        e.preventDefault(); // editando: não abre WhatsApp nem links externos
+        e.stopPropagation();
       }
-    });
+    }, true);
     if (ancora) doc.getElementById(ancora)?.scrollIntoView();
   };
-  iframe.srcdoc = html;
+  iframe.srcdoc = htmlDaPrevia(pagina);
   for (const b of abas.querySelectorAll("button")) b.setAttribute("aria-selected", String(b.dataset.pagina === pagina));
 }
 
 /**
- * Uma aba por página, com o nome que aparece no menu do próprio site.
- * @param {string[]} paginas
+ * Edita um texto da prévia no próprio lugar. Enter salva, Esc desfaz.
+ * @param {HTMLElement} el
+ * @param {string} pagina
  */
+function editar(el, pagina) {
+  if (el.isContentEditable) return;
+  const antes = el.innerHTML;
+  let desfazer = false;
+  el.contentEditable = "true";
+  el.focus();
+  const teclas = (/** @type {KeyboardEvent} */ e) => {
+    if (e.key === "Enter") { e.preventDefault(); el.blur(); }
+    if (e.key === "Escape") { desfazer = true; el.blur(); }
+  };
+  el.addEventListener("keydown", teclas);
+  el.addEventListener("blur", () => {
+    el.removeEventListener("keydown", teclas);
+    el.contentEditable = "false";
+    if (desfazer || el.innerHTML === antes || !estado) {
+      el.innerHTML = antes;
+      return;
+    }
+    const conteudo = limparConteudo(el);
+    el.innerHTML = conteudo;
+    estado.fontes[pagina] = aplicarTextos(estado.fontes[pagina], new Map([[Number(el.dataset.pv), conteudo]]));
+    estado.editado = true;
+    atualizarPendencias();
+    status.textContent = "Texto alterado. Ele vai assim no .zip.";
+  }, { once: true });
+}
+
+// ---------- Cores ----------
+
+/** Aplica as cores escolhidas na página da prévia. @param {Document} doc */
+function pintarCores(doc) {
+  if (!estado) return;
+  for (const [nome, valor] of estado.cores) doc.documentElement.style.setProperty(nome, valor);
+}
+
+/** @param {string} nome */
+function corAtual(nome) {
+  if (!estado) return undefined;
+  return estado.cores.get(nome) ?? estado.coresOriginais.find((c) => c.nome === nome)?.valor;
+}
+
+function mostrarContraste() {
+  const texto = ["--texto", "--tinta"].map(corAtual).find(Boolean);
+  const fundo = corAtual("--fundo");
+  if (!texto || !fundo) {
+    avisoContraste.textContent = "";
+    return;
+  }
+  const valor = contraste(texto, fundo);
+  const numero = valor.toFixed(1).replace(".", ",");
+  avisoContraste.textContent = valor >= 4.5
+    ? `Contraste entre texto e fundo: ${numero}:1 (bom).`
+    : `Atenção: contraste entre texto e fundo de ${numero}:1. Para ler bem, o mínimo é 4,5:1.`;
+  avisoContraste.classList.toggle("ruim", valor < 4.5);
+}
+
+function criarPaleta() {
+  if (!estado) return;
+  listaCores.replaceChildren(...estado.coresOriginais.map(({ nome, valor }) => {
+    const rotulo = document.createElement("label");
+    rotulo.className = "cor";
+    const entrada = document.createElement("input");
+    entrada.type = "color";
+    entrada.value = valor.toLowerCase();
+    entrada.dataset.cor = nome;
+    entrada.addEventListener("input", () => {
+      if (!estado) return;
+      estado.cores.set(nome, entrada.value.toUpperCase());
+      estado.editado = true;
+      const doc = iframe.contentDocument;
+      if (doc) doc.documentElement.style.setProperty(nome, entrada.value);
+      mostrarContraste();
+    });
+    const nomeVisivel = document.createElement("span");
+    nomeVisivel.textContent = nome.replace(/^--/, "").replace(/-/g, " ");
+    rotulo.append(entrada, nomeVisivel);
+    return rotulo;
+  }));
+  mostrarContraste();
+}
+
+botaoRestaurarCores.addEventListener("click", () => {
+  if (!estado) return;
+  const doc = iframe.contentDocument;
+  for (const nome of estado.cores.keys()) doc?.documentElement.style.removeProperty(nome);
+  estado.cores.clear();
+  criarPaleta();
+});
+
+// ---------- Resultado ----------
+
+/** @param {string[]} paginas */
 function criarAbas(paginas) {
-  const inicio = new DOMParser().parseFromString(paginasDaPrevia["index.html"] ?? "", "text/html");
+  const inicio = new DOMParser().parseFromString(estado?.fontes["index.html"] ?? "", "text/html");
   const nomeNoMenu = (/** @type {string} */ p) => inicio.querySelector(`.nav nav a[href="${p}"]`)?.textContent?.trim();
   abas.replaceChildren(...paginas.map((p) => {
     const b = document.createElement("button");
@@ -260,15 +387,12 @@ function criarAbas(paginas) {
   }));
 }
 
-/** @param {SiteMontado} site @param {DadosCliente} dados */
-function mostrarResultado(site, dados) {
-  resultado.hidden = false;
-  const qtd = [...site.arquivos.keys()].filter((c) => c.startsWith("assets/")).length;
-  resumo.textContent =
-    `${site.paginas.length === 1 ? "1 página" : `${site.paginas.length} páginas`} e ${qtd} arquivos · ` +
-    `WhatsApp ${formatarTelefone(dados.whatsapp)} · projeto "${site.slug}" na Cloudflare.`;
-  listaPendencias.replaceChildren(...(site.pendencias.length
-    ? site.pendencias.map((p) => {
+function atualizarPendencias() {
+  if (!estado) return;
+  estado.site.pendencias = procurarPendencias(estado.fontes, estado.dados);
+  const pendencias = estado.site.pendencias;
+  listaPendencias.replaceChildren(...(pendencias.length
+    ? pendencias.map((p) => {
       const li = document.createElement("li");
       const onde = document.createElement("code");
       onde.textContent = `${p.arquivo}:${p.linha}`;
@@ -278,6 +402,28 @@ function mostrarResultado(site, dados) {
       return li;
     })
     : [Object.assign(document.createElement("li"), { textContent: "Nada encontrado." })]));
+}
+
+function mostrarResultado() {
+  if (!estado) return;
+  resultado.hidden = false;
+  const qtd = [...estado.site.arquivos.keys()].filter((c) => c.startsWith("assets/")).length;
+  resumo.textContent =
+    `${estado.site.paginas.length === 1 ? "1 página" : `${estado.site.paginas.length} páginas`} e ${qtd} arquivos · ` +
+    `WhatsApp ${formatarTelefone(estado.dados.whatsapp)} · projeto "${estado.site.slug}" na Cloudflare.`;
+  atualizarPendencias();
+  criarPaleta();
+}
+
+/** O site com tudo o que foi editado na prévia: textos, cores e o LEIA-ME atualizado. */
+function arquivosFinais() {
+  if (!estado) return new Map();
+  const arquivos = new Map(estado.site.arquivos);
+  for (const [pagina, html] of Object.entries(estado.fontes)) arquivos.set(pagina, html);
+  const css = arquivos.get("assets/css/style.css");
+  if (estado.cores.size && typeof css === "string") arquivos.set("assets/css/style.css", aplicarCores(css, estado.cores));
+  arquivos.set("LEIA-ME.md", montarLeiaMe(estado.dados, { slug: estado.site.slug, paginas: estado.site.paginas, pendencias: estado.site.pendencias }));
+  return arquivos;
 }
 
 // ---------- Ações ----------
@@ -295,16 +441,26 @@ form.addEventListener("submit", async (e) => {
     status.textContent = "Confira os campos marcados.";
     return;
   }
+  if (estado?.editado && !confirm("Gerar de novo apaga os textos e as cores alterados na prévia. Continuar?")) return;
   botaoGerar.disabled = true;
   status.textContent = "Gerando...";
   try {
     const site = await montarSite(dados, leitor);
-    ultimoSite = site;
-    prepararPrevia(site.arquivos);
+    const css = site.arquivos.get("assets/css/style.css");
+    estado = {
+      site,
+      dados,
+      fontes: Object.fromEntries(site.paginas.map((p) => [p, String(site.arquivos.get(p))])),
+      coresOriginais: lerCores(typeof css === "string" ? css : ""),
+      cores: new Map(),
+      editado: false,
+      pagina: "index.html",
+    };
+    prepararArquivos(site.arquivos);
     criarAbas(site.paginas);
     mostrarPagina("index.html");
-    mostrarResultado(site, dados);
-    status.textContent = "Prévia pronta. Confira as páginas e baixe o .zip.";
+    mostrarResultado();
+    status.textContent = "Prévia pronta. Clique em \"Editar textos\" para mudar o que quiser direto na página.";
   } catch (erro) {
     status.textContent = "Não deu certo: " + /** @type {Error} */ (erro).message;
   } finally {
@@ -313,24 +469,38 @@ form.addEventListener("submit", async (e) => {
 });
 
 botaoBaixar.addEventListener("click", () => {
-  if (!ultimoSite) return;
-  const zip = criarZip(ultimoSite.arquivos, { pasta: ultimoSite.slug });
+  if (!estado) return;
+  const zip = criarZip(arquivosFinais(), { pasta: estado.site.slug });
   const url = URL.createObjectURL(new Blob([/** @type {BlobPart} */ (zip)], { type: "application/zip" }));
   const a = document.createElement("a");
   a.href = url;
-  a.download = `${ultimoSite.slug}.zip`;
+  a.download = `${estado.site.slug}.zip`;
   document.body.append(a);
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 10_000);
-  status.textContent = `Baixado: ${ultimoSite.slug}.zip`;
+  status.textContent = `Baixado: ${estado.site.slug}.zip`;
 });
 
-for (const b of /** @type {NodeListOf<HTMLButtonElement>} */ (document.querySelectorAll(".previa-tamanho button"))) {
+botaoEditar.addEventListener("click", () => {
+  modoEdicao = !modoEdicao;
+  botaoEditar.setAttribute("aria-pressed", String(modoEdicao));
+  iframe.contentDocument?.body.classList.toggle("pv-editando", modoEdicao);
+  status.textContent = modoEdicao
+    ? "Clique num texto da prévia para editar. Enter salva, Esc desfaz."
+    : "Edição desligada: os botões e links da prévia voltam a funcionar.";
+});
+
+botaoApresentar.addEventListener("click", () => {
+  if (document.fullscreenElement) document.exitFullscreen();
+  else moldura.requestFullscreen?.();
+});
+
+for (const b of /** @type {NodeListOf<HTMLButtonElement>} */ (document.querySelectorAll(".previa-tamanho button[data-tamanho]"))) {
   b.addEventListener("click", () => {
     moldura.dataset.tamanho = b.dataset.tamanho;
     ajustarEscala();
-    for (const outro of document.querySelectorAll(".previa-tamanho button")) outro.setAttribute("aria-pressed", String(outro === b));
+    for (const outro of document.querySelectorAll(".previa-tamanho button[data-tamanho]")) outro.setAttribute("aria-pressed", String(outro === b));
   });
 }
 
