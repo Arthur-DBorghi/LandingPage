@@ -70,6 +70,8 @@ Transformar uma vitrine em site de cliente era um passo a passo manual de seis e
 - **Troca o negócio fictício pelo do cliente.** Os artigos mudam conforme o gênero do nome novo ("da Navalha Fina" → "do Studio Corte"), então o texto continua natural.
 - **Lista tudo o que ainda é fictício,** com arquivo e linha, no roteiro do site novo.
 
+O mesmo núcleo roda em dois lugares. Um painel web privado no próprio site tem formulário, prévia em tamanho de celular e de computador e download em .zip, então criar o site de um cliente não exige terminal. A versão de linha de comando continua lá, para automatizar. O núcleo não usa nenhuma API do Node: cada porta de entrada entrega a ele uma função que lê arquivos (`fetch` no navegador, `fs` no Node), e as duas geram sites idênticos byte a byte. O gerador de .zip do painel tem umas 100 linhas de JavaScript, sem dependências.
+
 As edições no HTML são cirúrgicas: o parse5 informa a posição exata de cada tag e atributo, e as mudanças entram nessas posições. Assim o cliente recebe o mesmo HTML formatado à mão, e não a saída de um serializador. Os tipos são conferidos com JSDoc e `tsc`, ainda sem etapa de build. A cada push, o CI converte as seis vitrines e confere três coisas: nenhum resto de demonstração ficou para trás, todo arquivo citado existe e todo botão abre a conversa certa no WhatsApp, com a mesma mensagem.
 
 ## Resultados
@@ -80,7 +82,7 @@ As edições no HTML são cirúrgicas: o parse5 informa a posição exata de cad
 | Deslocamento de layout (CLS) | 0 em todas as páginas auditadas |
 | Maior elemento visível (LCP, celular simulado) | 0,9–1,7 s |
 | Peso das páginas | 81–327 KB (a maior é a inicial, com as telas de celular) |
-| Verificações automáticas | 156 verificações no navegador a cada push (cerca de 3 minutos no CI), 24 execuções do Lighthouse e 28 testes da ferramenta de clientes |
+| Verificações automáticas | 159 verificações no navegador a cada push (cerca de 3 minutos no CI), 24 execuções do Lighthouse e 34 testes da ferramenta de clientes e do painel |
 | Custo de hospedagem | Zero |
 
 Em novembro de 2026 o negócio ainda não tem clientes pagantes. Este site e as vitrines são a primeira coisa que um possível cliente vê.
@@ -116,6 +118,7 @@ modelos/<negócio>/                                     vitrine em landing page
 modelos/<negócio>-completo/                            vitrine em site de 5 páginas
 modelos/comum/                                         peças comuns: demonstração, animações e várias páginas
 testes/                                                testes automáticos (não são publicados)
-ferramentas/                                           ferramenta "novo cliente" (não é publicada)
+ferramentas/                                           ferramenta "novo cliente": o núcleo é publicado para o painel; terminal e testes não
+painel/                                                painel privado para criar sites de clientes
 docs/img/                                              imagens deste README (não são publicadas)
 ```

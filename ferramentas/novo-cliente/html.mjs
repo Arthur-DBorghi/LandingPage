@@ -12,8 +12,9 @@ import { escaparHtml } from "./texto.mjs";
  * @typedef {{ name: string, value: string }} Atributo
  * @typedef {{ startOffset: number, endOffset: number }} Posicao
  * @typedef {Posicao & { startTag?: Posicao, attrs?: Record<string, Posicao> }} PosicaoElemento
- * @typedef {{ nodeName: string, tagName?: string, attrs?: Atributo[], data?: string,
- *   childNodes?: No[], content?: No, sourceCodeLocation?: PosicaoElemento | null }} No
+ * @typedef {{ startOffset: number, endOffset: number, startTag?: Posicao, endTag?: Posicao, attrs?: Record<string, Posicao> }} PosicaoCompleta
+ * @typedef {{ nodeName: string, tagName?: string, attrs?: Atributo[], data?: string, value?: string,
+ *   childNodes?: No[], content?: No, parentNode?: No | null, sourceCodeLocation?: PosicaoCompleta | null }} No
  */
 
 /**

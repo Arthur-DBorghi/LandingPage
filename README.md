@@ -70,6 +70,8 @@ Turning a demo into a client's site used to be a six-step manual checklist, and 
 - **Swaps the fictional business for the client's.** Portuguese articles change with the new name's gender ("da Navalha Fina" → "do Studio Corte"), so the copy still reads naturally.
 - **Lists everything still fictional,** with file and line, in the new site's to-do file.
 
+The same core runs in two places. A private web panel on the site has a form, a live preview at phone and desktop sizes and a .zip download, so creating a client site needs no terminal. The CLI is still there for scripting. The core never touches Node APIs: each entry point hands it a file reader (`fetch` in the browser, `fs` in Node), and both produce byte-identical sites. The panel's .zip writer is about 100 lines of dependency-free JavaScript.
+
 HTML edits are surgical: parse5 reports the exact position of every tag and attribute, and changes are applied at those offsets, so the client gets the same hand-formatted HTML instead of serializer output. Types are checked with JSDoc and `tsc`, still without a build step. On every push, CI converts all six demos and checks that no demo leftovers remain, every referenced file exists and every button opens the right WhatsApp chat with the same message.
 
 ## Results
@@ -80,7 +82,7 @@ HTML edits are surgical: parse5 reports the exact position of every tag and attr
 | Cumulative Layout Shift | 0 on all audited pages |
 | Largest Contentful Paint (simulated mobile) | 0.9–1.7 s |
 | Page weight | 81–327 KB (the largest is the home page, with the phone mockups) |
-| Automated checks | 156 browser checks per push (about 3 minutes in CI), 24 Lighthouse runs and 28 tests for the client tool |
+| Automated checks | 159 browser checks per push (about 3 minutes in CI), 24 Lighthouse runs and 34 tests for the client tool and panel |
 | Hosting cost | Zero |
 
 As of November 2026 the business has no paying clients yet. This site and its demos are the first thing a prospect sees.
@@ -116,6 +118,7 @@ modelos/<business>/                                    demo as a landing page
 modelos/<business>-completo/                           demo as a 5-page site
 modelos/comum/                                         shared demo, animation and multi-page pieces
 testes/                                                automated tests (not deployed)
-ferramentas/                                           the "new client" CLI (not deployed)
+ferramentas/                                           the "new client" tool: shared core is deployed for the panel, CLI and tests are not
+painel/                                                private panel for creating client sites
 docs/img/                                              images for this README (not deployed)
 ```

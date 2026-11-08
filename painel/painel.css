@@ -1,0 +1,132 @@
+/* ==========================================================
+   Painel privado (novo cliente). Usa as cores e os botões do
+   site principal (assets/css/style.css) e só acrescenta o layout.
+   ========================================================== */
+
+.painel { min-height: 100vh; }
+
+.painel-topo {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 14px clamp(16px, 3vw, 32px);
+  border-bottom: 1px solid var(--linha);
+  background: var(--fundo-alt);
+}
+.painel-titulo { margin: 0; color: var(--texto-suave); font-size: 0.95rem; }
+
+/* Computador: cada coluna rola sozinha, a prévia fica sempre à vista */
+.painel-grade {
+  display: grid;
+  grid-template-columns: minmax(320px, 400px) 1fr;
+  gap: 0;
+  height: calc(100vh - 67px);
+}
+
+/* ---------- Formulário ---------- */
+.painel-form {
+  padding: 24px clamp(16px, 3vw, 32px) 40px;
+  border-right: 1px solid var(--linha);
+  overflow-y: auto;
+}
+.painel-form h1 { font-size: 1.4rem; margin-bottom: 18px; }
+.painel-form h2 { font-size: 1.05rem; margin: 22px 0 10px; }
+.painel-form .formulario { padding: 0; border: 0; background: none; }
+.painel-form .formulario label { margin-bottom: 6px; }
+
+.escolha { margin: 0 0 18px; padding: 0; border: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.escolha legend { width: 100%; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; }
+.formulario .escolha label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.formulario .escolha label:has(input:checked) { border-color: var(--ciano); background: rgba(0, 216, 255, 0.08); }
+.formulario .escolha input { width: auto; margin: 0; accent-color: var(--ciano); }
+
+.campo { margin-bottom: 16px; }
+.campo[hidden] { display: none; }
+.com-artigo { display: grid; grid-template-columns: 64px 1fr; gap: 8px; }
+.formulario .com-artigo select,
+.formulario .com-artigo input { margin-top: 0; }
+.dica { margin: 6px 0 0; color: var(--texto-suave); font-size: 0.85rem; }
+.erro { margin: 6px 0 0; color: #FF8FC8; font-size: 0.88rem; font-weight: 600; }
+.erro:empty { display: none; }
+.formulario [aria-invalid="true"] { border-color: #FF8FC8; }
+
+.resultado { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--linha); }
+.resumo { margin: 0 0 14px; color: var(--texto); }
+.pendencias { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.pendencias li { padding: 8px 10px; border-radius: 10px; background: var(--superficie); font-size: 0.88rem; color: var(--texto-suave); }
+.pendencias li strong { color: var(--texto); font-weight: 600; }
+.pendencias code, .dica code { color: var(--ciano); }
+.status { margin: 14px 0 0; color: var(--texto-suave); font-size: 0.9rem; }
+
+/* Cores da marca */
+.cores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+.formulario .cor, .cor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.cor input[type="color"] { width: 34px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: none; cursor: pointer; }
+.contraste.ruim { color: #FF8FC8; font-weight: 600; }
+
+/* ---------- Prévia ---------- */
+.painel-previa { display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden; background: #06060C; }
+.previa-barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--linha);
+}
+.previa-barra h2 { margin: 0; font-size: 1rem; }
+.previa-paginas { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+.previa-paginas button,
+.previa-tamanho button {
+  padding: 6px 12px;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.previa-paginas button[aria-selected="true"],
+.previa-tamanho button[aria-pressed="true"] { border-color: var(--ciano); color: var(--texto); background: rgba(0, 216, 255, 0.08); }
+.previa-paginas button:focus-visible,
+.previa-tamanho button:focus-visible { outline: 2px solid var(--ciano); outline-offset: 2px; }
+.previa-tamanho { display: flex; flex-wrap: wrap; gap: 6px; }
+#botao-editar[aria-pressed="true"] { border-color: #FFC93C; color: #FFE08A; background: rgba(255, 201, 60, 0.10); }
+.previa-moldura:fullscreen { padding: 0; align-items: center; background: #000; }
+
+.previa-moldura { flex: 1; display: flex; justify-content: center; align-items: flex-start; padding: 18px; min-height: 0; }
+.previa-escala { position: relative; overflow: hidden; border: 1px solid var(--linha); border-radius: 12px; background: #fff; }
+.previa-escala:has(iframe[hidden]) { display: none; }
+.previa-escala iframe { position: absolute; top: 0; left: 0; border: 0; transform-origin: top left; background: #fff; }
+.previa-vazia { align-self: center; color: var(--texto-suave); }
+
+@media (max-width: 900px) {
+  .painel-grade { grid-template-columns: 1fr; height: auto; }
+  .painel-form { overflow: visible; }
+  .previa-moldura { min-height: 700px; }
+  .painel-form { border-right: 0; border-bottom: 1px solid var(--linha); }
+  .painel-titulo { display: none; }
+}

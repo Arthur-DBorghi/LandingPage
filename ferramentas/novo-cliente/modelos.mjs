@@ -5,6 +5,7 @@
  * @typedef {"nome" | "whatsapp" | "cidade" | "bairro" | "endereco" | "profissional" | "email" | "dominio"} Campo
  * @typedef {{
  *   rotulo: string,
+ *   paginas: { lp: string[], completo: string[] },
  *   perguntas: Campo[],
  *   nome: { curto: string, completo: string },
  *   bairro?: string,
@@ -22,6 +23,7 @@
 export const MODELOS = {
   barbearia: {
     rotulo: "Barbearia e estética",
+    paginas: { lp: ["index.html"], completo: ["index.html", "servicos.html", "equipe.html", "galeria.html", "contato.html"] },
     perguntas: ["nome", "whatsapp", "cidade", "bairro", "endereco", "dominio"],
     nome: { curto: "Navalha Fina", completo: "Navalha Fina Barbearia" },
     bairro: "Centro",
@@ -42,6 +44,7 @@ export const MODELOS = {
   },
   consultoria: {
     rotulo: "Consultoria e serviços",
+    paginas: { lp: ["index.html"], completo: ["index.html", "servicos.html", "como-funciona.html", "sobre.html", "contato.html"] },
     perguntas: ["nome", "profissional", "whatsapp", "email", "dominio"],
     nome: { curto: "Clara Andrade Contabilidade", completo: "Clara Andrade Contabilidade" },
     profissional: { completo: "Clara Andrade", primeiro: "Clara", iniciais: "CA" },
@@ -61,6 +64,7 @@ export const MODELOS = {
   },
   petshop: {
     rotulo: "Pet shop e serviços com agenda",
+    paginas: { lp: ["index.html"], completo: ["index.html", "banho-e-tosa.html", "clube-do-banho.html", "cuidados.html", "contato.html"] },
     perguntas: ["nome", "whatsapp", "cidade", "bairro", "endereco", "dominio"],
     nome: { curto: "Focinho Feliz", completo: "Focinho Feliz Pet Shop" },
     bairro: "Vila Nova",

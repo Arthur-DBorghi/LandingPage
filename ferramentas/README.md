@@ -4,7 +4,16 @@ Ferramentas de apoio às vendas. Esta pasta não é publicada na Cloudflare (est
 
 ## novo-cliente
 
-Transforma uma vitrine (`modelos/...`) num site de cliente, numa pasta nova. Roda **uma vez**, no começo de cada cliente; depois disso o site é HTML normal, editado à mão.
+Transforma uma vitrine (`modelos/...`) num site de cliente. Roda **uma vez**, no começo de cada cliente; depois disso o site é HTML normal, editado à mão.
+
+Tem duas portas de entrada para o mesmo núcleo (`novo-cliente/montar.mjs`):
+
+- **Painel no navegador:** `/painel/` no próprio site. Formulário, prévia das páginas (celular e computador) e download do site em .zip. O painel não aparece em nenhum link do site e tem `noindex`; quando houver domínio próprio, fica protegido com login pelo Cloudflare Access.
+- **Terminal:** o comando abaixo, que grava o site direto numa pasta.
+
+O núcleo não usa nada do Node: lê os arquivos por uma função que cada porta fornece (o painel busca no próprio site; o terminal lê do disco) e devolve o site em memória. Por isso painel e terminal geram exatamente os mesmos arquivos.
+
+### Pelo terminal
 
 ```bash
 cd ferramentas
@@ -23,7 +32,7 @@ node novo-cliente/cli.mjs --modelo barbearia --versao completo \
 
 `node novo-cliente/cli.mjs --ajuda` lista todas as opções. O site sai em `../clientes/<nome-do-negócio>` (fora deste repositório), ou onde `--saida` mandar.
 
-### O que ela faz
+### O que ela faz (nas duas portas)
 
 1. **Copia só o que o cliente precisa:** as páginas da vitrine e os arquivos que elas usam, organizados em `assets/css`, `assets/js`, `assets/fonts`. Os caminhos são reescritos no HTML e no CSS.
 2. **Tira a camada de demonstração:** faixa "negócio fictício", janela de WhatsApp de mentira, `noindex`, favicon do Arthur e atributos de demonstração.
@@ -46,20 +55,30 @@ node novo-cliente/cli.mjs --modelo barbearia --versao completo \
 
 | Arquivo | Papel |
 |---|---|
+| `novo-cliente/montar.mjs` | Núcleo: monta o site em memória (páginas, arquivos, CSS, LEIA-ME); roda no Node e no navegador |
+| `novo-cliente/gerar.mjs` | Porta do terminal: lê as vitrines do disco e grava a pasta do cliente |
 | `novo-cliente/cli.mjs` | Perguntas e opções de linha de comando |
-| `novo-cliente/gerar.mjs` | Monta o site: páginas, cópia dos arquivos, CSS, LEIA-ME |
+| `novo-cliente/caminhos.mjs` | Caminhos de arquivo sem depender do Node |
+| `novo-cliente/arquivos.mjs` | Arquivos criados para o cliente: `whats.js`, `wrangler.jsonc`, `.assetsignore` |
+| `../painel/` | Porta do navegador: `index.html`, `painel.js`, `zip.mjs` (gerador de .zip próprio) e `vendor/` (cópia do parse5) |
 | `novo-cliente/html.mjs` | Leitura com posições e edições no HTML |
 | `novo-cliente/texto.mjs` | Troca de nomes com artigos e contrações |
 | `novo-cliente/entrada.mjs` | Validação do que a pessoa digita |
 | `novo-cliente/modelos.mjs` | O que é fictício em cada vitrine e o que perguntar |
-| `novo-cliente/arquivos/whats.js` | Modelo do `whats.js` do cliente |
 
 ### Testes
 
 ```bash
-npm test        # node:test: unitários + as 6 vitrines convertidas de verdade
-npm run tipos   # TypeScript conferindo os comentários JSDoc (sem etapa de build)
+npm test        # node:test: unitários, as 6 vitrines convertidas de verdade e o .zip do painel
+npm run tipos   # TypeScript conferindo os comentários JSDoc (sem etapa de build), inclusive do painel
+npm run vendor  # depois de atualizar o parse5: copia a versão nova para painel/vendor
 ```
+
+O painel também tem teste no navegador (`testes/specs/painel.spec.ts`):
+- validação dos campos;
+- prévia, com navegação pelas páginas;
+- download do .zip;
+- acessibilidade.
 
 O teste de integração gera um cliente a partir de cada uma das 6 vitrines (3 modelos × landing page e site completo). Em cada site gerado, ele confere que:
 - nenhum resto de demonstração ficou para trás;

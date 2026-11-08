@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de vendas · Novo cliente | Arthur Borghi</title>
+  <meta name="description" content="Painel privado: transforma uma vitrine em site de cliente." />
+  <!-- Página de uso interno: fora do Google -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="painel.css" />
+  <!-- O núcleo da ferramenta usa o parse5; aqui ele vem de uma cópia local (npm run vendor em ferramentas/) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "parse5": "./vendor/parse5/index.js",
+        "entities/decode": "./vendor/entities/decode.js",
+        "entities/escape": "./vendor/entities/escape.js"
+      }
+    }
+  </script>
+  <script type="module" src="painel.js"></script>
+</head>
+<body class="painel">
+
+  <header class="painel-topo">
+    <a href="../index.html" class="marca" aria-label="Painel do Arthur Borghi: ir para a página inicial">
+      <img src="../assets/img/logo-ab.png" alt="" width="49" height="38" />
+      <span>Painel</span>
+    </a>
+    <p class="painel-titulo">Monte o site do cliente na frente dele: dados, textos e cores</p>
+  </header>
+
+  <main class="painel-grade">
+    <section class="painel-form" aria-labelledby="titulo-dados">
+      <h1 id="titulo-dados">Dados do cliente</h1>
+
+      <form id="form-cliente" class="formulario" novalidate>
+        <fieldset class="escolha">
+          <legend>Modelo</legend>
+          <label><input type="radio" name="modelo" value="barbearia" checked /> Barbearia</label>
+          <label><input type="radio" name="modelo" value="consultoria" /> Consultoria</label>
+          <label><input type="radio" name="modelo" value="petshop" /> Pet shop</label>
+        </fieldset>
+
+        <fieldset class="escolha">
+          <legend>Versão</legend>
+          <label><input type="radio" name="versao" value="lp" checked /> Landing page</label>
+          <label><input type="radio" name="versao" value="completo" /> Site completo (5 páginas)</label>
+        </fieldset>
+
+        <div class="campo" data-campo="nome">
+          <label for="nome">Nome do negócio <span class="obrigatorio">*</span></label>
+          <div class="com-artigo">
+            <select name="nome-artigo" aria-label="Artigo do nome do negócio">
+              <option value="a">a</option>
+              <option value="o">o</option>
+            </select>
+            <input id="nome" name="nome" placeholder="Barbearia do Zé" autocomplete="off" aria-describedby="erro-nome dica-nome" />
+          </div>
+          <p class="dica" id="dica-nome">O artigo acerta o texto: "da Barbearia do Zé", "do Studio Corte".</p>
+          <p class="erro" id="erro-nome" aria-live="polite"></p>
+        </div>
+
+        <div class="campo" data-campo="profissional">
+          <label for="profissional">Profissional, como aparece no site <span class="obrigatorio">*</span></label>
+          <div class="com-artigo">
+            <select name="profissional-artigo" aria-label="Artigo do nome do profissional">
+              <option value="a">a</option>
+              <option value="o">o</option>
+            </select>
+            <input id="profissional" name="profissional" placeholder="Paula Lima" autocomplete="off" aria-describedby="erro-profissional" />
+          </div>
+          <p class="erro" id="erro-profissional" aria-live="polite"></p>
+        </div>
+
+        <div class="campo" data-campo="whatsapp">
+          <label for="whatsapp">WhatsApp com DDD <span class="obrigatorio">*</span></label>
+          <input id="whatsapp" name="whatsapp" inputmode="tel" placeholder="(11) 98765-4321" autocomplete="off" aria-describedby="erro-whatsapp" />
+          <p class="erro" id="erro-whatsapp" aria-live="polite"></p>
+        </div>
+
+        <div class="campo" data-campo="email">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" placeholder="paula@exemplo.com.br" autocomplete="off" aria-describedby="erro-email" />
+          <p class="erro" id="erro-email" aria-live="polite"></p>
+        </div>
+
+        <div class="campo" data-campo="cidade">
+          <label for="cidade">Cidade</label>
+          <input id="cidade" name="cidade" placeholder="São Paulo" autocomplete="off" />
+        </div>
+
+        <div class="campo" data-campo="bairro">
+          <label for="bairro">Bairro <span class="obrigatorio">*</span></label>
+          <div class="com-artigo">
+            <select name="bairro-artigo" aria-label="Artigo do bairro">
+              <option value="a">a</option>
+              <option value="o">o</option>
+            </select>
+            <input id="bairro" name="bairro" placeholder="Mooca" autocomplete="off" aria-describedby="erro-bairro dica-bairro" />
+          </div>
+          <p class="dica" id="dica-bairro">"na Mooca", "no Centro".</p>
+          <p class="erro" id="erro-bairro" aria-live="polite"></p>
+        </div>
+
+        <div class="campo" data-campo="endereco">
+          <label for="endereco">Endereço (rua e número)</label>
+          <input id="endereco" name="endereco" placeholder="Rua Tal, 45" autocomplete="off" />
+        </div>
+
+        <div class="campo" data-campo="dominio">
+          <label for="dominio">Domínio</label>
+          <input id="dominio" name="dominio" placeholder="barbeariadoze.com.br" autocomplete="off" aria-describedby="erro-dominio" />
+          <p class="erro" id="erro-dominio" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" class="botao botao-largo" id="botao-gerar">Gerar prévia</button>
+      </form>
+
+      <div id="resultado" class="resultado" hidden>
+        <p id="resumo" class="resumo"></p>
+        <button type="button" class="botao botao-largo" id="botao-baixar">Baixar site (.zip)</button>
+        <h2>Cores da marca</h2>
+        <div id="cores" class="cores"></div>
+        <p id="contraste" class="dica contraste" aria-live="polite"></p>
+        <button type="button" class="botao botao-contorno botao-pequeno" id="botao-restaurar-cores">Voltar às cores do modelo</button>
+        <h2>Ainda fictício ou de exemplo</h2>
+        <ul id="pendencias" class="pendencias"></ul>
+        <p class="dica">A mesma lista, com o roteiro do que revisar e como publicar, vai no <code>LEIA-ME.md</code> dentro do .zip. Os textos e as cores alterados na prévia também vão no .zip.</p>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="painel-previa" aria-labelledby="titulo-previa">
+      <div class="previa-barra">
+        <h2 id="titulo-previa">Prévia</h2>
+        <div class="previa-paginas" id="previa-paginas" role="tablist" aria-label="Páginas do site"></div>
+        <div class="previa-tamanho" role="group" aria-label="Ferramentas da prévia">
+          <button type="button" id="botao-editar" aria-pressed="false">Editar textos</button>
+          <button type="button" data-tamanho="celular" aria-pressed="true">Celular</button>
+          <button type="button" data-tamanho="computador" aria-pressed="false">Computador</button>
+          <button type="button" id="botao-apresentar">Apresentar</button>
+        </div>
+      </div>
+      <div class="previa-moldura" id="previa-moldura" data-tamanho="celular">
+        <p class="previa-vazia" id="previa-vazia">Preencha os dados e clique em "Gerar prévia".</p>
+        <div class="previa-escala" id="previa-escala">
+          <iframe id="previa" title="Prévia do site do cliente" hidden></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
