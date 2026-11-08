@@ -61,6 +61,17 @@ A zero-dependency Node server (`testes/servidor.mjs`) mimics Cloudflare's behavi
 
 ![The 5-page barbershop site on a phone: drawer menu and page change](docs/img/gaveta-celular.gif)
 
+## A new client in one command
+
+Turning a demo into a client's site used to be a six-step manual checklist, and forgetting one step is expensive: leave the `noindex` tag and the client never shows up on Google. [`ferramentas/novo-cliente`](ferramentas/README.md) is a small Node.js CLI that does the mechanical part in seconds:
+
+- **Copies only what the pages use** into a clean `assets/` structure, rewriting paths in both the HTML and the CSS.
+- **Strips the demo layer** and wires every button and form to the client's real WhatsApp number.
+- **Swaps the fictional business for the client's.** Portuguese articles change with the new name's gender ("da Navalha Fina" → "do Studio Corte"), so the copy still reads naturally.
+- **Lists everything still fictional,** with file and line, in the new site's to-do file.
+
+HTML edits are surgical: parse5 reports the exact position of every tag and attribute, and changes are applied at those offsets, so the client gets the same hand-formatted HTML instead of serializer output. Types are checked with JSDoc and `tsc`, still without a build step. On every push, CI converts all six demos and checks that no demo leftovers remain, every referenced file exists and every button opens the right WhatsApp chat with the same message.
+
 ## Results
 
 | | |
@@ -69,14 +80,14 @@ A zero-dependency Node server (`testes/servidor.mjs`) mimics Cloudflare's behavi
 | Cumulative Layout Shift | 0 on all audited pages |
 | Largest Contentful Paint (simulated mobile) | 0.9–1.7 s |
 | Page weight | 81–327 KB (the largest is the home page, with the phone mockups) |
-| Automated checks | 156 per push, about 3 minutes in CI, plus 24 Lighthouse runs |
+| Automated checks | 156 browser checks per push (about 3 minutes in CI), 24 Lighthouse runs and 28 tests for the client tool |
 | Hosting cost | Zero |
 
 As of November 2026 the business has no paying clients yet. This site and its demos are the first thing a prospect sees.
 
 ## What's next
 
-- **A "new client" command in Node.js:** copy a demo, strip the demo layer, set the client's WhatsApp number, generate `sitemap.xml`, `robots.txt` and LocalBusiness structured data, and run the same test suite against the result.
+- **Version 2 of the client tool:** generate `sitemap.xml`, `robots.txt`, canonical URLs and LocalBusiness structured data, and run the Playwright and axe suites against each generated site.
 - **A small backend on Cloudflare:** store quote requests in D1, block spam with Turnstile and add a private dashboard behind Cloudflare Access. This goes on my own site only, so client sites keep zero moving parts.
 - **A custom domain** and SEO for the sales site itself.
 
@@ -105,5 +116,6 @@ modelos/<business>/                                    demo as a landing page
 modelos/<business>-completo/                           demo as a 5-page site
 modelos/comum/                                         shared demo, animation and multi-page pieces
 testes/                                                automated tests (not deployed)
+ferramentas/                                           the "new client" CLI (not deployed)
 docs/img/                                              images for this README (not deployed)
 ```

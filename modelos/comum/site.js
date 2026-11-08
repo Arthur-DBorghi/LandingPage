@@ -57,8 +57,8 @@
         linhas.push((campo.dataset.rotulo || campo.name) + ": " + valor);
       }
       const msg = (form.dataset.intro || "Olá! Vim pelo site.") + "\n\n" + linhas.join("\n");
-      // Na página real: window.open("https://wa.me/55DDDNUMERO?text=" + encodeURIComponent(msg), "_blank")
-      if (window.demoWhats) window.demoWhats(msg);
+      // demo.js (vitrines) ou whats.js (clientes) implementam enviarWhats
+      if (window.enviarWhats) window.enviarWhats(msg);
     });
   });
 })();
