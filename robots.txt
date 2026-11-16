@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /painel/
+Disallow: /ferramentas/
+
+Sitemap: https://arthurborghi.com.br/sitemap.xml

@@ -38,3 +38,23 @@ test("cada página tem um título só dela", async ({ page }) => {
   }
   expect(repetidos).toEqual([]);
 });
+
+test("domínio próprio: canonical, prévia de link, robots.txt e sitemap.xml", async ({ page, request }) => {
+  const DOMINIO = "https://arthurborghi.com.br";
+  for (const [pagina, endereco] of [["index.html", `${DOMINIO}/`], ["orcamento.html", `${DOMINIO}/orcamento.html`], ["politicas.html", `${DOMINIO}/politicas.html`]]) {
+    await page.goto("/" + pagina);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", endereco);
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", endereco);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", `${DOMINIO}/assets/img/og.png`);
+  }
+  const dados = JSON.parse((await page.goto("/").then(() => page.locator('script[type="application/ld+json"]').textContent())) ?? "{}");
+  expect(dados["@type"]).toBe("ProfessionalService");
+  expect(dados.url).toBe(`${DOMINIO}/`);
+
+  const robots = await request.get("/robots.txt");
+  expect(robots.ok()).toBe(true);
+  expect(await robots.text()).toContain(`Sitemap: ${DOMINIO}/sitemap.xml`);
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  // Só as páginas do Arthur: vitrines (noindex), painel e 404 ficam de fora
+  expect([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])).toEqual([`${DOMINIO}/`, `${DOMINIO}/orcamento.html`, `${DOMINIO}/politicas.html`]);
+});
