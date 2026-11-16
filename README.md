@@ -2,7 +2,7 @@
 
 [![Quality](https://github.com/Arthur-DBorghi/LandingPage/actions/workflows/qualidade.yml/badge.svg)](https://github.com/Arthur-DBorghi/LandingPage/actions/workflows/qualidade.yml)
 
-**Live:** https://arthurdefendiborghi.arthur-defborghi.workers.dev · [Versão em português](README.pt-BR.md)
+**Live:** https://arthurborghi.com.br · [Versão em português](README.pt-BR.md)
 
 A side business I run alongside a full-time developer job: ready-made landing pages and 5-page websites for barbershops, pet shops, accountants and other local businesses in Brazil. This repository is the sales site plus three demo businesses (all fictional), each available as a one-page landing page and as a full 5-page site, so a prospect can compare both versions of the same business.
 

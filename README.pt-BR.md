@@ -2,7 +2,7 @@
 
 [![Qualidade](https://github.com/Arthur-DBorghi/LandingPage/actions/workflows/qualidade.yml/badge.svg)](https://github.com/Arthur-DBorghi/LandingPage/actions/workflows/qualidade.yml)
 
-**No ar:** https://arthurdefendiborghi.arthur-defborghi.workers.dev · [English version](README.md)
+**No ar:** https://arthurborghi.com.br · [English version](README.md)
 
 Um negócio paralelo que eu toco junto com meu trabalho de desenvolvedor: landing pages e sites de 5 páginas prontos para barbearias, pet shops, contadores e outros negócios locais. Este repositório tem o site de vendas e três vitrines de negócios fictícios. Cada vitrine existe como landing page de uma página e como site completo de 5 páginas, para o cliente comparar as duas versões do mesmo negócio.
 
