@@ -8,6 +8,7 @@ import { formatarTelefone, normalizarDominio, normalizarEmail, normalizarWhatsap
 import { dirname, join } from "../ferramentas/novo-cliente/caminhos.mjs";
 import { criarZip } from "./zip.mjs";
 import { aplicarCores, aplicarTextos, contraste, lerCores, limparConteudo, marcarEditaveis } from "./edicao.mjs";
+import { CSS_DAS_VARIACOES, ESTILOS_DO_TOPO, alternarLinks, alternarSecao, aplicarEstiloDoTopo, lerEstiloDoTopo, listarSecoes, reordenarSecoes, usaVariacoes } from "./variacoes.mjs";
 
 /** @typedef {import("../ferramentas/novo-cliente/montar.mjs").DadosCliente} DadosCliente */
 /** @typedef {import("../ferramentas/novo-cliente/montar.mjs").SiteMontado} SiteMontado */
@@ -32,6 +33,8 @@ const botaoApresentar = /** @type {HTMLButtonElement} */ (document.getElementByI
 const listaCores = /** @type {HTMLElement} */ (document.getElementById("cores"));
 const avisoContraste = /** @type {HTMLElement} */ (document.getElementById("contraste"));
 const botaoRestaurarCores = /** @type {HTMLButtonElement} */ (document.getElementById("botao-restaurar-cores"));
+const escolhaTopo = /** @type {HTMLFieldSetElement} */ (document.getElementById("estilo-topo"));
+const listaSecoes = /** @type {HTMLOListElement} */ (document.getElementById("secoes"));
 
 /** Largura do "computador" simulado: acima de 1024px aparece o menu no topo dos sites completos. */
 const LARGURA_COMPUTADOR = 1280;
@@ -196,7 +199,8 @@ const TIPOS = /** @type {Record<string, string>} */ ({
 });
 
 /** Estilo que só existe na prévia: destaque dos textos editáveis. */
-const ESTILO_DA_PREVIA = `<style id="pv-estilo">
+const ESTILO_DA_PREVIA = `<style id="pv-variacoes">${CSS_DAS_VARIACOES}</style>
+<style id="pv-estilo">
   body.pv-editando [data-pv] { cursor: text; }
   body.pv-editando [data-pv]:hover { outline: 2px dashed #00B8D9; outline-offset: 3px; }
   [data-pv][contenteditable="true"] { outline: 2px solid #00B8D9; outline-offset: 3px; background: rgba(0, 216, 255, 0.10); }
@@ -237,10 +241,11 @@ function htmlDaPrevia(pagina) {
     .replace("</head>", `${ESTILO_DA_PREVIA}\n</head>`);
 }
 
-/** @param {string} pagina @param {string} [ancora] */
-function mostrarPagina(pagina, ancora) {
+/** @param {string} pagina @param {string} [ancora] @param {number} [rolagem] posição para manter depois de recarregar */
+function mostrarPagina(pagina, ancora, rolagem) {
   if (!estado || !(pagina in estado.fontes)) return;
   estado.pagina = pagina;
+  mostrarLayout();
   iframe.hidden = false;
   vazia.hidden = true;
   ajustarEscala();
@@ -271,6 +276,7 @@ function mostrarPagina(pagina, ancora) {
       }
     }, true);
     if (ancora) doc.getElementById(ancora)?.scrollIntoView();
+    else if (rolagem) iframe.contentWindow?.scrollTo(0, rolagem);
   };
   iframe.srcdoc = htmlDaPrevia(pagina);
   for (const b of abas.querySelectorAll("button")) b.setAttribute("aria-selected", String(b.dataset.pagina === pagina));
@@ -306,6 +312,70 @@ function editar(el, pagina) {
     atualizarPendencias();
     status.textContent = "Texto alterado. Ele vai assim no .zip.";
   }, { once: true });
+}
+
+// ---------- Layout ----------
+
+/** Troca o HTML da página aberta e recarrega a prévia no mesmo ponto. @param {string} html */
+function trocarPagina(html) {
+  if (!estado) return;
+  estado.fontes[estado.pagina] = html;
+  estado.editado = true;
+  atualizarPendencias();
+  mostrarPagina(estado.pagina, undefined, iframe.contentWindow?.scrollY ?? 0);
+}
+
+function mostrarLayout() {
+  if (!estado) return;
+  const html = estado.fontes[estado.pagina];
+  const topo = lerEstiloDoTopo(html);
+  escolhaTopo.hidden = topo === null;
+  escolhaTopo.replaceChildren(
+    Object.assign(document.createElement("legend"), { textContent: "Topo" }),
+    ...ESTILOS_DO_TOPO.map(({ valor, rotulo }) => {
+      const label = document.createElement("label");
+      const radio = Object.assign(document.createElement("input"), { type: "radio", name: "estilo-topo", value: valor, checked: valor === topo });
+      radio.addEventListener("change", () => estado && trocarPagina(aplicarEstiloDoTopo(estado.fontes[estado.pagina], valor)));
+      label.append(radio, ` ${rotulo}`);
+      return label;
+    }),
+  );
+
+  const secoes = listarSecoes(html);
+  listaSecoes.replaceChildren(...secoes.map((s, pos) => {
+    const li = document.createElement("li");
+    li.classList.toggle("oculta", s.oculta);
+    const nome = Object.assign(document.createElement("span"), { className: "secao-nome", textContent: s.rotulo });
+    const botao = (/** @type {string} */ texto, /** @type {string} */ rotulo, /** @type {boolean} */ desligado, /** @type {() => void} */ acao) => {
+      const b = Object.assign(document.createElement("button"), { type: "button", textContent: texto, disabled: desligado });
+      b.setAttribute("aria-label", rotulo);
+      b.addEventListener("click", acao);
+      return b;
+    };
+    const mover = (/** @type {number} */ para) => () => {
+      if (!estado) return;
+      const ordem = secoes.map((x) => x.indice);
+      [ordem[pos], ordem[para]] = [ordem[para], ordem[pos]];
+      trocarPagina(reordenarSecoes(estado.fontes[estado.pagina], ordem));
+      /** @type {HTMLButtonElement | null | undefined} */ (listaSecoes.querySelectorAll("li")[para]?.querySelector(`button[aria-label^="${para < pos ? "Subir" : "Descer"}"]:not(:disabled)`))?.focus();
+    };
+    li.append(
+      nome,
+      botao("↑", `Subir "${s.rotulo}"`, pos === 0, mover(pos - 1)),
+      botao("↓", `Descer "${s.rotulo}"`, pos === secoes.length - 1, mover(pos + 1)),
+      botao(s.oculta ? "Mostrar" : "Esconder", `${s.oculta ? "Mostrar" : "Esconder"} "${s.rotulo}"`, false, () => {
+        if (!estado) return;
+        const pagina = estado.pagina;
+        const { html: novo, id } = alternarSecao(estado.fontes[pagina], s.indice, !s.oculta);
+        // Links de outras páginas para esta seção (ex.: "index.html#precos")
+        if (id) for (const outra of Object.keys(estado.fontes)) {
+          if (outra !== pagina) estado.fontes[outra] = alternarLinks(estado.fontes[outra], [`${pagina}#${id}`], !s.oculta);
+        }
+        trocarPagina(novo);
+      }),
+    );
+    return li;
+  }));
 }
 
 // ---------- Cores ----------
@@ -421,7 +491,9 @@ function arquivosFinais() {
   const arquivos = new Map(estado.site.arquivos);
   for (const [pagina, html] of Object.entries(estado.fontes)) arquivos.set(pagina, html);
   const css = arquivos.get("assets/css/style.css");
-  if (estado.cores.size && typeof css === "string") arquivos.set("assets/css/style.css", aplicarCores(css, estado.cores));
+  let cssFinal = typeof css === "string" && estado.cores.size ? aplicarCores(css, estado.cores) : css;
+  if (typeof cssFinal === "string" && usaVariacoes(estado.fontes)) cssFinal += CSS_DAS_VARIACOES;
+  if (typeof cssFinal === "string" && cssFinal !== css) arquivos.set("assets/css/style.css", cssFinal);
   arquivos.set("LEIA-ME.md", montarLeiaMe(estado.dados, { slug: estado.site.slug, paginas: estado.site.paginas, pendencias: estado.site.pendencias }));
   return arquivos;
 }
