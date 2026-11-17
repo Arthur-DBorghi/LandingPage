@@ -15,40 +15,17 @@ export const ESTILOS_DO_TOPO = /** @type {const} */ ([
   { valor: "faixa", rotulo: "Faixa" },
 ]);
 
+/** Estilos de fundo. "normal" é o do modelo; "fixo" deixa o fundo parado e a página rola por cima. */
+export const FUNDOS = /** @type {const} */ ([
+  { valor: "normal", rotulo: "Normal" },
+  { valor: "fixo", rotulo: "Fixo" },
+]);
+
 /**
- * CSS das variações. Vai junto no style.css do cliente só quando alguma é usada.
- * Usa só seletores e variáveis que existem nos três modelos (com alternativas).
+ * CSS das variações: um arquivo só, usado pelas vitrines que já nascem com
+ * variação (link direto) e anexado pelo painel ao style.css dos outros clientes.
  */
-export const CSS_DAS_VARIACOES = `
-/* ---------- Variações de layout (geradas pelo painel) ---------- */
-/* Seções e links escondidos no painel ficam no HTML, prontos para voltar */
-[hidden] { display: none !important; }
-
-.hero[data-topo="invertido"] { grid-template-columns: 1fr 1.25fr; }
-.hero[data-topo="invertido"] > :first-child { order: 2; }
-
-.hero[data-topo="centralizado"],
-.hero[data-topo="faixa"] { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-.hero[data-topo="centralizado"] > :first-child,
-.hero[data-topo="faixa"] > :first-child { max-width: 820px; }
-.hero[data-topo="centralizado"] > :nth-child(2) { max-width: min(420px, 100%); }
-.hero[data-topo="centralizado"] :is(.hero-acoes, .chips, .garantias),
-.hero[data-topo="faixa"] :is(.hero-acoes, .chips, .garantias) { justify-content: center; }
-
-.hero[data-topo="faixa"] {
-  max-width: none;
-  padding-block: clamp(64px, 11vw, 140px);
-  background: var(--superficie, var(--fundo-alt, var(--azul-secao, transparent)));
-  border-bottom: 1px solid var(--linha);
-}
-.hero[data-topo="faixa"] > :nth-child(2) { display: none; }
-.hero[data-topo="faixa"] h1 { font-size: clamp(2.3rem, 6vw, 4.1rem); }
-
-@media (max-width: 860px) {
-  .hero[data-topo] { grid-template-columns: 1fr; }
-  .hero[data-topo="invertido"] > :first-child { order: 0; }
-}
-`;
+export const CAMINHO_DO_CSS = "modelos/comum/variacoes.css";
 
 /** @param {string} html */
 function main(html) {
@@ -186,6 +163,41 @@ export function alternarSecao(html, indice, esconder) {
 }
 
 /**
+ * Põe, troca ou tira (valor null) um atributo de um elemento.
+ * @param {string} html @param {No} no @param {string} nome @param {string | null} valor
+ */
+function definirAtributo(html, no, nome, valor) {
+  const atual = atributo(no, nome);
+  if (valor === null) {
+    const pos = no.sourceCodeLocation?.attrs?.[nome];
+    if (!pos) return html;
+    let inicio = pos.startOffset;
+    while (inicio > 0 && /[ \t]/.test(html[inicio - 1])) inicio--;
+    return html.slice(0, inicio) + html.slice(pos.endOffset);
+  }
+  if (atual === valor) return html;
+  const edicao = atual !== undefined ? trocarAtributo(no, nome, valor) : acrescentarAtributos(html, no, ` ${nome}="${valor}"`);
+  return aplicarEdicoes(html, [edicao]);
+}
+
+/** @param {string} html */
+function corpo(html) {
+  return achar(lerHtml(html), (n) => n.tagName === "body");
+}
+
+/** Fundo da página: "fixo" ou "normal". @param {string} html */
+export function lerFundo(html) {
+  const body = corpo(html);
+  return body && atributo(body, "data-fundo") === "fixo" ? "fixo" : "normal";
+}
+
+/** @param {string} html @param {string} fundo um dos valores de FUNDOS */
+export function aplicarFundo(html, fundo) {
+  const body = corpo(html);
+  return body ? definirAtributo(html, body, "data-fundo", fundo === "normal" ? null : fundo) : html;
+}
+
+/**
  * Estilo atual do topo da página ("padrao" se não tiver topo variável ou atributo).
  * @param {string} html
  * @returns {string | null} null quando a página não tem topo (.hero)
@@ -204,23 +216,10 @@ export function lerEstiloDoTopo(html) {
 export function aplicarEstiloDoTopo(html, estilo) {
   const { principal } = main(html);
   const hero = principal && (principal.childNodes ?? []).find((n) => n.tagName === "section" && ehHero(n));
-  if (!hero) return html;
-  const atual = atributo(hero, "data-topo");
-  if (estilo === "padrao") {
-    if (atual === undefined || atual === null) return html;
-    const pos = /** @type {NonNullable<No["sourceCodeLocation"]>} */ (hero.sourceCodeLocation).attrs?.["data-topo"];
-    if (!pos) return html;
-    let inicio = pos.startOffset;
-    while (inicio > 0 && /[ \t]/.test(html[inicio - 1])) inicio--;
-    return html.slice(0, inicio) + html.slice(pos.endOffset);
-  }
-  const edicao = atual !== undefined && atual !== null
-    ? trocarAtributo(hero, "data-topo", estilo)
-    : acrescentarAtributos(html, hero, ` data-topo="${estilo}"`);
-  return aplicarEdicoes(html, [edicao]);
+  return hero ? definirAtributo(html, hero, "data-topo", estilo === "padrao" ? null : estilo) : html;
 }
 
 /** Alguma página usa variação de topo? @param {Record<string, string>} paginas */
 export function usaVariacoes(paginas) {
-  return Object.values(paginas).some((html) => /<section\b[^>]*\sdata-topo="/.test(html) || /<(section|a|li)\b[^>]*\shidden[\s>=]/.test(html));
+  return Object.values(paginas).some((html) => /<(section|body)\b[^>]*\sdata-(topo|fundo)="/.test(html) || /<(section|a|li)\b[^>]*\shidden[\s>=]/.test(html));
 }

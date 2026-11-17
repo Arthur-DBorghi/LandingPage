@@ -124,6 +124,7 @@ test("pendências apontam o que continua fictício", () => {
 test("a lista de páginas de cada modelo bate com as pastas das vitrines", () => {
   for (const [modelo, m] of Object.entries(MODELOS)) {
     for (const versao of /** @type {const} */ (["lp", "completo"])) {
+      if (!m.paginas[versao].length) continue; // modelo só com landing page
       const pastaVitrine = path.join(RAIZ_REPO, "modelos", modelo + (versao === "completo" ? "-completo" : ""));
       const reais = readdirSync(pastaVitrine).filter((f) => f.endsWith(".html")).sort();
       assert.deepEqual([...m.paginas[versao]].sort(), reais, `${modelo} ${versao}`);

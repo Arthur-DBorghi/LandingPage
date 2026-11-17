@@ -42,6 +42,7 @@ if (campoModelo) {
     barbearia: "Barbearia e estética",
     consultoria: "Consultoria e serviços",
     petshop: "Pet shop e serviços com agenda",
+    manicure: "Manicure e pedicure",
   };
   const vindo = new URLSearchParams(location.search).get("modelo");
   if (nomes[vindo]) campoModelo.value = nomes[vindo];

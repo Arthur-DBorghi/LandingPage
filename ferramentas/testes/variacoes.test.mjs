@@ -82,3 +82,13 @@ test("funciona nas vitrines de verdade", () => {
     assert.match(aplicarEstiloDoTopo(html, "invertido"), /data-topo="invertido"/, m);
   }
 });
+
+test("fundo fixo: liga, desliga e é detectado como variação", async () => {
+  const { aplicarFundo, lerFundo } = await import("../../painel/variacoes.mjs");
+  assert.equal(lerFundo(PAGINA), "normal");
+  const fixo = aplicarFundo(PAGINA, "fixo");
+  assert.match(fixo, /<body data-fundo="fixo">/);
+  assert.equal(lerFundo(fixo), "fixo");
+  assert.equal(usaVariacoes({ "index.html": fixo }), true);
+  assert.equal(aplicarFundo(fixo, "normal"), PAGINA);
+});

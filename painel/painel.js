@@ -8,7 +8,7 @@ import { formatarTelefone, normalizarDominio, normalizarEmail, normalizarWhatsap
 import { dirname, join } from "../ferramentas/novo-cliente/caminhos.mjs";
 import { criarZip } from "./zip.mjs";
 import { aplicarCores, aplicarTextos, contraste, lerCores, limparConteudo, marcarEditaveis } from "./edicao.mjs";
-import { CSS_DAS_VARIACOES, ESTILOS_DO_TOPO, alternarLinks, alternarSecao, aplicarEstiloDoTopo, lerEstiloDoTopo, listarSecoes, reordenarSecoes, usaVariacoes } from "./variacoes.mjs";
+import { CAMINHO_DO_CSS, ESTILOS_DO_TOPO, FUNDOS, alternarLinks, alternarSecao, aplicarEstiloDoTopo, aplicarFundo, lerEstiloDoTopo, lerFundo, listarSecoes, reordenarSecoes, usaVariacoes } from "./variacoes.mjs";
 
 /** @typedef {import("../ferramentas/novo-cliente/montar.mjs").DadosCliente} DadosCliente */
 /** @typedef {import("../ferramentas/novo-cliente/montar.mjs").SiteMontado} SiteMontado */
@@ -35,6 +35,9 @@ const avisoContraste = /** @type {HTMLElement} */ (document.getElementById("cont
 const botaoRestaurarCores = /** @type {HTMLButtonElement} */ (document.getElementById("botao-restaurar-cores"));
 const escolhaTopo = /** @type {HTMLFieldSetElement} */ (document.getElementById("estilo-topo"));
 const listaSecoes = /** @type {HTMLOListElement} */ (document.getElementById("secoes"));
+const escolhaFundo = /** @type {HTMLFieldSetElement} */ (document.getElementById("estilo-fundo"));
+/** CSS das variações de layout (um arquivo só, o mesmo das vitrines) */
+let cssDasVariacoes = "";
 
 /** Largura do "computador" simulado: acima de 1024px aparece o menu no topo dos sites completos. */
 const LARGURA_COMPUTADOR = 1280;
@@ -88,7 +91,12 @@ const valor = (nome) => {
 
 /** Mostra só os campos do modelo escolhido. */
 function ajustarCampos() {
-  const perguntas = MODELOS[valor("modelo")].perguntas;
+  const modelo = MODELOS[valor("modelo")];
+  const perguntas = modelo.perguntas;
+  // Modelo só com landing page: "Site completo" fica indisponível
+  const completo = /** @type {HTMLInputElement} */ (form.querySelector('input[name="versao"][value="completo"]'));
+  completo.disabled = !modelo.paginas.completo.length;
+  if (completo.disabled && completo.checked) /** @type {HTMLInputElement} */ (form.querySelector('input[name="versao"][value="lp"]')).checked = true;
   for (const bloco of /** @type {NodeListOf<HTMLElement>} */ (form.querySelectorAll(".campo[data-campo]"))) {
     bloco.hidden = !perguntas.includes(/** @type {any} */ (bloco.dataset.campo));
   }
@@ -199,8 +207,7 @@ const TIPOS = /** @type {Record<string, string>} */ ({
 });
 
 /** Estilo que só existe na prévia: destaque dos textos editáveis. */
-const ESTILO_DA_PREVIA = `<style id="pv-variacoes">${CSS_DAS_VARIACOES}</style>
-<style id="pv-estilo">
+const ESTILO_DA_PREVIA = `<style id="pv-estilo">
   body.pv-editando [data-pv] { cursor: text; }
   body.pv-editando [data-pv]:hover { outline: 2px dashed #00B8D9; outline-offset: 3px; }
   [data-pv][contenteditable="true"] { outline: 2px solid #00B8D9; outline-offset: 3px; background: rgba(0, 216, 255, 0.10); }
@@ -238,7 +245,7 @@ function htmlDaPrevia(pagina) {
       const url = urlsDosArquivos.get(ref);
       return url ? `${attr}="${url}"` : inteiro;
     })
-    .replace("</head>", `${ESTILO_DA_PREVIA}\n</head>`);
+    .replace("</head>", `<style id="pv-variacoes">${cssDasVariacoes}</style>\n${ESTILO_DA_PREVIA}\n</head>`);
 }
 
 /** @param {string} pagina @param {string} [ancora] @param {number} [rolagem] posição para manter depois de recarregar */
@@ -325,21 +332,39 @@ function trocarPagina(html) {
   mostrarPagina(estado.pagina, undefined, iframe.contentWindow?.scrollY ?? 0);
 }
 
-function mostrarLayout() {
-  if (!estado) return;
-  const html = estado.fontes[estado.pagina];
-  const topo = lerEstiloDoTopo(html);
-  escolhaTopo.hidden = topo === null;
-  escolhaTopo.replaceChildren(
-    Object.assign(document.createElement("legend"), { textContent: "Topo" }),
-    ...ESTILOS_DO_TOPO.map(({ valor, rotulo }) => {
+/**
+ * Botões de escolha (rádio) com legenda.
+ * @param {HTMLFieldSetElement} grupo @param {string} legenda @param {string} nome
+ * @param {readonly { valor: string, rotulo: string }[]} opcoes @param {string | null} atual
+ * @param {(valor: string) => void} aoEscolher
+ */
+function preencherEscolha(grupo, legenda, nome, opcoes, atual, aoEscolher) {
+  grupo.replaceChildren(
+    Object.assign(document.createElement("legend"), { textContent: legenda }),
+    ...opcoes.map(({ valor, rotulo }) => {
       const label = document.createElement("label");
-      const radio = Object.assign(document.createElement("input"), { type: "radio", name: "estilo-topo", value: valor, checked: valor === topo });
-      radio.addEventListener("change", () => estado && trocarPagina(aplicarEstiloDoTopo(estado.fontes[estado.pagina], valor)));
+      const radio = Object.assign(document.createElement("input"), { type: "radio", name: nome, value: valor, checked: valor === atual });
+      radio.addEventListener("change", () => aoEscolher(valor));
       label.append(radio, ` ${rotulo}`);
       return label;
     }),
   );
+}
+
+function mostrarLayout() {
+  if (!estado) return;
+  const html = estado.fontes[estado.pagina];
+  // Fundo vale para o site inteiro
+  preencherEscolha(escolhaFundo, "Fundo (todas as páginas)", "estilo-fundo", FUNDOS, lerFundo(html), (valor) => {
+    if (!estado) return;
+    for (const p of Object.keys(estado.fontes)) if (p !== estado.pagina) estado.fontes[p] = aplicarFundo(estado.fontes[p], valor);
+    trocarPagina(aplicarFundo(estado.fontes[estado.pagina], valor));
+  });
+  const topo = lerEstiloDoTopo(html);
+  escolhaTopo.hidden = topo === null;
+  preencherEscolha(escolhaTopo, "Topo", "estilo-topo", ESTILOS_DO_TOPO, topo, (valor) => {
+    if (estado) trocarPagina(aplicarEstiloDoTopo(estado.fontes[estado.pagina], valor));
+  });
 
   const secoes = listarSecoes(html);
   listaSecoes.replaceChildren(...secoes.map((s, pos) => {
@@ -492,7 +517,10 @@ function arquivosFinais() {
   for (const [pagina, html] of Object.entries(estado.fontes)) arquivos.set(pagina, html);
   const css = arquivos.get("assets/css/style.css");
   let cssFinal = typeof css === "string" && estado.cores.size ? aplicarCores(css, estado.cores) : css;
-  if (typeof cssFinal === "string" && usaVariacoes(estado.fontes)) cssFinal += CSS_DAS_VARIACOES;
+  // Vitrine que já usa variações traz o próprio variacoes.css; nas outras, o CSS vai junto no style.css
+  if (typeof cssFinal === "string" && usaVariacoes(estado.fontes) && !arquivos.has("assets/css/variacoes.css")) {
+    cssFinal += "\n" + cssDasVariacoes;
+  }
   if (typeof cssFinal === "string" && cssFinal !== css) arquivos.set("assets/css/style.css", cssFinal);
   arquivos.set("LEIA-ME.md", montarLeiaMe(estado.dados, { slug: estado.site.slug, paginas: estado.site.paginas, pendencias: estado.site.pendencias }));
   return arquivos;
@@ -578,3 +606,4 @@ for (const b of /** @type {NodeListOf<HTMLButtonElement>} */ (document.querySele
 
 restaurar();
 ajustarCampos();
+leitor.lerTexto(CAMINHO_DO_CSS).then((css) => { cssDasVariacoes = css; }, () => {});

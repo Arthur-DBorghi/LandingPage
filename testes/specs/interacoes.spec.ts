@@ -105,7 +105,7 @@ test.describe("Pet shop · preço muda com o porte", () => {
 
 test.describe("Vitrines · botões de WhatsApp", () => {
   soNo("computador");
-  for (const modelo of ["barbearia", "consultoria", "petshop"]) {
+  for (const modelo of ["barbearia", "consultoria", "petshop", "manicure"]) {
     test(`${modelo}: botão mostra a mensagem e a faixa leva ao orçamento`, async ({ page }) => {
       await page.goto(`/modelos/${modelo}/index.html`);
       const botao = page.locator("main [data-whats]").first();
@@ -115,6 +115,7 @@ test.describe("Vitrines · botões de WhatsApp", () => {
       await page.locator("dialog.demo-janela [data-fechar]").click();
 
       await expect(page.locator(".demo-faixa a").first()).toHaveAttribute("href", `../../orcamento.html?modelo=${modelo}`);
+      if (modelo === "manicure") return; // só landing page
       await page.goto(`/modelos/${modelo}-completo/index.html`);
       await expect(page.locator(".demo-faixa a").first()).toHaveAttribute("href", `../../orcamento.html?modelo=${modelo}&plano=site`);
     });

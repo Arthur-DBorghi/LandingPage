@@ -81,6 +81,26 @@ export const MODELOS = {
       "Equipe e fotos dos pets (com autorização dos tutores)",
     ],
   },
+  manicure: {
+    rotulo: "Manicure e pedicure",
+    // Só landing page por enquanto (nasce com o fundo fixo)
+    paginas: { lp: ["index.html"], completo: [] },
+    perguntas: ["nome", "whatsapp", "cidade", "bairro", "endereco", "dominio"],
+    nome: { curto: "Lumi", completo: "Lumi Esmalteria" },
+    bairro: "Jardim das Flores",
+    endereco: "Rua Exemplo, 789",
+    seoLandingPage: {
+      titulo: "Lumi Esmalteria | Manicure e pedicure no Jardim das Flores",
+      descricao: "Manicure, pedicure e esmaltação em gel no Jardim das Flores, com material esterilizado e kit individual. Agende pelo WhatsApp.",
+    },
+    ficticios: [],
+    revisar: [
+      "Preços e tempos dos serviços e do Clube Mãos e Pés",
+      "Horários de funcionamento e regra de desmarcação",
+      "Itens de biossegurança: confirmar o que o cliente usa de verdade (autoclave, kit individual)",
+      "Fotos reais nos espaços marcados (com autorização das clientes)",
+    ],
+  },
 };
 
 /** Textos que denunciam conteúdo de demonstração em qualquer vitrine. */

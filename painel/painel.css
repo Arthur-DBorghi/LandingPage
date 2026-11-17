@@ -74,6 +74,7 @@
 /* Layout da página */
 .escolha[hidden] { display: none; }
 .resultado .escolha label { padding: 6px 12px; font-size: 0.88rem; }
+.formulario .escolha label:has(input:disabled) { opacity: 0.45; cursor: not-allowed; }
 .secoes { display: grid; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
 .secoes li {
   display: grid;

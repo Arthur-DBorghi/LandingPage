@@ -187,10 +187,40 @@ test("muda o topo, a ordem e esconde seções, e o .zip sai igual à prévia", a
   const { readFileSync } = await import("node:fs");
   const zip = readFileSync((await download.path())!);
   expect(zip.includes(Buffer.from('<section class="hero" data-topo="faixa">'))).toBe(true);
-  expect(zip.includes(Buffer.from("Variações de layout (geradas pelo painel)"))).toBe(true);
+  expect(zip.includes(Buffer.from("Variações de layout (escolhidas no painel)"))).toBe(true);
   expect(zip.includes(Buffer.from(" hidden>"))).toBe(true);
 
   const resultado = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).exclude("#previa").analyze();
   expect(resultado.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(" | ")}`)).toEqual([]);
+  expect(erros).toEqual([]);
+});
+
+test("manicure: só landing page, nasce com fundo fixo e leva o variacoes.css no .zip", async ({ page }) => {
+  const erros = vigiarErros(page);
+  await page.goto("/painel/");
+  await page.locator('input[name="versao"][value="completo"]').check();
+  await page.locator('input[name="modelo"][value="manicure"]').check();
+  await expect(page.locator('input[name="versao"][value="completo"]')).toBeDisabled();
+  await expect(page.locator('input[name="versao"][value="lp"]')).toBeChecked();
+  await page.locator("#nome").fill("Unhas da Bia");
+  await page.locator("#whatsapp").fill("(11) 98765-4321");
+  await page.locator("#bairro").fill("Granja Viana");
+  await page.locator("#botao-gerar").click();
+  const previa = page.frameLocator("#previa");
+  await expect(previa.locator("body")).toHaveAttribute("data-fundo", "fixo");
+  await expect(page.locator('#estilo-fundo input[value="fixo"]')).toBeChecked();
+  await expect(previa.locator(".marca span")).toHaveText("Unhas da Bia");
+
+  // Desliga e liga de novo o fundo fixo
+  await page.locator('#estilo-fundo input[value="normal"]').check();
+  await expect(previa.locator("body")).not.toHaveAttribute("data-fundo", "fixo");
+  await page.locator('#estilo-fundo input[value="fixo"]').check();
+  await expect(previa.locator("body")).toHaveAttribute("data-fundo", "fixo");
+
+  const [download] = await Promise.all([page.waitForEvent("download"), page.locator("#botao-baixar").click()]);
+  const { readFileSync } = await import("node:fs");
+  const zip = readFileSync((await download.path())!);
+  expect(zip.includes(Buffer.from("unhas-da-bia/assets/css/variacoes.css"))).toBe(true);
+  expect(zip.includes(Buffer.from('<body data-fundo="fixo">'))).toBe(true);
   expect(erros).toEqual([]);
 });

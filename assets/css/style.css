@@ -193,7 +193,7 @@ p { margin: 0; }
 .nota { margin-top: 24px; color: var(--texto-suave); font-size: 0.9rem; }
 
 /* Portfólio */
-.projetos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.projetos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .projeto {
   display: flex;
   flex-direction: column;
@@ -535,6 +535,7 @@ p { margin: 0; }
 .projeto-barbearia { --cor: #E2B93B; }
 .projeto-consultoria { --cor: #3CC4A2; }
 .projeto-petshop { --cor: #FFC93C; }
+.projeto-manicure { --cor: #F48FB1; }
 .projeto::before {
   content: "";
   position: absolute;
