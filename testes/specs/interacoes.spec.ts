@@ -232,3 +232,33 @@ test.describe("Orçamento", () => {
     expect(texto).toContain("Formato: Site completo (5 páginas, R$ 850)");
   });
 });
+
+test.describe("Troca de página no site completo", () => {
+  soNo("computador");
+
+  test("transição suave ligada e próxima página preparada ao passar o mouse", async ({ page }) => {
+    await page.goto("/modelos/manicure-completo/index.html");
+    // @view-transition { navigation: auto } carregado
+    const temTransicao = await page.evaluate(() =>
+      [...document.styleSheets].some((s) => [...s.cssRules].some((r) => r.constructor.name === "CSSViewTransitionRule")),
+    );
+    expect(temTransicao).toBe(true);
+    // Chromium: regras de prerender só para as páginas do próprio site
+    const regras = JSON.parse((await page.locator('script[type="speculationrules"]').textContent()) ?? "{}");
+    expect(regras.prerender[0].eagerness).toBe("moderate");
+    expect(JSON.stringify(regras)).toContain("[data-whats]");
+  });
+
+  test("vindo de outra página do site, o topo aparece na hora; na primeira visita, anima", async ({ page }) => {
+    // Primeira visita (sem página anterior): o título entra com animação
+    await page.goto("/modelos/petshop-completo/cuidados.html");
+    await expect(page.locator(".cabecalho-pagina h1")).toHaveClass(/revelar/);
+
+    // Pelo menu: o título já está visível, sem esperar animação
+    await page.locator('.nav nav a[href="contato.html"]').click();
+    await expect(page).toHaveURL(/contato\.html$/);
+    await expect(page.locator(".cabecalho-pagina h1")).not.toHaveClass(/revelar/);
+    // O que fica abaixo da dobra continua animando ao rolar
+    await expect(page.locator(".rodape-grade > *").first()).toHaveClass(/revelar/);
+  });
+});

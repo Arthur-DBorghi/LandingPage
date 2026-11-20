@@ -9,6 +9,18 @@
 
   document.documentElement.classList.add("anima");
 
+  // Veio de outra página do mesmo site (menu, voltar)? O que já está na tela
+  // aparece na hora: a animação de entrada fica só para a primeira visita e
+  // para o que surge ao rolar. Assim a troca de página não parece lenta.
+  let veioDoSite = false;
+  try {
+    const nav = performance.getEntriesByType("navigation")[0];
+    veioDoSite = !!document.referrer &&
+      new URL(".", document.referrer).href === new URL(".", location.href).href &&
+      (!nav || nav.type !== "reload");
+  } catch (e) { /* referrer estranho: segue com as animações */ }
+  const naTela = (el) => el.getBoundingClientRect().top < window.innerHeight;
+
   // Textos e cards (entram em sequência dentro do mesmo pai)
   const textos = [
     ".hero-texto > *", ".hero > div:first-child > *",
@@ -44,6 +56,7 @@
       const porPai = new Map();
       document.querySelectorAll(sel).forEach((el) => {
         if (el.classList.contains("revelar") || el.classList.contains("revelar-img")) return;
+        if (veioDoSite && naTela(el)) return;
         const i = porPai.get(el.parentElement) || 0;
         porPai.set(el.parentElement, i + 1);
         el.classList.add(classe);
