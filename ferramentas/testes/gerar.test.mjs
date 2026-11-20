@@ -95,6 +95,8 @@ for (const [modelo, cliente] of Object.entries(CLIENTES)) {
       }
 
       assert.match(readFileSync(path.join(saida, "assets/js/whats.js"), "utf8"), new RegExp(`"${NUMERO}"`));
+      // Cache no navegador: o mesmo _headers do site do Arthur
+      assert.equal(readFileSync(path.join(saida, "_headers"), "utf8"), readFileSync(path.join(RAIZ_REPO, "_headers"), "utf8"));
       const wrangler = readFileSync(path.join(saida, "wrangler.jsonc"), "utf8");
       assert.match(wrangler, new RegExp(`"name": "${r.slug}"`));
       assert.match(wrangler, /"compatibility_date": "2026-11-07"/);

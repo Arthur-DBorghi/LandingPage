@@ -60,7 +60,7 @@
         const i = porPai.get(el.parentElement) || 0;
         porPai.set(el.parentElement, i + 1);
         el.classList.add(classe);
-        el.style.setProperty("--atraso", Math.min(i, 6) * 0.08 + "s");
+        el.style.setProperty("--atraso", Math.min(i, 5) * 0.05 + "s");
         observador.observe(el);
       });
     });
