@@ -23,3 +23,16 @@ for (const pagina of todasAsPaginas()) {
     expect(problemas).toEqual([]);
   });
 }
+
+// Títulos em ordem (h1 → h2 → h3), sem pular nível. É "boa prática" no axe
+// (fora das tags WCAG acima), mas o Lighthouse cobra e leitores de tela usam.
+test("títulos em ordem em todas as páginas", async ({ page }, info) => {
+  test.skip(info.project.name !== "computador", "não depende do tamanho da tela");
+  const fora: string[] = [];
+  for (const pagina of todasAsPaginas()) {
+    await page.goto("/" + pagina);
+    const r = await new AxeBuilder({ page }).withRules(["heading-order"]).analyze();
+    for (const v of r.violations) fora.push(`${pagina}: ${v.nodes.map((n) => n.target.join(" ")).join(" | ")}`);
+  }
+  expect(fora).toEqual([]);
+});

@@ -1,6 +1,6 @@
 # Ferramentas
 
-Ferramentas de apoio às vendas. Esta pasta não é publicada na Cloudflare (está no `.assetsignore`).
+Ferramentas de apoio às vendas. Só o núcleo (`novo-cliente/`, menos `cli.mjs` e `gerar.mjs`) é publicado na Cloudflare, porque o painel usa no navegador; o resto está no `.assetsignore`.
 
 ## novo-cliente
 
@@ -8,7 +8,14 @@ Transforma uma vitrine (`modelos/...`) num site de cliente. Roda **uma vez**, no
 
 Tem duas portas de entrada para o mesmo núcleo (`novo-cliente/montar.mjs`):
 
-- **Painel no navegador:** `/painel/` no próprio site. Formulário, prévia das páginas (celular e computador) e download do site em .zip. O painel não aparece em nenhum link do site e tem `noindex`; quando houver domínio próprio, fica protegido com login pelo Cloudflare Access.
+- **Painel de vendas no navegador:** `/painel/` no próprio site, para usar na frente do cliente:
+  - formulário e prévia das páginas (celular e computador), com "Apresentar" em tela cheia;
+  - **textos:** clicar e editar no lugar (Enter salva, Esc desfaz);
+  - **cores da marca:** um seletor por cor do modelo, com aviso de contraste;
+  - **layout:** fundo normal ou fixo, estilo do topo (lado a lado, invertido, centralizado, faixa), subir, descer, esconder e mostrar seções;
+  - download do site em .zip, igual à prévia.
+
+  O painel não aparece em nenhum link do site, tem `noindex`, fica fora do `robots.txt` e é protegido com login pelo Cloudflare Access.
 - **Terminal:** o comando abaixo, que grava o site direto numa pasta.
 
 O núcleo não usa nada do Node: lê os arquivos por uma função que cada porta fornece (o painel busca no próprio site; o terminal lê do disco) e devolve o site em memória. Por isso painel e terminal geram exatamente os mesmos arquivos.
@@ -30,7 +37,7 @@ node novo-cliente/cli.mjs --modelo barbearia --versao completo \
   --dominio barbeariadoze.com.br --git --sim
 ```
 
-`node novo-cliente/cli.mjs --ajuda` lista todas as opções. O site sai em `../clientes/<nome-do-negócio>` (fora deste repositório), ou onde `--saida` mandar.
+`node novo-cliente/cli.mjs --ajuda` lista todas as opções. Modelos: `barbearia`, `consultoria`, `petshop` e `manicure`. O site sai em `../clientes/<nome-do-negócio>` (fora deste repositório), ou onde `--saida` mandar.
 
 ### O que ela faz (nas duas portas)
 
@@ -42,7 +49,7 @@ node novo-cliente/cli.mjs --modelo barbearia --versao completo \
 4. **Troca a identidade fictícia:** nome do negócio, endereço, bairro, profissional, iniciais e e-mail. Acerta artigos e contrações pelo gênero do nome novo ("da Navalha Fina" → "do Studio Corte", "no Centro" → "na Mooca").
 5. **Landing page com título de verdade:** o título e a descrição de demonstração viram os da página inicial do site completo do mesmo modelo.
 6. **Lista o que ainda é fictício:** nomes da equipe, fotos de exemplo, textos "Na sua página...", palavras de profissão e gênero. A lista sai no terminal e no `LEIA-ME.md` do cliente, com arquivo e linha.
-7. **Prepara a publicação:** `wrangler.jsonc` com o nome do projeto, `.assetsignore` e, com `--git`, o repositório com o primeiro commit.
+7. **Prepara a publicação:** `wrangler.jsonc` com o nome do projeto, `.assetsignore`, `_headers` (cache no navegador, igual ao do site do Arthur) e, com `--git`, o repositório com o primeiro commit.
 
 ### Como funciona por dentro
 
@@ -59,8 +66,9 @@ node novo-cliente/cli.mjs --modelo barbearia --versao completo \
 | `novo-cliente/gerar.mjs` | Porta do terminal: lê as vitrines do disco e grava a pasta do cliente |
 | `novo-cliente/cli.mjs` | Perguntas e opções de linha de comando |
 | `novo-cliente/caminhos.mjs` | Caminhos de arquivo sem depender do Node |
-| `novo-cliente/arquivos.mjs` | Arquivos criados para o cliente: `whats.js`, `wrangler.jsonc`, `.assetsignore` |
-| `../painel/` | Porta do navegador: `index.html`, `painel.js`, `zip.mjs` (gerador de .zip próprio) e `vendor/` (cópia do parse5) |
+| `novo-cliente/arquivos.mjs` | Arquivos criados para o cliente: `whats.js`, `wrangler.jsonc`, `.assetsignore`, `_headers` |
+| `../painel/` | Porta do navegador: `index.html`, `painel.js` (tela), `edicao.mjs` (textos e cores), `variacoes.mjs` (topo, fundo, ordem e seções escondidas), `zip.mjs` (gerador de .zip próprio) e `vendor/` (cópia do parse5) |
+| `../modelos/comum/variacoes.css` | CSS das variações de layout: a manicure liga direto; nos outros clientes, o painel anexa ao `style.css` quando alguma variação é usada |
 | `novo-cliente/html.mjs` | Leitura com posições e edições no HTML |
 | `novo-cliente/texto.mjs` | Troca de nomes com artigos e contrações |
 | `novo-cliente/entrada.mjs` | Validação do que a pessoa digita |
@@ -77,6 +85,8 @@ npm run vendor  # depois de atualizar o parse5: copia a versão nova para painel
 O painel também tem teste no navegador (`testes/specs/painel.spec.ts`):
 - validação dos campos;
 - prévia, com navegação pelas páginas;
+- edição de texto (Enter e Esc) e de cores, levadas para o .zip;
+- topo, ordem, seções escondidas e fundo fixo, levados para o .zip;
 - download do .zip;
 - acessibilidade.
 
@@ -84,7 +94,8 @@ O teste de integração gera um cliente a partir de cada uma das 8 vitrines (4 m
 - nenhum resto de demonstração ficou para trás;
 - todo arquivo citado existe;
 - todo botão abre o WhatsApp do cliente com a mesma mensagem;
-- os nomes entraram com o artigo certo.
+- os nomes entraram com o artigo certo;
+- o `_headers` do cliente é igual ao do site do Arthur.
 
 Roda no GitHub Actions a cada push, junto com os testes do site.
 
