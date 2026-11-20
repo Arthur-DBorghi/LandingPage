@@ -68,6 +68,8 @@
 
 // ---------- 3. Próxima página mais rápida ----------
 (function () {
+  // Fora de um site de verdade (ex.: prévia do painel, about:srcdoc) não faz nada
+  if (!/^https?:$/.test(location.protocol)) return;
   // Só páginas deste site, na mesma pasta (nada de WhatsApp, âncoras ou outros sites)
   const pasta = new URL(".", location.href).href;
   function ehPaginaDoSite(a) {
