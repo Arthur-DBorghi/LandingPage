@@ -83,8 +83,8 @@ export const MODELOS = {
   },
   manicure: {
     rotulo: "Manicure e pedicure",
-    // Só landing page por enquanto (nasce com o fundo fixo)
-    paginas: { lp: ["index.html"], completo: [] },
+    // Nasce com o fundo fixo (data-fundo="fixo" no <body>)
+    paginas: { lp: ["index.html"], completo: ["index.html", "servicos.html", "cuidados.html", "galeria.html", "contato.html"] },
     perguntas: ["nome", "whatsapp", "cidade", "bairro", "endereco", "dominio"],
     nome: { curto: "Lumi", completo: "Lumi Esmalteria" },
     bairro: "Jardim das Flores",

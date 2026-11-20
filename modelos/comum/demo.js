@@ -16,6 +16,32 @@
   const linkOrcamento = "../../orcamento.html?modelo=" + encodeURIComponent(modelo) +
     (plano ? "&plano=" + encodeURIComponent(plano) : "");
 
+  // ---------- Fundo fixo pela URL (?fundo=fixo ou ?fundo=normal) ----------
+  // O portfólio usa isso para mostrar qualquer modelo com o fundo parado.
+  const fundo = new URLSearchParams(location.search).get("fundo");
+  if (fundo === "fixo") {
+    document.body.dataset.fundo = "fixo";
+    if (!document.querySelector('link[href$="variacoes.css"]')) {
+      const css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = "../comum/variacoes.css";
+      document.head.appendChild(css);
+    }
+  } else if (fundo === "normal") {
+    delete document.body.dataset.fundo;
+  }
+  if (fundo === "fixo" || fundo === "normal") {
+    // Mantém a escolha ao trocar de página no site completo
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('a[href]').forEach((a) => {
+        const href = a.getAttribute("href");
+        if (!/^[\w-]+\.html(#.*)?$/.test(href)) return;
+        const [pagina, ancora] = href.split("#");
+        a.setAttribute("href", pagina + "?fundo=" + fundo + (ancora ? "#" + ancora : ""));
+      });
+    });
+  }
+
   // ---------- Faixa no topo ----------
   const faixa = document.createElement("div");
   faixa.className = "demo-faixa";

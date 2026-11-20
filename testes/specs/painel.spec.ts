@@ -195,13 +195,11 @@ test("muda o topo, a ordem e esconde seções, e o .zip sai igual à prévia", a
   expect(erros).toEqual([]);
 });
 
-test("manicure: só landing page, nasce com fundo fixo e leva o variacoes.css no .zip", async ({ page }) => {
+test("manicure: nasce com fundo fixo, que vale para as 5 páginas, e leva o variacoes.css no .zip", async ({ page }) => {
   const erros = vigiarErros(page);
   await page.goto("/painel/");
-  await page.locator('input[name="versao"][value="completo"]').check();
   await page.locator('input[name="modelo"][value="manicure"]').check();
-  await expect(page.locator('input[name="versao"][value="completo"]')).toBeDisabled();
-  await expect(page.locator('input[name="versao"][value="lp"]')).toBeChecked();
+  await page.locator('input[name="versao"][value="completo"]').check();
   await page.locator("#nome").fill("Unhas da Bia");
   await page.locator("#whatsapp").fill("(11) 98765-4321");
   await page.locator("#bairro").fill("Granja Viana");
@@ -209,12 +207,22 @@ test("manicure: só landing page, nasce com fundo fixo e leva o variacoes.css no
   const previa = page.frameLocator("#previa");
   await expect(previa.locator("body")).toHaveAttribute("data-fundo", "fixo");
   await expect(page.locator('#estilo-fundo input[value="fixo"]')).toBeChecked();
-  await expect(previa.locator(".marca span")).toHaveText("Unhas da Bia");
+  await expect(previa.locator(".nav .marca span")).toHaveText("Unhas da Bia");
 
   // Desliga e liga de novo o fundo fixo
   await page.locator('#estilo-fundo input[value="normal"]').check();
   await expect(previa.locator("body")).not.toHaveAttribute("data-fundo", "fixo");
   await page.locator('#estilo-fundo input[value="fixo"]').check();
+  await expect(previa.locator("body")).toHaveAttribute("data-fundo", "fixo");
+  await expect(page.locator("#previa-paginas button")).toHaveCount(5);
+
+  // Desligar o fundo vale para o site inteiro
+  await page.locator('#estilo-fundo input[value="normal"]').check();
+  await page.locator("#previa-paginas button").nth(2).click();
+  await expect(previa.locator("body")).not.toHaveAttribute("data-fundo", "fixo");
+  await expect(page.locator('#estilo-fundo input[value="normal"]')).toBeChecked();
+  await page.locator('#estilo-fundo input[value="fixo"]').check();
+  await page.locator("#previa-paginas button").first().click();
   await expect(previa.locator("body")).toHaveAttribute("data-fundo", "fixo");
 
   const [download] = await Promise.all([page.waitForEvent("download"), page.locator("#botao-baixar").click()]);

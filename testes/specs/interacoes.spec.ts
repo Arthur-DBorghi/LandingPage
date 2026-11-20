@@ -115,7 +115,6 @@ test.describe("Vitrines · botões de WhatsApp", () => {
       await page.locator("dialog.demo-janela [data-fechar]").click();
 
       await expect(page.locator(".demo-faixa a").first()).toHaveAttribute("href", `../../orcamento.html?modelo=${modelo}`);
-      if (modelo === "manicure") return; // só landing page
       await page.goto(`/modelos/${modelo}-completo/index.html`);
       await expect(page.locator(".demo-faixa a").first()).toHaveAttribute("href", `../../orcamento.html?modelo=${modelo}&plano=site`);
     });
@@ -124,7 +123,7 @@ test.describe("Vitrines · botões de WhatsApp", () => {
 
 test.describe("Portfólio · landing page ou site completo", () => {
   soNo("computador");
-  for (const modelo of ["barbearia", "consultoria", "petshop"]) {
+  for (const modelo of ["barbearia", "consultoria", "petshop", "manicure"]) {
     test(modelo, async ({ page, context }) => {
       await page.goto("/index.html#portfolio");
       const card = page.locator(`.projeto-${modelo}`);
@@ -149,6 +148,42 @@ test.describe("Portfólio · landing page ou site completo", () => {
     });
   }
 });
+test.describe("Fundo fixo pela URL e pelo portfólio", () => {
+  soNo("computador");
+
+  test("o card liga o fundo fixo e o site completo mantém a escolha entre as páginas", async ({ page, context }) => {
+    await page.goto("/index.html#portfolio");
+    const card = page.locator(".projeto-petshop");
+    const link = card.locator(".projeto-link");
+    await card.locator(".fundo-fixo").click();
+    await expect(card.locator(".fundo-fixo")).toHaveAttribute("aria-pressed", "true");
+    await expect(link).toHaveAttribute("href", "modelos/petshop/index.html?fundo=fixo");
+    await card.locator('.versoes button[data-versao="site"]').click();
+    await expect(link).toHaveAttribute("href", "modelos/petshop-completo/index.html?fundo=fixo");
+
+    const [vitrine] = await Promise.all([context.waitForEvent("page"), link.click()]);
+    await vitrine.waitForLoadState();
+    await expect(vitrine.locator("body")).toHaveAttribute("data-fundo", "fixo");
+    await expect(vitrine.locator(".hero")).toBeVisible();
+    // O painel da seção fica por cima do fundo (com cantos arredondados)
+    expect(await vitrine.locator("main > section.secao").first().evaluate((el) => getComputedStyle(el).borderTopLeftRadius)).not.toBe("0px");
+    await vitrine.locator('.nav nav a[href^="contato.html"]').click();
+    await expect(vitrine).toHaveURL(/contato\.html\?fundo=fixo$/);
+    await expect(vitrine.locator("body")).toHaveAttribute("data-fundo", "fixo");
+  });
+
+  test("a manicure nasce com fundo fixo e o card permite desligar", async ({ page }) => {
+    await page.goto("/index.html#portfolio");
+    const card = page.locator(".projeto-manicure");
+    await expect(card.locator(".fundo-fixo")).toHaveAttribute("aria-pressed", "true");
+    await expect(card.locator(".projeto-link")).toHaveAttribute("href", "modelos/manicure/index.html");
+    await card.locator(".fundo-fixo").click();
+    await expect(card.locator(".projeto-link")).toHaveAttribute("href", "modelos/manicure/index.html?fundo=normal");
+    await page.goto("/modelos/manicure/index.html?fundo=normal");
+    await expect(page.locator("body")).not.toHaveAttribute("data-fundo", "fixo");
+  });
+});
+
 
 test.describe("Orçamento", () => {
   soNo("computador");

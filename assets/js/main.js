@@ -65,18 +65,34 @@ if (campoFormato) {
 // =========================
 // Cada card alterna entre as duas versões do mesmo negócio fictício:
 // troca a imagem, o texto e o link "Ver como ...".
+// O botão "Fundo fixo" abre o modelo com ?fundo=fixo (ou ?fundo=normal, no
+// modelo que já nasce com fundo fixo); o demo.js das vitrines aplica.
 document.querySelectorAll(".projeto[data-versao]").forEach((card) => {
   const link = card.querySelector(".projeto-link");
   const capa = card.querySelector(".projeto-capa");
+  const fundo = card.querySelector(".fundo-fixo");
+  const padrao = card.dataset.fundoPadrao || "normal";
+
+  function atualizar() {
+    const versao = card.dataset.versao; // "lp" ou "site"
+    const escolhido = fundo && fundo.getAttribute("aria-pressed") === "true" ? "fixo" : "normal";
+    link.href = capa.href = link.dataset[versao] + (escolhido === padrao ? "" : "?fundo=" + escolhido);
+    link.textContent = versao === "site" ? "Ver como site completo →" : "Ver como landing page →";
+  }
+
   card.querySelectorAll(".versoes button").forEach((botao) => {
     botao.addEventListener("click", () => {
-      const versao = botao.dataset.versao; // "lp" ou "site"
-      card.dataset.versao = versao;
+      card.dataset.versao = botao.dataset.versao;
       card.querySelectorAll(".versoes button").forEach((b) => b.setAttribute("aria-pressed", String(b === botao)));
-      link.href = capa.href = link.dataset[versao];
-      link.textContent = versao === "site" ? "Ver como site completo →" : "Ver como landing page →";
+      atualizar();
     });
   });
+  if (fundo) {
+    fundo.addEventListener("click", () => {
+      fundo.setAttribute("aria-pressed", String(fundo.getAttribute("aria-pressed") !== "true"));
+      atualizar();
+    });
+  }
 });
 
 // =========================

@@ -36,6 +36,12 @@ const CLIENTES = {
     whatsapp: NUMERO,
     bairro: { artigo: "o", nome: "Tatuapé" },
   },
+  manicure: {
+    modelo: "manicure",
+    nome: { artigo: "a", nome: "Unhas da Bia" },
+    whatsapp: NUMERO,
+    bairro: { artigo: "a", nome: "Granja Viana" },
+  },
 };
 
 /** Restos da vitrine que não podem aparecer no site de um cliente. */
@@ -43,6 +49,7 @@ const PROIBIDOS = [
   "Navalha Fina", "NAVALHA FINA", "Focinho Feliz", "Clara Andrade", "Olá, Clara", "a Clara",
   "noindex", "demo.js", "demo.css", "data-modelo", "data-plano", "negócio fictício",
   "Modelo de demonstração", "../", "favicon.png", "Vila Nova", "no Centro",
+  "Lumi", "Jardim das Flores",
 ];
 
 for (const [modelo, cliente] of Object.entries(CLIENTES)) {

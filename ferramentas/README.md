@@ -69,7 +69,7 @@ node novo-cliente/cli.mjs --modelo barbearia --versao completo \
 ### Testes
 
 ```bash
-npm test        # node:test: unitários, as 6 vitrines convertidas de verdade e o .zip do painel
+npm test        # node:test: unitários, as 8 vitrines convertidas de verdade e o .zip do painel
 npm run tipos   # TypeScript conferindo os comentários JSDoc (sem etapa de build), inclusive do painel
 npm run vendor  # depois de atualizar o parse5: copia a versão nova para painel/vendor
 ```
@@ -80,7 +80,7 @@ O painel também tem teste no navegador (`testes/specs/painel.spec.ts`):
 - download do .zip;
 - acessibilidade.
 
-O teste de integração gera um cliente a partir de cada uma das 6 vitrines (3 modelos × landing page e site completo). Em cada site gerado, ele confere que:
+O teste de integração gera um cliente a partir de cada uma das 8 vitrines (4 modelos × landing page e site completo). Em cada site gerado, ele confere que:
 - nenhum resto de demonstração ficou para trás;
 - todo arquivo citado existe;
 - todo botão abre o WhatsApp do cliente com a mesma mensagem;

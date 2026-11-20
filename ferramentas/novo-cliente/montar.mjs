@@ -20,7 +20,7 @@ import {
  * @typedef {import("./html.mjs").No} No
  * @typedef {{ artigo: Artigo, nome: string }} NomeDefinido
  * @typedef {{
- *   modelo: "barbearia" | "consultoria" | "petshop",
+ *   modelo: "barbearia" | "consultoria" | "petshop" | "manicure",
  *   versao: "lp" | "completo",
  *   nome: NomeDefinido,
  *   whatsapp: string,

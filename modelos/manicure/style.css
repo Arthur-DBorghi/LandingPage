@@ -125,6 +125,29 @@ h3 { font-size: 1.25rem; }
 .secao { max-width: 1180px; margin: 0 auto; padding: clamp(48px, 7vw, 88px) clamp(20px, 5vw, 64px); }
 .secao > h2 { margin-bottom: 32px; max-width: 680px; }
 
+.titulo-secao { margin-bottom: 32px; }
+.titulo-secao h2 { max-width: 680px; }
+.nota { margin: 20px 0 0; color: var(--tinta-suave); font-size: 0.95rem; }
+
+/* Como funciona */
+.passos { counter-reset: passo; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }
+.passos li { counter-increment: passo; padding: 24px; border-radius: 22px; background: var(--cartao); border: 1px solid var(--linha); }
+.passos li::before {
+  content: counter(passo);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  background: var(--destaque-claro);
+  color: var(--destaque-escuro);
+  font-family: var(--titulo);
+  font-size: 1.2rem;
+}
+.passos strong { display: block; font-size: 1.1rem; margin-bottom: 4px; }
+.passos span { color: var(--tinta-suave); }
+
 /* Serviços */
 .servicos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }
 .servicos li {
@@ -139,7 +162,7 @@ h3 { font-size: 1.25rem; }
 }
 .servicos li p { margin: 0; color: var(--tinta-suave); }
 .servicos li .link-seta { align-self: flex-start; margin-top: auto; }
-.servicos .destaque { border-color: var(--destaque); box-shadow: 0 18px 40px -28px rgba(158, 42, 91, 0.6); }
+.servicos .mais-pedido { border-color: var(--destaque); box-shadow: 0 18px 40px -28px rgba(158, 42, 91, 0.6); }
 .selo-servico { position: absolute; top: -12px; right: 18px; padding: 4px 12px; border-radius: 999px; background: var(--destaque); color: #fff; font-size: 0.78rem; font-weight: 700; }
 .preco { font-family: var(--titulo); font-size: 1.6rem; color: var(--tinta) !important; }
 .preco small { font-family: var(--corpo); font-size: 0.9rem; color: var(--tinta-suave); }
@@ -182,6 +205,7 @@ h3 { font-size: 1.25rem; }
 #duvidas > .sobretitulo, #duvidas > h2 { grid-column: 1 / -1; }
 .faq details { padding: 16px 0; border-bottom: 1px solid var(--linha); }
 .faq summary { cursor: pointer; font-weight: 700; }
+.faq summary::after { color: var(--destaque); }
 .faq summary:focus-visible { outline: 3px solid var(--dourado); outline-offset: 3px; }
 .faq details p { margin: 10px 0 0; color: var(--tinta-suave); }
 .horarios-card { align-self: start; padding: 24px; border-radius: 22px; background: var(--cartao); border: 1px solid var(--linha); }
