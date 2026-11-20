@@ -20,7 +20,7 @@ import { MODELOS } from "./modelos.mjs";
 const AJUDA = `Transforma uma vitrine em site de cliente, numa pasta nova.
 
 Opções (o que faltar é perguntado):
-  --modelo        barbearia | consultoria | petshop
+  --modelo        barbearia | consultoria | petshop | manicure
   --versao        lp | completo
   --nome          nome do negócio com artigo, ex.: "a Barbearia do Zé", "o Studio Corte"
   --whatsapp      com DDD, ex.: "(11) 98765-4321"
@@ -115,8 +115,8 @@ async function obterComArtigo(pergunta, jaDado, opcao) {
 }
 
 try {
-  const modelo = await obter("Modelo (barbearia, consultoria, petshop)", opcoes.modelo, (t) => {
-    if (!(t in MODELOS)) throw new Error("Use barbearia, consultoria ou petshop.");
+  const modelo = await obter("Modelo (barbearia, consultoria, petshop, manicure)", opcoes.modelo, (t) => {
+    if (!(t in MODELOS)) throw new Error("Use barbearia, consultoria, petshop ou manicure.");
     return /** @type {Pedido["modelo"]} */ (t);
   }, { opcao: "modelo" });
   const versao = await obter("Versão (lp = landing page, completo = 5 páginas)", opcoes.versao, (t) => {

@@ -45,7 +45,7 @@ jobs:
           retention-days: 14
 
   ferramenta:
-    name: Ferramenta novo-cliente (6 vitrines convertidas)
+    name: Ferramenta novo-cliente (8 vitrines convertidas)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     defaults:

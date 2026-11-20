@@ -105,7 +105,7 @@ test.describe("Pet shop · preço muda com o porte", () => {
 
 test.describe("Vitrines · botões de WhatsApp", () => {
   soNo("computador");
-  for (const modelo of ["barbearia", "consultoria", "petshop"]) {
+  for (const modelo of ["barbearia", "consultoria", "petshop", "manicure"]) {
     test(`${modelo}: botão mostra a mensagem e a faixa leva ao orçamento`, async ({ page }) => {
       await page.goto(`/modelos/${modelo}/index.html`);
       const botao = page.locator("main [data-whats]").first();
@@ -123,7 +123,7 @@ test.describe("Vitrines · botões de WhatsApp", () => {
 
 test.describe("Portfólio · landing page ou site completo", () => {
   soNo("computador");
-  for (const modelo of ["barbearia", "consultoria", "petshop"]) {
+  for (const modelo of ["barbearia", "consultoria", "petshop", "manicure"]) {
     test(modelo, async ({ page, context }) => {
       await page.goto("/index.html#portfolio");
       const card = page.locator(`.projeto-${modelo}`);
@@ -148,6 +148,42 @@ test.describe("Portfólio · landing page ou site completo", () => {
     });
   }
 });
+test.describe("Fundo fixo pela URL e pelo portfólio", () => {
+  soNo("computador");
+
+  test("o card liga o fundo fixo e o site completo mantém a escolha entre as páginas", async ({ page, context }) => {
+    await page.goto("/index.html#portfolio");
+    const card = page.locator(".projeto-petshop");
+    const link = card.locator(".projeto-link");
+    await card.locator(".fundo-fixo").click();
+    await expect(card.locator(".fundo-fixo")).toHaveAttribute("aria-pressed", "true");
+    await expect(link).toHaveAttribute("href", "modelos/petshop/index.html?fundo=fixo");
+    await card.locator('.versoes button[data-versao="site"]').click();
+    await expect(link).toHaveAttribute("href", "modelos/petshop-completo/index.html?fundo=fixo");
+
+    const [vitrine] = await Promise.all([context.waitForEvent("page"), link.click()]);
+    await vitrine.waitForLoadState();
+    await expect(vitrine.locator("body")).toHaveAttribute("data-fundo", "fixo");
+    await expect(vitrine.locator(".hero")).toBeVisible();
+    // O painel da seção fica por cima do fundo (com cantos arredondados)
+    expect(await vitrine.locator("main > section.secao").first().evaluate((el) => getComputedStyle(el).borderTopLeftRadius)).not.toBe("0px");
+    await vitrine.locator('.nav nav a[href^="contato.html"]').click();
+    await expect(vitrine).toHaveURL(/contato\.html\?fundo=fixo$/);
+    await expect(vitrine.locator("body")).toHaveAttribute("data-fundo", "fixo");
+  });
+
+  test("a manicure nasce com fundo fixo e o card permite desligar", async ({ page }) => {
+    await page.goto("/index.html#portfolio");
+    const card = page.locator(".projeto-manicure");
+    await expect(card.locator(".fundo-fixo")).toHaveAttribute("aria-pressed", "true");
+    await expect(card.locator(".projeto-link")).toHaveAttribute("href", "modelos/manicure/index.html");
+    await card.locator(".fundo-fixo").click();
+    await expect(card.locator(".projeto-link")).toHaveAttribute("href", "modelos/manicure/index.html?fundo=normal");
+    await page.goto("/modelos/manicure/index.html?fundo=normal");
+    await expect(page.locator("body")).not.toHaveAttribute("data-fundo", "fixo");
+  });
+});
+
 
 test.describe("Orçamento", () => {
   soNo("computador");
@@ -194,5 +230,35 @@ test.describe("Orçamento", () => {
     const texto = url.searchParams.get("text") ?? "";
     expect(texto).toContain("Nome: Ana");
     expect(texto).toContain("Formato: Site completo (5 páginas, R$ 850)");
+  });
+});
+
+test.describe("Troca de página no site completo", () => {
+  soNo("computador");
+
+  test("transição suave ligada e próxima página preparada ao passar o mouse", async ({ page }) => {
+    await page.goto("/modelos/manicure-completo/index.html");
+    // @view-transition { navigation: auto } carregado
+    const temTransicao = await page.evaluate(() =>
+      [...document.styleSheets].some((s) => [...s.cssRules].some((r) => r.constructor.name === "CSSViewTransitionRule")),
+    );
+    expect(temTransicao).toBe(true);
+    // Chromium: regras de prerender só para as páginas do próprio site
+    const regras = JSON.parse((await page.locator('script[type="speculationrules"]').textContent()) ?? "{}");
+    expect(regras.prerender[0].eagerness).toBe("moderate");
+    expect(JSON.stringify(regras)).toContain("[data-whats]");
+  });
+
+  test("vindo de outra página do site, o topo aparece na hora; na primeira visita, anima", async ({ page }) => {
+    // Primeira visita (sem página anterior): o título entra com animação
+    await page.goto("/modelos/petshop-completo/cuidados.html");
+    await expect(page.locator(".cabecalho-pagina h1")).toHaveClass(/revelar/);
+
+    // Pelo menu: o título já está visível, sem esperar animação
+    await page.locator('.nav nav a[href="contato.html"]').click();
+    await expect(page).toHaveURL(/contato\.html$/);
+    await expect(page.locator(".cabecalho-pagina h1")).not.toHaveClass(/revelar/);
+    // O que fica abaixo da dobra continua animando ao rolar
+    await expect(page.locator(".rodape-grade > *").first()).toHaveClass(/revelar/);
   });
 });

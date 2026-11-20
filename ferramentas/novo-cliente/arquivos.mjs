@@ -46,4 +46,31 @@ export function wranglerJsonc(slug, hoje) {
   return `{\n  "name": "${slug}",\n  "compatibility_date": "${hoje}",\n  "assets": {\n    "directory": "./"\n  }\n}\n`;
 }
 
+/**
+ * Cache no navegador (lido pela Cloudflare). Sem isto, a cada página o
+ * navegador confere de novo cada CSS, JS e imagem com o servidor.
+ */
+export const HEADERS = `# Fontes nunca mudam: o navegador pode guardar por 1 ano
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS e JS: guardados por 10 minutos. Quem navega pelo site não espera o
+# navegador conferir cada arquivo de novo a cada página; uma mudança
+# publicada aparece para todos em até 10 minutos.
+/*.css
+  Cache-Control: public, max-age=600
+/*.js
+  Cache-Control: public, max-age=600
+
+# Imagens: 1 dia (usadas de novo depois, enquanto o navegador confere)
+/*.webp
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/*.png
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/*.jpg
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/*.svg
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+`;
+
 export const ASSETSIGNORE = [".git", "wrangler.jsonc", ".assetsignore", "LEIA-ME.md", ""].join("\n");

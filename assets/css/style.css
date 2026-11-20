@@ -193,7 +193,7 @@ p { margin: 0; }
 .nota { margin-top: 24px; color: var(--texto-suave); font-size: 0.9rem; }
 
 /* Portfólio */
-.projetos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.projetos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .projeto {
   display: flex;
   flex-direction: column;
@@ -239,6 +239,37 @@ p { margin: 0; }
   transition: background 0.2s, color 0.2s;
 }
 .versoes button:hover { color: var(--texto); }
+
+/* Interruptor "Fundo fixo" do card */
+.fundo-fixo {
+  position: relative;
+  z-index: 1; /* acima do link que cobre o card */
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px;
+  padding: 4px 4px 4px 0;
+  border: 0;
+  background: none;
+  color: var(--texto-suave);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.fundo-fixo::before {
+  content: "";
+  width: 34px;
+  height: 20px;
+  border-radius: 999px;
+  border: 1px solid var(--linha);
+  background: radial-gradient(circle at 10px 50%, var(--texto-suave) 6px, transparent 6.5px) rgba(255, 255, 255, 0.04);
+  transition: background 0.2s;
+}
+.fundo-fixo[aria-pressed="true"] { color: var(--texto); }
+.fundo-fixo[aria-pressed="true"]::before { background: radial-gradient(circle at 24px 50%, #0B0B14 6px, transparent 6.5px) var(--cor, var(--ciano)); border-color: transparent; }
+.fundo-fixo:hover { color: var(--texto); }
+.fundo-fixo:focus-visible { outline: 2px solid var(--ciano); outline-offset: 3px; }
 .versoes button[aria-pressed="true"] { background: var(--cor, var(--ciano)); color: #0B0B14; }
 .capa-site, .texto-site { display: none; }
 .projeto[data-versao="site"] .capa-lp,
@@ -535,6 +566,7 @@ p { margin: 0; }
 .projeto-barbearia { --cor: #E2B93B; }
 .projeto-consultoria { --cor: #3CC4A2; }
 .projeto-petshop { --cor: #FFC93C; }
+.projeto-manicure { --cor: #F48FB1; }
 .projeto::before {
   content: "";
   position: absolute;

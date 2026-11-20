@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serviços e preços | Lumi Esmalteria no Jardim das Flores</title>
+  <meta name="description" content="Manicure R$ 35, pedicure R$ 40, pé e mão R$ 70, gel, alongamento em fibra e spa dos pés. Clube Mãos e Pés por R$ 240 ao mês." />
+  <!-- Modelo fictício: não deve aparecer no Google -->
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+  <link rel="preload" href="../../assets/fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../../assets/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../comum/demo.css" />
+  <link rel="stylesheet" href="../comum/animacoes.css" />
+  <link rel="stylesheet" href="../manicure/style.css" />
+  <link rel="stylesheet" href="../comum/site.css" />
+  <link rel="stylesheet" href="site-manicure.css" />
+  <link rel="stylesheet" href="../comum/variacoes.css" />
+</head>
+<body data-modelo="manicure" data-plano="site" data-fundo="fixo">
+
+  <!-- Faixa de demonstração: carregada logo no início (sem defer) para não empurrar a página depois de aparecer -->
+  <script src="../comum/demo.js"></script>
+
+  <header class="nav">
+    <a href="index.html" class="marca">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#9E2A5B" />
+        <rect x="15" y="9" width="10" height="9" rx="2" fill="#F7D9CF" />
+        <rect x="12" y="17" width="16" height="15" rx="5" fill="#FCE4EC" />
+      </svg>
+      <span>Lumi Esmalteria</span>
+    </a>
+    <nav aria-label="Páginas">
+      <a href="index.html">Início</a>
+      <a href="servicos.html" aria-current="page">Serviços e preços</a>
+      <a href="cuidados.html">Cuidados</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    <div style="display:flex; gap:10px; align-items:center">
+      <a href="#" class="botao botao-pequeno" data-whats="Olá! Vim pelo site e quero agendar um horário.">Agendar</a>
+      <button type="button" class="menu-botao" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="gaveta-fundo" aria-hidden="true"></div>
+  <nav class="gaveta" id="gaveta" aria-label="Menu" aria-hidden="true" inert>
+    <div class="gaveta-topo">
+      <a href="index.html" class="marca"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#9E2A5B" />
+        <rect x="15" y="9" width="10" height="9" rx="2" fill="#F7D9CF" />
+        <rect x="12" y="17" width="16" height="15" rx="5" fill="#FCE4EC" />
+      </svg><span>Lumi Esmalteria</span></a>
+      <button type="button" class="gaveta-fechar" aria-label="Fechar menu">✕</button>
+    </div>
+    <a href="index.html" class="gaveta-link">Início</a>
+    <a href="servicos.html" class="gaveta-link" aria-current="page">Serviços e preços</a>
+    <a href="cuidados.html" class="gaveta-link">Cuidados</a>
+    <a href="galeria.html" class="gaveta-link">Galeria</a>
+    <a href="contato.html" class="gaveta-link">Contato</a>
+    <a href="#" class="botao" data-whats="Olá! Vim pelo site e quero agendar um horário.">Agendar pelo WhatsApp</a>
+  </nav>
+
+  <main id="topo">
+    <section class="cabecalho-pagina">
+      <p class="trilha"><a href="index.html">Início</a> / Serviços e preços</p>
+      <p class="sobretitulo">Serviços e preços</p>
+      <h1>Escolha o cuidado e veja quanto fica</h1>
+      <p class="lead">Preços fechados, sem surpresa no fim. Os tempos são aproximados e podem variar um pouco.</p>
+    </section>
+
+    <section class="secao">
+      <ul class="servicos">
+        <li>
+          <h3>Manicure</h3>
+          <p>Cutilagem, lixamento e esmaltação tradicional.</p>
+          <p class="preco">R$ 35 <small>· 40 min</small></p>
+          <a href="#" class="link-seta" data-whats="Olá! Quero agendar manicure.">Agendar →</a>
+        </li>
+        <li>
+          <h3>Pedicure</h3>
+          <p>Cutilagem, lixamento, hidratação rápida e esmaltação.</p>
+          <p class="preco">R$ 40 <small>· 50 min</small></p>
+          <a href="#" class="link-seta" data-whats="Olá! Quero agendar pedicure.">Agendar →</a>
+        </li>
+        <li class="mais-pedido">
+          <span class="selo-servico">Mais pedido</span>
+          <h3>Pé e mão</h3>
+          <p>Manicure e pedicure no mesmo horário, com uma profissional para cada.</p>
+          <p class="preco">R$ 70 <small>· 1h</small></p>
+          <a href="#" class="link-seta" data-whats="Olá! Quero agendar pé e mão.">Agendar →</a>
+        </li>
+        <li>
+          <h3>Esmaltação em gel</h3>
+          <p>Brilho que dura até 3 semanas, sem lascar. Remoção inclusa na próxima visita.</p>
+          <p class="preco">R$ 90 <small>· 1h15</small></p>
+          <a href="#" class="link-seta" data-whats="Olá! Quero agendar esmaltação em gel.">Agendar →</a>
+        </li>
+        <li>
+          <h3>Alongamento em fibra</h3>
+          <p>Unhas longas e naturais, com formato e tamanho que você escolher.</p>
+          <p class="preco">R$ 160 <small>· 2h</small></p>
+          <a href="#" class="link-seta" data-whats="Olá! Quero agendar alongamento em fibra.">Agendar →</a>
+        </li>
+        <li>
+          <h3>Manutenção do alongamento</h3>
+          <p>A cada 15 a 20 dias, para o alongamento continuar bonito.</p>
+          <p class="preco">R$ 110 <small>· 1h30</small></p>
+          <a href="#" class="link-seta" data-whats="Olá! Quero agendar manutenção do alongamento.">Agendar →</a>
+        </li>
+        <li>
+          <h3>Spa dos pés</h3>
+          <p>Escalda-pés, esfoliação, hidratação profunda e massagem.</p>
+          <p class="preco">R$ 60 <small>· 45 min</small></p>
+          <a href="#" class="link-seta" data-whats="Olá! Quero agendar spa dos pés.">Agendar →</a>
+        </li>
+        <li>
+          <h3>Plástica dos pés</h3>
+          <p>Lixamento de calosidades e hidratação intensiva.</p>
+          <p class="preco">R$ 75 <small>· 1h</small></p>
+          <a href="#" class="link-seta" data-whats="Olá! Quero agendar plástica dos pés.">Agendar →</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="secao" id="clube">
+      <div class="titulo-secao">
+        <p class="sobretitulo">Clube Mãos e Pés</p>
+        <h2>Unhas sempre em dia, com horário garantido</h2>
+      </div>
+      <div class="pacote">
+        <div>
+          <h3>4 sessões de pé e mão por mês</h3>
+          <p>No dia e horário fixos que você escolher. Se precisar remarcar, é só avisar com 3 horas de antecedência.</p>
+        </div>
+        <p class="preco">R$ 240<small>/mês · economia de R$ 40</small></p>
+        <a href="#" class="botao" data-whats="Olá! Quero saber do Clube Mãos e Pés.">Quero entrar no clube</a>
+      </div>
+    </section>
+
+    <section class="secao">
+      <div class="duas-colunas">
+        <div>
+          <p class="sobretitulo">Adicionais</p>
+          <h2>Para deixar do seu jeito</h2>
+          <p class="lead">Combine com qualquer serviço. É só avisar no agendamento.</p>
+        </div>
+        <ul class="avulsos caixa">
+          <li><span>Nail art (por unha)</span><strong>R$ 5</strong></li>
+          <li><span>Francesinha</span><strong>R$ 10</strong></li>
+          <li><span>Remoção de gel de outro salão</span><strong>R$ 30</strong></li>
+          <li><span>Hidratação de parafina</span><strong>R$ 25</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Bora deixar as unhas em dia?</h2>
+      <p>Os horários de sexta e sábado são os primeiros a acabar.</p>
+      <a href="#" class="botao botao-claro" data-whats="Olá! Vim pelo site e quero agendar um horário.">Agendar pelo WhatsApp</a>
+    </section>
+
+  </main>
+
+  <footer class="rodape-completo">
+    <div class="rodape-grade">
+      <div>
+        <a href="index.html" class="marca"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#9E2A5B" />
+        <rect x="15" y="9" width="10" height="9" rx="2" fill="#F7D9CF" />
+        <rect x="12" y="17" width="16" height="15" rx="5" fill="#FCE4EC" />
+      </svg><span>Lumi Esmalteria</span></a>
+        <p>Manicure, pedicure e esmaltação em gel no Jardim das Flores, com material esterilizado e kit individual.</p>
+      </div>
+      <div>
+        <h3>Páginas</h3>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="servicos.html">Serviços e preços</a></li>
+            <li><a href="cuidados.html">Cuidados</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Horários</h3>
+        <ul>
+          <li>Ter a sex: 9h às 19h</li>
+          <li>Sábado: 8h às 16h</li>
+          <li>Domingo e segunda: fechado</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <ul>
+          <li>Rua Exemplo, 789, Jardim das Flores</li>
+          <li><a href="#" data-whats="Olá! Vim pelo site e quero agendar um horário.">WhatsApp</a></li>
+          <li><a href="#" data-whats="Olá! Vim pelo site e tenho uma dúvida.">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="assinatura">© Lumi Esmalteria · negócio fictício para demonstração</p>
+  </footer>
+
+  <a href="#" class="whats-flutuante" aria-label="Agendar pelo WhatsApp" data-whats="Olá! Vim pelo site e quero agendar um horário.">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+  </a>
+
+  <script src="../comum/animacoes.js" defer></script>
+  <script src="../comum/site.js" defer></script>
+</body>
+</html>

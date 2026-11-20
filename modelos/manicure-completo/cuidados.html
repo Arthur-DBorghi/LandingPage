@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biossegurança | Lumi Esmalteria no Jardim das Flores</title>
+  <meta name="description" content="Alicates esterilizados em autoclave, kit individual aberto na sua frente e esmaltes hipoalergênicos. Veja como cuidamos da sua saúde." />
+  <!-- Modelo fictício: não deve aparecer no Google -->
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+  <link rel="preload" href="../../assets/fonts/fraunces-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../../assets/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../comum/demo.css" />
+  <link rel="stylesheet" href="../comum/animacoes.css" />
+  <link rel="stylesheet" href="../manicure/style.css" />
+  <link rel="stylesheet" href="../comum/site.css" />
+  <link rel="stylesheet" href="site-manicure.css" />
+  <link rel="stylesheet" href="../comum/variacoes.css" />
+</head>
+<body data-modelo="manicure" data-plano="site" data-fundo="fixo">
+
+  <!-- Faixa de demonstração: carregada logo no início (sem defer) para não empurrar a página depois de aparecer -->
+  <script src="../comum/demo.js"></script>
+
+  <header class="nav">
+    <a href="index.html" class="marca">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#9E2A5B" />
+        <rect x="15" y="9" width="10" height="9" rx="2" fill="#F7D9CF" />
+        <rect x="12" y="17" width="16" height="15" rx="5" fill="#FCE4EC" />
+      </svg>
+      <span>Lumi Esmalteria</span>
+    </a>
+    <nav aria-label="Páginas">
+      <a href="index.html">Início</a>
+      <a href="servicos.html">Serviços e preços</a>
+      <a href="cuidados.html" aria-current="page">Cuidados</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    <div style="display:flex; gap:10px; align-items:center">
+      <a href="#" class="botao botao-pequeno" data-whats="Olá! Vim pelo site e quero agendar um horário.">Agendar</a>
+      <button type="button" class="menu-botao" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="gaveta-fundo" aria-hidden="true"></div>
+  <nav class="gaveta" id="gaveta" aria-label="Menu" aria-hidden="true" inert>
+    <div class="gaveta-topo">
+      <a href="index.html" class="marca"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#9E2A5B" />
+        <rect x="15" y="9" width="10" height="9" rx="2" fill="#F7D9CF" />
+        <rect x="12" y="17" width="16" height="15" rx="5" fill="#FCE4EC" />
+      </svg><span>Lumi Esmalteria</span></a>
+      <button type="button" class="gaveta-fechar" aria-label="Fechar menu">✕</button>
+    </div>
+    <a href="index.html" class="gaveta-link">Início</a>
+    <a href="servicos.html" class="gaveta-link">Serviços e preços</a>
+    <a href="cuidados.html" class="gaveta-link" aria-current="page">Cuidados</a>
+    <a href="galeria.html" class="gaveta-link">Galeria</a>
+    <a href="contato.html" class="gaveta-link">Contato</a>
+    <a href="#" class="botao" data-whats="Olá! Vim pelo site e quero agendar um horário.">Agendar pelo WhatsApp</a>
+  </nav>
+
+  <main id="topo">
+    <section class="cabecalho-pagina">
+      <p class="trilha"><a href="index.html">Início</a> / Cuidados</p>
+      <p class="sobretitulo">Biossegurança</p>
+      <h1>Cuidado de verdade com a sua saúde</h1>
+      <p class="lead">Manicure bonita começa com material limpo. Veja o que a gente faz em todo atendimento.</p>
+    </section>
+
+    <section class="secao">
+      <div class="cuidados">
+        <article>
+          <h3>Alicates na autoclave</h3>
+          <p>Todo o material de metal é lavado, embalado e esterilizado em autoclave, a 121 °C.</p>
+        </article>
+        <article>
+          <h3>Pacote aberto na sua frente</h3>
+          <p>O kit chega lacrado, com a data da esterilização na embalagem.</p>
+        </article>
+        <article>
+          <h3>Kit só seu</h3>
+          <p>Lixa, palito e pedra-pomes são individuais. Quem é do clube ganha um kit com o próprio nome.</p>
+        </article>
+        <article>
+          <h3>Bacias com protetor descartável</h3>
+          <p>Na pedicure, cada cliente usa um protetor novo na bacia.</p>
+        </article>
+        <article>
+          <h3>Esmaltes hipoalergênicos</h3>
+          <p>Linha especial para quem tem sensibilidade, sem custo a mais.</p>
+        </article>
+        <article>
+          <h3>Ambiente limpo e climatizado</h3>
+          <p>Bancadas higienizadas entre um atendimento e outro.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="secao">
+      <div class="titulo-secao">
+        <p class="sobretitulo">Passo a passo</p>
+        <h2>Como o material é esterilizado</h2>
+      </div>
+      <ol class="passos">
+        <li><strong>Lavagem</strong><span>Escovação com detergente enzimático, que tira toda a sujeira.</span></li>
+        <li><strong>Secagem e embalagem</strong><span>Cada kit vai para um envelope próprio, lacrado e datado.</span></li>
+        <li><strong>Autoclave</strong><span>Vapor a 121 °C, o mesmo processo dos consultórios.</span></li>
+        <li><strong>Aberto na hora</strong><span>Você confere o lacre antes do atendimento começar.</span></li>
+      </ol>
+    </section>
+
+    <section class="cta">
+      <h2>Bora deixar as unhas em dia?</h2>
+      <p>Os horários de sexta e sábado são os primeiros a acabar.</p>
+      <a href="#" class="botao botao-claro" data-whats="Olá! Vim pelo site e quero agendar um horário.">Agendar pelo WhatsApp</a>
+    </section>
+
+  </main>
+
+  <footer class="rodape-completo">
+    <div class="rodape-grade">
+      <div>
+        <a href="index.html" class="marca"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#9E2A5B" />
+        <rect x="15" y="9" width="10" height="9" rx="2" fill="#F7D9CF" />
+        <rect x="12" y="17" width="16" height="15" rx="5" fill="#FCE4EC" />
+      </svg><span>Lumi Esmalteria</span></a>
+        <p>Manicure, pedicure e esmaltação em gel no Jardim das Flores, com material esterilizado e kit individual.</p>
+      </div>
+      <div>
+        <h3>Páginas</h3>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="servicos.html">Serviços e preços</a></li>
+            <li><a href="cuidados.html">Cuidados</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Horários</h3>
+        <ul>
+          <li>Ter a sex: 9h às 19h</li>
+          <li>Sábado: 8h às 16h</li>
+          <li>Domingo e segunda: fechado</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <ul>
+          <li>Rua Exemplo, 789, Jardim das Flores</li>
+          <li><a href="#" data-whats="Olá! Vim pelo site e quero agendar um horário.">WhatsApp</a></li>
+          <li><a href="#" data-whats="Olá! Vim pelo site e tenho uma dúvida.">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="assinatura">© Lumi Esmalteria · negócio fictício para demonstração</p>
+  </footer>
+
+  <a href="#" class="whats-flutuante" aria-label="Agendar pelo WhatsApp" data-whats="Olá! Vim pelo site e quero agendar um horário.">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+  </a>
+
+  <script src="../comum/animacoes.js" defer></script>
+  <script src="../comum/site.js" defer></script>
+</body>
+</html>

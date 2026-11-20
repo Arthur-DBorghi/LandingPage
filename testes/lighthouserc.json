@@ -9,9 +9,11 @@
         "http://localhost:4173/modelos/barbearia/index.html",
         "http://localhost:4173/modelos/consultoria/index.html",
         "http://localhost:4173/modelos/petshop/index.html",
+        "http://localhost:4173/modelos/manicure/index.html",
         "http://localhost:4173/modelos/barbearia-completo/servicos.html",
         "http://localhost:4173/modelos/consultoria-completo/servicos.html",
-        "http://localhost:4173/modelos/petshop-completo/banho-e-tosa.html"
+        "http://localhost:4173/modelos/petshop-completo/banho-e-tosa.html",
+        "http://localhost:4173/modelos/manicure-completo/servicos.html"
       ],
       "numberOfRuns": 3,
       "settings": {

@@ -36,7 +36,8 @@
 
 .escolha { margin: 0 0 18px; padding: 0; border: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .escolha legend { width: 100%; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; }
-.formulario .escolha label {
+.formulario .escolha label,
+.resultado .escolha label {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -47,7 +48,9 @@
   font-weight: 600;
   cursor: pointer;
 }
+.resultado .escolha label:has(input:checked),
 .formulario .escolha label:has(input:checked) { border-color: var(--ciano); background: rgba(0, 216, 255, 0.08); }
+.resultado .escolha input,
 .formulario .escolha input { width: auto; margin: 0; accent-color: var(--ciano); }
 
 .campo { margin-bottom: 16px; }
@@ -67,6 +70,38 @@
 .pendencias li strong { color: var(--texto); font-weight: 600; }
 .pendencias code, .dica code { color: var(--ciano); }
 .status { margin: 14px 0 0; color: var(--texto-suave); font-size: 0.9rem; }
+
+/* Layout da página */
+.escolha[hidden] { display: none; }
+.resultado .escolha label { padding: 6px 12px; font-size: 0.88rem; }
+.formulario .escolha label:has(input:disabled) { opacity: 0.45; cursor: not-allowed; }
+.secoes { display: grid; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
+.secoes li {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px 6px 12px;
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.secoes li.oculta .secao-nome { color: var(--texto-suave); text-decoration: line-through; }
+.secoes button {
+  min-width: 32px;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--linha);
+  border-radius: 8px;
+  background: none;
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.secoes button:disabled { opacity: 0.35; cursor: default; }
+.secoes button:focus-visible { outline: 2px solid var(--ciano); outline-offset: 2px; }
 
 /* Cores da marca */
 .cores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }

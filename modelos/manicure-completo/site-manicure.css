@@ -1,0 +1,29 @@
+/* ==========================================================
+   Manicure · Site completo: peças só desta versão.
+   O visual base vem de ../manicure/style.css (o mesmo da landing
+   page), o menu, cabeçalhos e rodapé de ../comum/site.css e o
+   fundo fixo de ../comum/variacoes.css.
+   ========================================================== */
+
+:root {
+  --site-secao: #FCE4EC;
+  --site-brilho: rgba(201, 161, 91, 0.28);
+  --site-rodape: #3B1F2B;
+  --site-rodape-texto: #F6E3EA;
+  --site-rodape-suave: #CDB1BE;
+}
+
+/* Lista de serviços com 8 itens: 4 colunas no computador */
+.servicos { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+/* Adicionais (nome e preço) */
+.avulsos { margin: 0; padding: 6px 24px; list-style: none; }
+.avulsos li { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px dashed var(--linha); }
+.avulsos li:last-child { border-bottom: 0; }
+.avulsos strong { font-family: var(--titulo); font-size: 1.2rem; white-space: nowrap; }
+
+/* Cuidados: 6 itens */
+.cuidados { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+/* Galeria maior */
+.galeria-grande { margin-top: 0; }

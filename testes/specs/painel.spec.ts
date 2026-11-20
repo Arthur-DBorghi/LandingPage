@@ -142,3 +142,93 @@ test("edita textos e cores clicando na prévia e leva as mudanças para o .zip",
 
   expect(erros).toEqual([]);
 });
+
+test("muda o topo, a ordem e esconde seções, e o .zip sai igual à prévia", async ({ page }) => {
+  const erros = vigiarErros(page);
+  await page.goto("/painel/");
+  await page.locator('input[name="modelo"][value="petshop"]').check();
+  await page.locator("#nome").fill("Bicho Feliz");
+  await page.locator("#whatsapp").fill("(11) 98765-4321");
+  await page.locator("#bairro").fill("Tatuapé");
+  await page.locator('input[name="versao"][value="completo"]').check();
+  await page.locator("#botao-gerar").click();
+  const previa = page.frameLocator("#previa");
+  await expect(previa.locator("h1")).toBeVisible();
+
+  // Topo em faixa: uma coluna, sem a ilustração
+  await page.locator('#estilo-topo input[value="faixa"]').check();
+  await expect(previa.locator('.hero[data-topo="faixa"]')).toBeVisible();
+  await expect(previa.locator(".hero .ilustracao")).toBeHidden();
+
+  // Ordem: a primeira seção desce uma posição
+  const nomes = page.locator("#secoes .secao-nome");
+  const [primeira, segunda] = await nomes.allTextContents();
+  await page.locator("#secoes li").first().getByRole("button", { name: /^Descer/ }).click();
+  await expect(nomes.nth(0)).toHaveText(segunda);
+  await expect(nomes.nth(1)).toHaveText(primeira);
+  await expect(page.locator("#secoes li").nth(1).getByRole("button", { name: /^Descer/ })).toBeFocused();
+
+  // Esconder a seção com id: some da prévia e o link do menu também
+  const comId = page.locator("#secoes li").filter({ hasText: "Dúvidas" }).first();
+  const temDuvidas = await comId.count();
+  const alvo = temDuvidas ? comId : page.locator("#secoes li").last();
+  await alvo.getByRole("button", { name: /^Esconder/ }).click();
+  await expect(page.locator("#secoes li.oculta")).toHaveCount(1);
+  await expect(previa.locator("main > section[hidden]")).toHaveCount(1);
+  await expect(previa.locator("main > section[hidden]")).toBeHidden();
+
+  // A edição de layout fica na página dela: outra página não tem topo variável
+  await page.locator("#previa-paginas button").nth(1).click();
+  await expect(page.locator("#estilo-topo")).toBeHidden();
+  await page.locator("#previa-paginas button").first().click();
+  await expect(page.locator('#estilo-topo input[value="faixa"]')).toBeChecked();
+
+  const [download] = await Promise.all([page.waitForEvent("download"), page.locator("#botao-baixar").click()]);
+  const { readFileSync } = await import("node:fs");
+  const zip = readFileSync((await download.path())!);
+  expect(zip.includes(Buffer.from('<section class="hero" data-topo="faixa">'))).toBe(true);
+  expect(zip.includes(Buffer.from("Variações de layout (escolhidas no painel)"))).toBe(true);
+  expect(zip.includes(Buffer.from(" hidden>"))).toBe(true);
+
+  const resultado = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).exclude("#previa").analyze();
+  expect(resultado.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(" | ")}`)).toEqual([]);
+  expect(erros).toEqual([]);
+});
+
+test("manicure: nasce com fundo fixo, que vale para as 5 páginas, e leva o variacoes.css no .zip", async ({ page }) => {
+  const erros = vigiarErros(page);
+  await page.goto("/painel/");
+  await page.locator('input[name="modelo"][value="manicure"]').check();
+  await page.locator('input[name="versao"][value="completo"]').check();
+  await page.locator("#nome").fill("Unhas da Bia");
+  await page.locator("#whatsapp").fill("(11) 98765-4321");
+  await page.locator("#bairro").fill("Granja Viana");
+  await page.locator("#botao-gerar").click();
+  const previa = page.frameLocator("#previa");
+  await expect(previa.locator("body")).toHaveAttribute("data-fundo", "fixo");
+  await expect(page.locator('#estilo-fundo input[value="fixo"]')).toBeChecked();
+  await expect(previa.locator(".nav .marca span")).toHaveText("Unhas da Bia");
+
+  // Desliga e liga de novo o fundo fixo
+  await page.locator('#estilo-fundo input[value="normal"]').check();
+  await expect(previa.locator("body")).not.toHaveAttribute("data-fundo", "fixo");
+  await page.locator('#estilo-fundo input[value="fixo"]').check();
+  await expect(previa.locator("body")).toHaveAttribute("data-fundo", "fixo");
+  await expect(page.locator("#previa-paginas button")).toHaveCount(5);
+
+  // Desligar o fundo vale para o site inteiro
+  await page.locator('#estilo-fundo input[value="normal"]').check();
+  await page.locator("#previa-paginas button").nth(2).click();
+  await expect(previa.locator("body")).not.toHaveAttribute("data-fundo", "fixo");
+  await expect(page.locator('#estilo-fundo input[value="normal"]')).toBeChecked();
+  await page.locator('#estilo-fundo input[value="fixo"]').check();
+  await page.locator("#previa-paginas button").first().click();
+  await expect(previa.locator("body")).toHaveAttribute("data-fundo", "fixo");
+
+  const [download] = await Promise.all([page.waitForEvent("download"), page.locator("#botao-baixar").click()]);
+  const { readFileSync } = await import("node:fs");
+  const zip = readFileSync((await download.path())!);
+  expect(zip.includes(Buffer.from("unhas-da-bia/assets/css/variacoes.css"))).toBe(true);
+  expect(zip.includes(Buffer.from('<body data-fundo="fixo">'))).toBe(true);
+  expect(erros).toEqual([]);
+});

@@ -7,7 +7,7 @@ import { MODELOS, SINAIS_DE_DEMONSTRACAO, SO_DEMONSTRACAO } from "./modelos.mjs"
 import { criarSlug, formatarTelefone, iniciais } from "./entrada.mjs";
 import { substituirNomes } from "./texto.mjs";
 import { basename, dirname, extname, join, relative } from "./caminhos.mjs";
-import { ASSETSIGNORE, whatsJs, wranglerJsonc } from "./arquivos.mjs";
+import { ASSETSIGNORE, HEADERS, whatsJs, wranglerJsonc } from "./arquivos.mjs";
 import {
   acrescentarAtributos, aplicarEdicoes, atributo, lerHtml, percorrer,
   remover, removerAtributo, trocarAtributo,
@@ -20,7 +20,7 @@ import {
  * @typedef {import("./html.mjs").No} No
  * @typedef {{ artigo: Artigo, nome: string }} NomeDefinido
  * @typedef {{
- *   modelo: "barbearia" | "consultoria" | "petshop",
+ *   modelo: "barbearia" | "consultoria" | "petshop" | "manicure",
  *   versao: "lp" | "completo",
  *   nome: NomeDefinido,
  *   whatsapp: string,
@@ -337,6 +337,7 @@ export async function montarSite(pedido, leitor) {
   arquivos.set("assets/js/whats.js", whatsJs(pedido.whatsapp));
   arquivos.set("wrangler.jsonc", wranglerJsonc(slug, pedido.hoje ?? new Date().toISOString().slice(0, 10)));
   arquivos.set(".assetsignore", ASSETSIGNORE);
+  arquivos.set("_headers", HEADERS);
 
   const pendencias = procurarPendencias(paginas, pedido);
   const resumo = { slug, paginas: Object.keys(paginas), pendencias };
@@ -380,7 +381,7 @@ ${dados.join("\n")}
 - Tirou a camada de demonstração (faixa, janela de WhatsApp de mentira e \`noindex\`).
 - Ligou todos os botões e formulários ao WhatsApp do cliente (\`assets/js/whats.js\`).
 - Trocou nome, endereço e demais dados fictícios que ela conhece.
-- Criou \`wrangler.jsonc\` (projeto \`${r.slug}\` na Cloudflare) e \`.assetsignore\`.
+- Criou \`wrangler.jsonc\` (projeto \`${r.slug}\` na Cloudflare), \`.assetsignore\` e \`_headers\` (cache no navegador: CSS e JS por 10 minutos, imagens por 1 dia, fontes por 1 ano).
 
 ## Ainda fictício ou de exemplo (encontrado automaticamente)
 ${pendencias}

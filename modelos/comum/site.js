@@ -4,6 +4,9 @@
       fecha no X, no fundo escuro, na tecla Esc ou ao escolher
       uma página.
    2. Formulário que monta a mensagem do WhatsApp.
+   3. Próxima página mais rápida: o navegador já prepara a página
+      quando o visitante para o mouse (ou o dedo) em cima do link.
+   A transição suave entre as páginas está no site.css.
    ========================================================== */
 
 // ---------- 1. Gaveta ----------
@@ -61,4 +64,54 @@
       if (window.enviarWhats) window.enviarWhats(msg);
     });
   });
+})();
+
+// ---------- 3. Próxima página mais rápida ----------
+(function () {
+  // Fora de um site de verdade (ex.: prévia do painel, about:srcdoc) não faz nada
+  if (!/^https?:$/.test(location.protocol)) return;
+  // Só páginas deste site, na mesma pasta (nada de WhatsApp, âncoras ou outros sites)
+  const pasta = new URL(".", location.href).href;
+  function ehPaginaDoSite(a) {
+    if (!a || !a.href || a.hasAttribute("data-whats")) return false;
+    const url = new URL(a.href, location.href);
+    return url.origin === location.origin && /\.html$/.test(url.pathname) &&
+      new URL(".", url).href === pasta && url.pathname !== location.pathname;
+  }
+
+  // Chrome e Edge: Speculation Rules deixam a página pronta (prerender) ao
+  // passar o mouse; o clique abre na hora.
+  if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports("speculationrules")) {
+    const regras = document.createElement("script");
+    regras.type = "speculationrules";
+    regras.textContent = JSON.stringify({
+      prerender: [{
+        where: { and: [
+          { href_matches: "/*" },
+          { selector_matches: ".nav nav a, .gaveta a, .rodape-grade a, .trilha a, a.destaque, a.link-seta, .hero-acoes a" },
+          { not: { selector_matches: "[data-whats]" } },
+        ] },
+        eagerness: "moderate",
+      }],
+    });
+    document.head.appendChild(regras);
+    return;
+  }
+
+  // Outros navegadores: baixa a página antes do clique (prefetch)
+  const pedidas = new Set();
+  function preparar(e) {
+    const a = e.target.closest && e.target.closest("a[href]");
+    if (!ehPaginaDoSite(a)) return;
+    const url = a.href.split("#")[0];
+    if (pedidas.has(url)) return;
+    pedidas.add(url);
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.href = url;
+    document.head.appendChild(link);
+  }
+  document.addEventListener("pointerover", preparar, { passive: true });
+  document.addEventListener("touchstart", preparar, { passive: true });
+  document.addEventListener("focusin", preparar);
 })();

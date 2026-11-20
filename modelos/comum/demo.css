@@ -5,6 +5,7 @@
    ========================================================== */
 
 .demo-faixa {
+  view-transition-name: demo-faixa; /* fica parada na troca de página */
   position: relative;
   z-index: 100;
   display: flex;

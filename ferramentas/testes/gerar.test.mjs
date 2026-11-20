@@ -36,6 +36,12 @@ const CLIENTES = {
     whatsapp: NUMERO,
     bairro: { artigo: "o", nome: "Tatuapé" },
   },
+  manicure: {
+    modelo: "manicure",
+    nome: { artigo: "a", nome: "Unhas da Bia" },
+    whatsapp: NUMERO,
+    bairro: { artigo: "a", nome: "Granja Viana" },
+  },
 };
 
 /** Restos da vitrine que não podem aparecer no site de um cliente. */
@@ -43,6 +49,7 @@ const PROIBIDOS = [
   "Navalha Fina", "NAVALHA FINA", "Focinho Feliz", "Clara Andrade", "Olá, Clara", "a Clara",
   "noindex", "demo.js", "demo.css", "data-modelo", "data-plano", "negócio fictício",
   "Modelo de demonstração", "../", "favicon.png", "Vila Nova", "no Centro",
+  "Lumi", "Jardim das Flores",
 ];
 
 for (const [modelo, cliente] of Object.entries(CLIENTES)) {
@@ -88,6 +95,8 @@ for (const [modelo, cliente] of Object.entries(CLIENTES)) {
       }
 
       assert.match(readFileSync(path.join(saida, "assets/js/whats.js"), "utf8"), new RegExp(`"${NUMERO}"`));
+      // Cache no navegador: o mesmo _headers do site do Arthur
+      assert.equal(readFileSync(path.join(saida, "_headers"), "utf8"), readFileSync(path.join(RAIZ_REPO, "_headers"), "utf8"));
       const wrangler = readFileSync(path.join(saida, "wrangler.jsonc"), "utf8");
       assert.match(wrangler, new RegExp(`"name": "${r.slug}"`));
       assert.match(wrangler, /"compatibility_date": "2026-11-07"/);
@@ -124,6 +133,7 @@ test("pendências apontam o que continua fictício", () => {
 test("a lista de páginas de cada modelo bate com as pastas das vitrines", () => {
   for (const [modelo, m] of Object.entries(MODELOS)) {
     for (const versao of /** @type {const} */ (["lp", "completo"])) {
+      if (!m.paginas[versao].length) continue; // modelo só com landing page
       const pastaVitrine = path.join(RAIZ_REPO, "modelos", modelo + (versao === "completo" ? "-completo" : ""));
       const reais = readdirSync(pastaVitrine).filter((f) => f.endsWith(".html")).sort();
       assert.deepEqual([...m.paginas[versao]].sort(), reais, `${modelo} ${versao}`);
