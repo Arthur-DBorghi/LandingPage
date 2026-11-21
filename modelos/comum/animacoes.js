@@ -56,6 +56,7 @@
       const porPai = new Map();
       document.querySelectorAll(sel).forEach((el) => {
         if (el.classList.contains("revelar") || el.classList.contains("revelar-img")) return;
+        if (el.classList.contains("so-leitor")) return; // título só para leitores de tela
         if (veioDoSite && naTela(el)) return;
         const i = porPai.get(el.parentElement) || 0;
         porPai.set(el.parentElement, i + 1);

@@ -107,7 +107,9 @@ document.querySelectorAll(".projeto[data-versao]").forEach((card) => {
 
   // Grupos que aparecem em sequência (um item depois do outro)
   const grupos = [
-    ".hero-grid > div:first-child > *",
+    // O título (h1) fica de fora: é o maior elemento da tela, e animá-lo atrasava
+    // a medição de "maior elemento visível" (LCP) em algumas cargas
+    ".hero-grid > div:first-child > :not(h1)",
     ".faixa-item",
     ".cabecalho > *",
     ".projeto",
