@@ -123,7 +123,9 @@ p { margin: 0; }
 }
 .topo-inner { display: flex; align-items: center; gap: 32px; height: 72px; }
 .marca { display: flex; align-items: center; gap: 12px; color: var(--texto); text-decoration: none; font-weight: 600; font-size: 1.05rem; }
-.marca img { height: 38px; width: auto; }
+.marca img { width: auto; }
+.marca .marca-simbolo, .marca > img:only-of-type { height: 32px; }
+.marca .marca-nome { height: 21px; margin-top: 2px; }
 .menu { display: flex; gap: 28px; margin-left: auto; }
 .menu a { color: var(--texto-suave); text-decoration: none; font-size: 0.95rem; }
 .menu a:hover { color: var(--texto); }
@@ -499,7 +501,7 @@ p { margin: 0; }
 }
 
 @media (max-width: 520px) {
-  .marca span { display: none; }
+  .marca .marca-nome { display: none; }
   .faixa-grid { grid-template-columns: 1fr; }
   .faixa-item { padding: 14px 0; }
   .acoes .botao { flex: 1 1 100%; }
